@@ -58,6 +58,7 @@
       gap: 14px;
     }
 
+    /* Driver Selector */
     .driver-selector {
       display: flex;
       background: var(--card-bg);
@@ -107,6 +108,7 @@
       border-radius: 4px;
     }
 
+    /* RPM Bar */
     .rpm-bar-container {
       display: flex;
       gap: 3px;
@@ -835,19 +837,21 @@
     currentDriver = driver;
     localStorage.setItem('f1_driver', driver);
     document.querySelectorAll('.driver-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    if (btn) btn.classList.add('active');
 
     const root = document.documentElement;
     const submitBtn = document.getElementById('submitBtn');
     
     if (driver === 'kimi') {
       root.style.setProperty('--accent', '#00d2be');
-      submitBtn.classList.remove('ollie-mode');
-      document.getElementById('slipDriverName').textContent = 'KIMI ANTONELLI #12';
+      if (submitBtn) submitBtn.classList.remove('ollie-mode');
+      const slipName = document.getElementById('slipDriverName');
+      if (slipName) slipName.textContent = 'KIMI ANTONELLI #12';
     } else {
       root.style.setProperty('--accent', '#e10600');
-      submitBtn.classList.add('ollie-mode');
-      document.getElementById('slipDriverName').textContent = 'OLLIE BEARMAN #87';
+      if (submitBtn) submitBtn.classList.add('ollie-mode');
+      const slipName = document.getElementById('slipDriverName');
+      if (slipName) slipName.textContent = 'OLLIE BEARMAN #87';
     }
   }
 
@@ -1022,6 +1026,10 @@
     listEl.innerHTML = activeSubjects.map(sub => {
       const s = stats[sub];
       const avg = s.gradeCount > 0 ? (s.sumGrade / s.gradeCount).toFixed(1) : null;
+      const gradeHtml = avg 
+        ? `<div style="font-family: Orbitron, sans-serif; font-size:12px; color:${avg <= 2.0 ? 'var(--p1)' : '#fff'};">Ø Note ${avg}</div>` 
+        : `<div style="font-family: Orbitron, sans-serif; font-size:11px; color:var(--trophy-gold);">🏆 Trophy</div>`;
+
       return `
         <div class="subject-stat-card">
           <div>
@@ -1029,8 +1037,8 @@
             <div style="color:var(--text-sub); font-size:11px;">${s.count} Event(s) absolviert</div>
           </div>
           <div style="text-align:right;">
-            ${avg ? `<div style="font-family:'Orbitron'; font-size:12px; color:${avg <= 2.0 ? 'var(--p1)' : '#fff'};">Ø Note ${avg}</div>` : '<div style="font-family:'Orbitron'; font-size:11px; color:var(--trophy-gold);">🏆 Trophy</div>'}
-            <div style="font-family:'Orbitron'; font-size:11px; color:var(--accent);">+ ${formatCurrency(s.totalBonus)} Provision</div>
+            ${gradeHtml}
+            <div style="font-family: Orbitron, sans-serif; font-size:11px; color:var(--accent);">+ ${formatCurrency(s.totalBonus)} Provision</div>
           </div>
         </div>
       `;
@@ -1057,7 +1065,7 @@
             <td><strong>${item.subject}</strong><br><span style="font-size:9px; color:var(--text-sub);">${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}</span></td>
             <td style="font-size:9px; text-transform:uppercase;">${item.type === 'competition' ? '🏆 COMP' : item.type === 'vocab' ? 'Vocab' : item.type === 'exam' ? 'GP' : 'Sprint'}${item.prepBonus ? ' 🟢' : ''}${item.improved ? ' 🚀' : ''}</td>
             <td><strong style="color:${item.type === 'competition' ? 'var(--trophy-gold)' : item.grade === 1 ? 'var(--p1)' : item.grade === 2 ? 'var(--p2)' : '#fff'}">${item.type === 'competition' ? '🏆' : `P${item.grade}`}</strong></td>
-            <td style="text-align: right; color: var(--p1); font-weight:700; font-family:'Orbitron';">+ ${formatCurrency(item.bonus)}</td>
+            <td style="text-align: right; color: var(--p1); font-weight:700; font-family: Orbitron, sans-serif;">+ ${formatCurrency(item.bonus)}</td>
           </tr>
         `;
       }).join('');
@@ -1091,8 +1099,9 @@
   function switchTab(tabId, btn) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById(`tab-${tabId}`).classList.add('active');
-    btn.classList.add('active');
+    const targetTab = document.getElementById(`tab-${tabId}`);
+    if (targetTab) targetTab.classList.add('active');
+    if (btn) btn.classList.add('active');
 
     if (tabId === 'analytics') renderAnalytics();
     if (tabId === 'report') renderReport();
@@ -1142,7 +1151,6 @@
     });
     localStorage.setItem('f1_entries', JSON.stringify(entries));
 
-    // Radio Affirmation & Special FX
     const radioEl = document.getElementById('teamRadioText');
     if (type === 'competition') {
       radioEl.textContent = `"${RADIO_MESSAGES.competition[Math.floor(Math.random() * RADIO_MESSAGES.competition.length)]}"`;
