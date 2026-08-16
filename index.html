@@ -250,6 +250,12 @@
       -webkit-appearance: none;
     }
 
+    input:disabled, select:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: #08090c;
+    }
+
     input:focus, select:focus {
       border-color: var(--accent);
     }
@@ -305,9 +311,51 @@
       color: #fff;
     }
 
-    button.btn-race:active {
+    button.btn-race:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    button.btn-race:active:not(:disabled) {
       transform: scale(0.98);
       filter: brightness(1.2);
+    }
+
+    /* Paddock Lock Card */
+    .lock-card {
+      background: linear-gradient(135deg, #1b2029, #12151c);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lock-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .lock-badge {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    .lock-badge.locked {
+      background: rgba(225, 6, 0, 0.2);
+      color: #ff5252;
+      border: 1px solid #e10600;
+    }
+
+    .lock-badge.unlocked {
+      background: rgba(0, 230, 118, 0.2);
+      color: var(--p1);
+      border: 1px solid var(--p1);
     }
 
     .entries-list {
@@ -446,6 +494,30 @@
       align-items: center;
       margin-bottom: 6px;
       font-size: 12px;
+    }
+
+    /* Footer Branding */
+    .app-footer {
+      text-align: center;
+      padding: 18px 0 10px 0;
+      color: var(--text-sub);
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .app-footer .creator {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text);
+    }
+
+    .app-footer .version-tag {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      color: var(--accent);
+      opacity: 0.85;
     }
 
     nav.tab-bar {
@@ -639,6 +711,11 @@
         <div style="text-align: center; color: var(--text-sub); font-size: 12px; padding: 14px;">Noch keine Sektor-Daten erfasst.</div>
       </div>
     </section>
+
+    <footer class="app-footer">
+      <span class="creator">Made by CreatingReorganized</span>
+      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+    </footer>
   </div>
 
   <!-- TAB 2: OVERALL STANDINGS -->
@@ -652,6 +729,11 @@
       </p>
       <div id="subjectAnalyticsList"></div>
     </section>
+
+    <footer class="app-footer">
+      <span class="creator">Made by CreatingReorganized</span>
+      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+    </footer>
   </div>
 
   <!-- TAB 3: FIA PAY SHEET -->
@@ -664,6 +746,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.3.0-F1</div>
         </div>
       </div>
 
@@ -693,72 +776,112 @@
           <span id="slipTotal">20,00 €</span>
         </div>
       </div>
+      
+      <div style="text-align: right; font-size: 8px; color: #444c56; margin-top: 8px; font-family: 'Orbitron';">
+        MADE BY CREATINGREORGANIZED
+      </div>
     </div>
 
     <button type="button" class="btn-race" onclick="exportSlipAsImage()">
       📤 Export & Send FIA Report
     </button>
+
+    <footer class="app-footer">
+      <span class="creator">Made by CreatingReorganized</span>
+      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+    </footer>
   </div>
 
-  <!-- TAB 4: PADDOCK SETTINGS -->
+  <!-- TAB 4: PADDOCK SETTINGS (MIT PASSWORTSCHUTZ) -->
   <div id="tab-settings" class="tab-content">
     
+    <!-- FIA Security Lock Banner -->
+    <div class="lock-card">
+      <div class="lock-status">
+        <div>
+          <strong style="font-family: 'Orbitron'; font-size: 12px; color: #fff;">FIA STEWARD CONTROL</strong>
+          <p style="font-size: 11px; color: var(--text-sub);">Paddock-Zugriff sperren / entsperren</p>
+        </div>
+        <div class="lock-badge locked" id="paddockLockBadge">🔒 READ-ONLY</div>
+      </div>
+
+      <div id="unlockFormRow" style="display: flex; gap: 8px; margin-top: 4px;">
+        <input type="password" id="paddockPasswordInput" placeholder="Passwort eingeben..." style="font-size: 13px; padding: 8px 12px;">
+        <button type="button" class="btn-race" onclick="unlockPaddock()" style="width: auto; margin-top: 0; padding: 0 14px; font-size: 11px;">🔓 Unlock</button>
+      </div>
+
+      <button type="button" id="relockBtn" class="btn-race ollie-mode" onclick="lockPaddock()" style="display: none; margin-top: 4px; padding: 8px; font-size: 11px;">
+        🔒 Paddock wieder sperren
+      </button>
+    </div>
+
+    <!-- F1 Sparziel -->
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">F1 Sparziel / Wishlist</h2>
       <div class="form-group" style="margin-bottom: 0;">
         <label for="goalNameInput">Wunsch (z. B. F1 Team Cap / Videospiel)</label>
-        <input type="text" id="goalNameInput" placeholder="F1 Fan Cap">
+        <input type="text" id="goalNameInput" placeholder="F1 Fan Cap" disabled>
       </div>
     </section>
 
+    <!-- Grundgehalt & Wettbewerb -->
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Base Contract & Competition</h2>
       <div class="row">
         <div class="form-group" style="margin-bottom: 0;">
           <label for="baseSalaryInput">Grundgehalt (€ / Mo)</label>
-          <input type="number" id="baseSalaryInput" step="0.50" min="0" value="20.00">
+          <input type="number" id="baseSalaryInput" step="0.50" min="0" value="20.00" disabled>
         </div>
         <div class="form-group" style="margin-bottom: 0;">
           <label for="bonusCompInput">Wettbewerb (€ Extra)</label>
-          <input type="number" id="bonusCompInput" step="1.00" min="0" value="20.00">
+          <input type="number" id="bonusCompInput" step="1.00" min="0" value="20.00" disabled>
         </div>
       </div>
     </section>
 
+    <!-- Vokabeltests -->
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Vokabeltest Englisch (Wöchentlich)</h2>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div><label>P1 (Note 1 €)</label><input type="number" step="0.25" id="bonus_vocab_1"></div>
-        <div><label>P2 (Note 2 €)</label><input type="number" step="0.25" id="bonus_vocab_2"></div>
+        <div><label>P1 (Note 1 €)</label><input type="number" step="0.25" id="bonus_vocab_1" disabled></div>
+        <div><label>P2 (Note 2 €)</label><input type="number" step="0.25" id="bonus_vocab_2" disabled></div>
       </div>
     </section>
 
+    <!-- Klassenarbeiten -->
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Main GP (Klassenarbeiten)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-        <div><label>P1 (€)</label><input type="number" step="0.25" id="bonus_exam_1"></div>
-        <div><label>P2 (€)</label><input type="number" step="0.25" id="bonus_exam_2"></div>
-        <div><label>P3 (€)</label><input type="number" step="0.25" id="bonus_exam_3"></div>
+        <div><label>P1 (€)</label><input type="number" step="0.25" id="bonus_exam_1" disabled></div>
+        <div><label>P2 (€)</label><input type="number" step="0.25" id="bonus_exam_2" disabled></div>
+        <div><label>P3 (€)</label><input type="number" step="0.25" id="bonus_exam_3" disabled></div>
       </div>
     </section>
 
+    <!-- Kleine Tests -->
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Sprint (Kleine Tests)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-        <div><label>P1 (€)</label><input type="number" step="0.25" id="bonus_test_1"></div>
-        <div><label>P2 (€)</label><input type="number" step="0.25" id="bonus_test_2"></div>
-        <div><label>P3 (€)</label><input type="number" step="0.25" id="bonus_test_3"></div>
+        <div><label>P1 (€)</label><input type="number" step="0.25" id="bonus_test_1" disabled></div>
+        <div><label>P2 (€)</label><input type="number" step="0.25" id="bonus_test_2" disabled></div>
+        <div><label>P3 (€)</label><input type="number" step="0.25" id="bonus_test_3" disabled></div>
       </div>
     </section>
 
+    <!-- Fächerverwaltung -->
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Season Calendar (Fächer & Events)</h2>
       <form id="addSubjectForm" style="display: flex; gap: 8px;">
-        <input type="text" id="newSubjectInput" placeholder="Neues Fach/Wettbewerb..." required>
-        <button type="submit" class="btn-race" style="width: auto; margin-top: 0; padding: 0 16px;">+</button>
+        <input type="text" id="newSubjectInput" placeholder="Neues Fach/Wettbewerb..." required disabled>
+        <button type="submit" class="btn-race" id="addSubjectBtn" style="width: auto; margin-top: 0; padding: 0 16px;" disabled>+</button>
       </form>
       <div class="chip-container" id="subjectsContainer"></div>
     </section>
+
+    <footer class="app-footer">
+      <span class="creator">Made by CreatingReorganized</span>
+      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+    </footer>
   </div>
 
 </div>
@@ -784,6 +907,10 @@
 </nav>
 
 <script>
+  const APP_VERSION = 'v1.3.0-F1';
+  const PADDOCK_PASSWORD = 'Memphis';
+  let isPaddockUnlocked = false;
+
   const DEFAULT_SUBJECTS = ['Englisch', 'Mathematik', 'Deutsch', 'Geschichte', 'Biologie', 'Physik', 'Geografie', 'Sport', 'Musik', 'Kunst', 'Känguru-Wettbewerb (Mathe)', 'The Big Challenge (Englisch)'];
   
   const DEFAULT_BONUS_RULES = {
@@ -831,6 +958,67 @@
 
   function formatCurrency(val) {
     return val.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+  }
+
+  function applyVersionTags() {
+    document.querySelectorAll('.app-ver-label').forEach(el => el.textContent = APP_VERSION);
+    const slipVer = document.getElementById('slipVersionTag');
+    if (slipVer) slipVer.textContent = APP_VERSION;
+  }
+
+  /* Paddock Security / Lock Management */
+  function unlockPaddock() {
+    const input = document.getElementById('paddockPasswordInput');
+    if (input.value.trim().toLowerCase() === PADDOCK_PASSWORD.toLowerCase()) {
+      isPaddockUnlocked = true;
+      input.value = '';
+      updatePaddockLockState();
+      alert('Paddock erfolgreich freigeschaltet!');
+    } else {
+      alert('Falsches Passwort! Zugriff verweigert.');
+    }
+  }
+
+  function lockPaddock() {
+    isPaddockUnlocked = false;
+    updatePaddockLockState();
+  }
+
+  function updatePaddockLockState() {
+    const badge = document.getElementById('paddockLockBadge');
+    const unlockRow = document.getElementById('unlockFormRow');
+    const relockBtn = document.getElementById('relockBtn');
+
+    const inputsToToggle = [
+      'goalNameInput', 'baseSalaryInput', 'bonusCompInput',
+      'bonus_vocab_1', 'bonus_vocab_2',
+      'bonus_exam_1', 'bonus_exam_2', 'bonus_exam_3',
+      'bonus_test_1', 'bonus_test_2', 'bonus_test_3',
+      'newSubjectInput', 'addSubjectBtn'
+    ];
+
+    if (isPaddockUnlocked) {
+      badge.textContent = '🔓 EDIT MODE';
+      badge.className = 'lock-badge unlocked';
+      unlockRow.style.display = 'none';
+      relockBtn.style.display = 'block';
+
+      inputsToToggle.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.disabled = false;
+      });
+    } else {
+      badge.textContent = '🔒 READ-ONLY';
+      badge.className = 'lock-badge locked';
+      unlockRow.style.display = 'flex';
+      relockBtn.style.display = 'none';
+
+      inputsToToggle.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.disabled = true;
+      });
+    }
+    renderSubjects();
   }
 
   function setDriver(driver, btn) {
@@ -901,7 +1089,7 @@
     container.innerHTML = subjects.map(sub => `
       <div class="subject-chip">
         <span>${sub}</span>
-        <button type="button" onclick="removeSubject('${sub}')" style="background:none; border:none; color:var(--f1-red); cursor:pointer; font-weight:bold;">&times;</button>
+        ${isPaddockUnlocked ? `<button type="button" onclick="removeSubject('${sub}')" style="background:none; border:none; color:var(--f1-red); cursor:pointer; font-weight:bold;">&times;</button>` : ''}
       </div>
     `).join('');
   }
@@ -924,6 +1112,7 @@
         const el = document.getElementById(`bonus_${type}_${grade}`);
         if(el) {
           el.addEventListener('change', (e) => {
+            if (!isPaddockUnlocked) return;
             bonusRules[type][grade] = parseFloat(e.target.value) || 0;
             localStorage.setItem('f1_bonus_rules', JSON.stringify(bonusRules));
           });
@@ -932,12 +1121,14 @@
     });
 
     document.getElementById('bonusCompInput').addEventListener('change', (e) => {
+      if (!isPaddockUnlocked) return;
       competitionBonus = parseFloat(e.target.value) || 20.00;
       localStorage.setItem('f1_comp_bonus', competitionBonus.toString());
       handleTypeChange();
     });
 
     document.getElementById('goalNameInput').addEventListener('change', (e) => {
+      if (!isPaddockUnlocked) return;
       goalName = e.target.value.trim() || 'F1 Fan Cap';
       localStorage.setItem('f1_goal_name', goalName);
       document.getElementById('potGoalLabel').textContent = `${goalName} (30%)`;
@@ -1185,6 +1376,7 @@
 
   document.getElementById('addSubjectForm').addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!isPaddockUnlocked) return;
     const val = document.getElementById('newSubjectInput').value.trim();
     if(val && !subjects.includes(val)) {
       subjects.push(val);
@@ -1195,12 +1387,14 @@
   });
 
   window.removeSubject = function(sub) {
+    if (!isPaddockUnlocked) return;
     subjects = subjects.filter(s => s !== sub);
     localStorage.setItem('f1_subjects', JSON.stringify(subjects));
     renderSubjects();
   };
 
   document.getElementById('baseSalaryInput').addEventListener('change', (e) => {
+    if (!isPaddockUnlocked) return;
     baseSalary = parseFloat(e.target.value) || 20.00;
     localStorage.setItem('f1_base_salary', baseSalary.toString());
     updateTrackerUI();
@@ -1209,8 +1403,10 @@
   // Init
   const initialBtn = document.querySelector(`.driver-btn.${currentDriver}`);
   if (initialBtn) setDriver(currentDriver, initialBtn);
+  applyVersionTags();
   renderSubjects();
   initSettingsInputs();
+  updatePaddockLockState();
   updateTrackerUI();
 </script>
 </body>
