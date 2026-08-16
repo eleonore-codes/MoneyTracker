@@ -618,17 +618,17 @@
       </div>
 
       <div class="telemetry-main-val">
-        <div style="font-size: 10px; color: var(--text-sub); text-transform: uppercase; font-family: 'Orbitron';">Total Purse</div>
+        <div style="font-size: 10px; color: var(--text-sub); text-transform: uppercase; font-family: 'Orbitron';">Total Purse (Gesamtauszahlung)</div>
         <div class="amount" id="totalAmount">20,00 €</div>
       </div>
 
       <div class="telemetry-grid">
         <div class="telemetry-box">
-          <span>Base Retainer</span>
+          <span>Base Retainer (Fixgehalt)</span>
           <strong id="dashBaseSalary">20,00 €</strong>
         </div>
         <div class="telemetry-box">
-          <span>Performance Bonus</span>
+          <span>Bonus (Leistungsprämie)</span>
           <strong id="dashBonusAmount" style="color: var(--p1);">+ 0,00 €</strong>
         </div>
       </div>
@@ -653,11 +653,11 @@
     <!-- Entry Form -->
     <section class="card">
       <h2 style="font-family: 'Orbitron', sans-serif; font-size: 13px; text-transform: uppercase; margin-bottom: 10px;">
-        🏁 Log Telemetry (Note / Event buchen)
+        🏁 Log Telemetry (Note / Event eintragen)
       </h2>
       <form id="gradeForm">
         <div class="form-group">
-          <label for="subjectSelect">Track / Schulfach / Event</label>
+          <label for="subjectSelect">Track / Schulfach / Wettbewerb</label>
           <select id="subjectSelect" required>
             <option value="" disabled selected>Fach oder Wettbewerb wählen...</option>
           </select>
@@ -665,11 +665,11 @@
 
         <div class="row">
           <div class="form-group">
-            <label for="typeSelect">Session Type</label>
+            <label for="typeSelect">Art der Arbeit (Session Type)</label>
             <select id="typeSelect" onchange="handleTypeChange()" required>
               <option value="vocab">Vokabeltest Englisch (Wöchentlich)</option>
-              <option value="exam">Main GP (Klassenarbeit)</option>
-              <option value="test">Sprint (Kleiner Test)</option>
+              <option value="exam">Main GP (Klassenarbeit / Schulaufgabe - 100%)</option>
+              <option value="test">Sprint (Kleiner Test / Kurztest - 50%)</option>
               <option value="competition">🏆 Special Competition (+20 € Känguru / Big Challenge)</option>
             </select>
           </div>
@@ -678,43 +678,43 @@
             <label for="gradeSelect">Position (Note 1-6)</label>
             <select id="gradeSelect" required>
               <option value="" disabled selected>Note...</option>
-              <option value="1">P1 (Note 1 - Sieg)</option>
-              <option value="2">P2 (Note 2 - Podium)</option>
-              <option value="3">P3 (Note 3 - Points)</option>
-              <option value="4">P4 (Note 4 - Finished)</option>
-              <option value="5">P5 (Note 5 - Pit Issue)</option>
-              <option value="6">P6 (Note 6 - DNF)</option>
+              <option value="1">P1 (Note 1 - Sehr gut / Sieg)</option>
+              <option value="2">P2 (Note 2 - Gut / Podium)</option>
+              <option value="3">P3 (Note 3 - Befriedigend)</option>
+              <option value="4">P4 (Note 4 - Ausreichend)</option>
+              <option value="5">P5 (Note 5 - Mangelhaft)</option>
+              <option value="6">P6 (Note 6 - Ungenügend)</option>
             </select>
           </div>
         </div>
 
         <label class="checkbox-group" id="prepBonusWrapper">
           <input type="checkbox" id="prepBonusCheck">
-          <span>🟢 Free Practice Bonus (+1,00 € für rechtzeitiges Lernen)</span>
+          <span>🟢 Free Practice (+1,00 € Fleißbonus für rechtzeitiges Lernen)</span>
         </label>
 
         <div class="form-group">
-          <label for="customBonusInput">Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional überschreiben)</span></label>
-          <input type="number" id="customBonusInput" step="0.25" min="0" placeholder="Automatisch nach Staffelung">
+          <label for="customBonusInput">Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. bei sehr schwerer Arbeit)</span></label>
+          <input type="number" id="customBonusInput" step="0.25" min="0" placeholder="Automatisch nach Standard-Tabelle">
         </div>
 
-        <button type="submit" class="btn-race" id="submitBtn">⚡ Log Sector & Bonus</button>
+        <button type="submit" class="btn-race" id="submitBtn">⚡ Log Sector & Bonus (Verbuchen)</button>
       </form>
     </section>
 
     <!-- History -->
     <section>
       <h2 style="font-family: 'Orbitron', sans-serif; font-size: 12px; color: var(--text-sub); text-transform: uppercase; margin: 4px 0 8px 4px;">
-        Sector Times & Results (Diesen Monat)
+        Erfasste Noten & Boni (Diesen Monat)
       </h2>
       <div class="entries-list" id="entriesList">
-        <div style="text-align: center; color: var(--text-sub); font-size: 12px; padding: 14px;">Noch keine Sektor-Daten erfasst.</div>
+        <div style="text-align: center; color: var(--text-sub); font-size: 12px; padding: 14px;">Noch keine Noten erfasst.</div>
       </div>
     </section>
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+      <span class="version-tag app-ver-label">v1.3.1-F1</span>
     </footer>
   </div>
 
@@ -722,7 +722,7 @@
   <div id="tab-analytics" class="tab-content">
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 10px;">
-        📊 Driver Standings (Alle Fächer & Events)
+        📊 Driver Standings (Alle Fächer & Notenstände)
       </h2>
       <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
         Notenschnitt, Sessions und verdiente Gesamt-Prämien im laufenden Schuljahr.
@@ -732,7 +732,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+      <span class="version-tag app-ver-label">v1.3.1-F1</span>
     </footer>
   </div>
 
@@ -746,17 +746,17 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.3.0-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.3.1-F1</div>
         </div>
       </div>
 
       <table class="slip-table">
         <thead>
           <tr>
-            <th>SESSION / TRACK</th>
-            <th>TYPE</th>
-            <th>POS</th>
-            <th style="text-align: right;">PURSE</th>
+            <th>FACH / THEMA</th>
+            <th>ART</th>
+            <th>NOTE</th>
+            <th style="text-align: right;">BONUS</th>
           </tr>
         </thead>
         <tbody id="slipTableBody"></tbody>
@@ -764,15 +764,15 @@
 
       <div style="background: #090a0d; border: 1px solid var(--card-border); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 4px;">
         <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub);">
-          <span>Base Contract:</span>
+          <span>Grund-Taschengeld (Fixgehalt):</span>
           <span id="slipBase">20,00 €</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub);">
-          <span>Performance, Prep & Trophy Bonus:</span>
+          <span>Leistungs-, Fleiß- & Pokal-Bonus:</span>
           <span id="slipBonus" style="color: var(--p1);">+ 0,00 €</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 900; color: var(--accent); margin-top: 4px; padding-top: 4px; border-top: 1px dashed #333; font-family: 'Orbitron';">
-          <span>TOTAL PAYOUT:</span>
+          <span>GESAMTAUSZAHLUNG:</span>
           <span id="slipTotal">20,00 €</span>
         </div>
       </div>
@@ -783,16 +783,16 @@
     </div>
 
     <button type="button" class="btn-race" onclick="exportSlipAsImage()">
-      📤 Export & Send FIA Report
+      📤 Export & Send FIA Report (Als Bild teilen)
     </button>
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+      <span class="version-tag app-ver-label">v1.3.1-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 4: PADDOCK SETTINGS (MIT PASSWORTSCHUTZ) -->
+  <!-- TAB 4: PADDOCK SETTINGS (MIT PASSWORTSCHUTZ & KLAREN NOTENBEZEICHNUNGEN) -->
   <div id="tab-settings" class="tab-content">
     
     <!-- FIA Security Lock Banner -->
@@ -806,7 +806,7 @@
       </div>
 
       <div id="unlockFormRow" style="display: flex; gap: 8px; margin-top: 4px;">
-        <input type="password" id="paddockPasswordInput" placeholder="Passwort eingeben..." style="font-size: 13px; padding: 8px 12px;">
+        <input type="password" id="paddockPasswordInput" placeholder="Passwort (Memphis)..." style="font-size: 13px; padding: 8px 12px;">
         <button type="button" class="btn-race" onclick="unlockPaddock()" style="width: auto; margin-top: 0; padding: 0 14px; font-size: 11px;">🔓 Unlock</button>
       </div>
 
@@ -817,19 +817,19 @@
 
     <!-- F1 Sparziel -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">F1 Sparziel / Wishlist</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">F1 Sparziel / Wishlist (30% Topf)</h2>
       <div class="form-group" style="margin-bottom: 0;">
-        <label for="goalNameInput">Wunsch (z. B. F1 Team Cap / Videospiel)</label>
+        <label for="goalNameInput">Wunsch (z. B. F1 Team Cap / Hoodie / Videospiel)</label>
         <input type="text" id="goalNameInput" placeholder="F1 Fan Cap" disabled>
       </div>
     </section>
 
     <!-- Grundgehalt & Wettbewerb -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Base Contract & Competition</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Fixgehalt & Wettbewerbsprämie</h2>
       <div class="row">
         <div class="form-group" style="margin-bottom: 0;">
-          <label for="baseSalaryInput">Grundgehalt (€ / Mo)</label>
+          <label for="baseSalaryInput">Grundgehalt (€ / Monat)</label>
           <input type="number" id="baseSalaryInput" step="0.50" min="0" value="20.00" disabled>
         </div>
         <div class="form-group" style="margin-bottom: 0;">
@@ -843,34 +843,34 @@
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Vokabeltest Englisch (Wöchentlich)</h2>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div><label>P1 (Note 1 €)</label><input type="number" step="0.25" id="bonus_vocab_1" disabled></div>
-        <div><label>P2 (Note 2 €)</label><input type="number" step="0.25" id="bonus_vocab_2" disabled></div>
+        <div><label>P1 (Note 1 - Sehr gut)</label><input type="number" step="0.25" id="bonus_vocab_1" disabled></div>
+        <div><label>P2 (Note 2 - Gut)</label><input type="number" step="0.25" id="bonus_vocab_2" disabled></div>
       </div>
     </section>
 
     <!-- Klassenarbeiten -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Main GP (Klassenarbeiten)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Main GP (Große Klassenarbeiten / Schulaufgaben)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-        <div><label>P1 (€)</label><input type="number" step="0.25" id="bonus_exam_1" disabled></div>
-        <div><label>P2 (€)</label><input type="number" step="0.25" id="bonus_exam_2" disabled></div>
-        <div><label>P3 (€)</label><input type="number" step="0.25" id="bonus_exam_3" disabled></div>
+        <div><label>P1 (Note 1)</label><input type="number" step="0.25" id="bonus_exam_1" disabled></div>
+        <div><label>P2 (Note 2)</label><input type="number" step="0.25" id="bonus_exam_2" disabled></div>
+        <div><label>P3 (Note 3)</label><input type="number" step="0.25" id="bonus_exam_3" disabled></div>
       </div>
     </section>
 
     <!-- Kleine Tests -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Sprint (Kleine Tests)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Sprint (Kleine Tests / Kurztests)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-        <div><label>P1 (€)</label><input type="number" step="0.25" id="bonus_test_1" disabled></div>
-        <div><label>P2 (€)</label><input type="number" step="0.25" id="bonus_test_2" disabled></div>
-        <div><label>P3 (€)</label><input type="number" step="0.25" id="bonus_test_3" disabled></div>
+        <div><label>P1 (Note 1)</label><input type="number" step="0.25" id="bonus_test_1" disabled></div>
+        <div><label>P2 (Note 2)</label><input type="number" step="0.25" id="bonus_test_2" disabled></div>
+        <div><label>P3 (Note 3)</label><input type="number" step="0.25" id="bonus_test_3" disabled></div>
       </div>
     </section>
 
     <!-- Fächerverwaltung -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Season Calendar (Fächer & Events)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Season Calendar (Fächer & Events verwalten)</h2>
       <form id="addSubjectForm" style="display: flex; gap: 8px;">
         <input type="text" id="newSubjectInput" placeholder="Neues Fach/Wettbewerb..." required disabled>
         <button type="submit" class="btn-race" id="addSubjectBtn" style="width: auto; margin-top: 0; padding: 0 16px;" disabled>+</button>
@@ -880,7 +880,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.3.0-F1</span>
+      <span class="version-tag app-ver-label">v1.3.1-F1</span>
     </footer>
   </div>
 
@@ -907,7 +907,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.3.0-F1';
+  const APP_VERSION = 'v1.3.1-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
@@ -1071,7 +1071,7 @@
       gradeGroup.style.display = 'block';
       gradeSelect.required = true;
       prepWrapper.style.display = 'flex';
-      customInput.placeholder = 'Automatisch nach Staffelung';
+      customInput.placeholder = 'Automatisch nach Standard-Tabelle';
     }
   }
 
@@ -1159,32 +1159,37 @@
 
     const listEl = document.getElementById('entriesList');
     if (currentMonthEntries.length === 0) {
-      listEl.innerHTML = '<div style="text-align:center; color:var(--text-sub); font-size:12px; padding:14px;">Noch keine Sektor-Daten erfasst.</div>';
+      listEl.innerHTML = '<div style="text-align:center; color:var(--text-sub); font-size:12px; padding:14px;">Noch keine Noten erfasst.</div>';
       return;
     }
 
-    listEl.innerHTML = currentMonthEntries.map(item => `
-      <div class="entry-card">
-        <div class="entry-left">
-          <div class="pos-badge ${item.type === 'competition' ? 'pos-trophy' : item.grade === 1 ? 'pos-1' : item.grade === 2 ? 'pos-2' : item.grade === 3 ? 'pos-3' : 'pos-other'}">
-            ${item.type === 'competition' ? '🏆' : `P${item.grade}`}
+    listEl.innerHTML = currentMonthEntries.map(item => {
+      const typeLabel = item.type === 'competition' ? '🏆 Championship Competition' : item.type === 'vocab' ? '🔤 Vokabeltest' : item.type === 'exam' ? '🏁 Klassenarbeit (100%)' : '⚡ Kurztest (50%)';
+      const gradeLabel = item.type === 'competition' ? '🏆' : `P${item.grade} (Note ${item.grade})`;
+
+      return `
+        <div class="entry-card">
+          <div class="entry-left">
+            <div class="pos-badge ${item.type === 'competition' ? 'pos-trophy' : item.grade === 1 ? 'pos-1' : item.grade === 2 ? 'pos-2' : item.grade === 3 ? 'pos-3' : 'pos-other'}">
+              ${item.type === 'competition' ? '🏆' : `P${item.grade}`}
+            </div>
+            <div class="entry-details">
+              <h4>${item.subject}</h4>
+              <p>
+                ${typeLabel} • ${gradeLabel}
+                ${item.prepBonus ? '• 🟢 Practice' : ''} 
+                ${item.improved ? '• 🚀 Comeback' : ''} 
+                • ${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}
+              </p>
+            </div>
           </div>
-          <div class="entry-details">
-            <h4>${item.subject}</h4>
-            <p>
-              ${item.type === 'competition' ? '🏆 Championship Competition' : item.type === 'vocab' ? '🔤 Vokabeltest' : item.type === 'exam' ? '🏁 Main GP' : '⚡ Sprint'} 
-              ${item.prepBonus ? '• 🟢 Practice' : ''} 
-              ${item.improved ? '• 🚀 Comeback' : ''} 
-              • ${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}
-            </p>
+          <div class="entry-right">
+            <div class="bonus-tag">+ ${formatCurrency(item.bonus)}</div>
+            <button class="delete-btn" onclick="deleteEntry('${item.id}')">&times;</button>
           </div>
         </div>
-        <div class="entry-right">
-          <div class="bonus-tag">+ ${formatCurrency(item.bonus)}</div>
-          <button class="delete-btn" onclick="deleteEntry('${item.id}')">&times;</button>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   function renderAnalytics() {
@@ -1251,11 +1256,14 @@
     } else {
       tableBody.innerHTML = currentMonthEntries.map(item => {
         totalBonus += item.bonus;
+        const typeShort = item.type === 'competition' ? '🏆 COMP' : item.type === 'vocab' ? 'Vokabeln' : item.type === 'exam' ? 'Arbeit (100%)' : 'Test (50%)';
+        const gradeText = item.type === 'competition' ? '🏆' : `Note ${item.grade}`;
+
         return `
           <tr>
             <td><strong>${item.subject}</strong><br><span style="font-size:9px; color:var(--text-sub);">${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}</span></td>
-            <td style="font-size:9px; text-transform:uppercase;">${item.type === 'competition' ? '🏆 COMP' : item.type === 'vocab' ? 'Vocab' : item.type === 'exam' ? 'GP' : 'Sprint'}${item.prepBonus ? ' 🟢' : ''}${item.improved ? ' 🚀' : ''}</td>
-            <td><strong style="color:${item.type === 'competition' ? 'var(--trophy-gold)' : item.grade === 1 ? 'var(--p1)' : item.grade === 2 ? 'var(--p2)' : '#fff'}">${item.type === 'competition' ? '🏆' : `P${item.grade}`}</strong></td>
+            <td style="font-size:9px; text-transform:uppercase;">${typeShort}${item.prepBonus ? ' 🟢' : ''}${item.improved ? ' 🚀' : ''}</td>
+            <td><strong style="color:${item.type === 'competition' ? 'var(--trophy-gold)' : item.grade === 1 ? 'var(--p1)' : item.grade === 2 ? 'var(--p2)' : '#fff'}">${gradeText}</strong></td>
             <td style="text-align: right; color: var(--p1); font-weight:700; font-family: Orbitron, sans-serif;">+ ${formatCurrency(item.bonus)}</td>
           </tr>
         `;
