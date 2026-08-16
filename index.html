@@ -237,7 +237,7 @@
       margin-bottom: 5px;
     }
 
-    input, select {
+    input:not([type="checkbox"]), select {
       width: 100%;
       padding: 11px;
       border-radius: 10px;
@@ -266,27 +266,52 @@
       gap: 10px;
     }
 
+    /* Interaktive F1 Practice Checkbox */
     .checkbox-group {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(0,0,0,0.3);
-      padding: 10px;
+      gap: 10px;
+      background: rgba(0,0,0,0.4);
+      padding: 12px;
       border-radius: 10px;
-      border: 1px solid var(--card-border);
+      border: 1.5px solid var(--card-border);
       margin-bottom: 12px;
       cursor: pointer;
+      user-select: none;
+      transition: border-color 0.2s, background-color 0.2s;
     }
 
-    .checkbox-group input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--accent);
+    .checkbox-group.checked {
+      border-color: var(--p1);
+      background: rgba(0, 230, 118, 0.08);
+    }
+
+    .custom-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #444c56;
+      background: #0b0d10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: transparent;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .checkbox-group.checked .custom-checkbox {
+      background: var(--p1);
+      border-color: var(--p1);
+      color: #000;
     }
 
     .checkbox-group span {
       font-size: 12px;
       font-weight: 600;
+      color: #fff;
     }
 
     button.btn-race {
@@ -716,10 +741,12 @@
           </div>
         </div>
 
-        <label class="checkbox-group" id="prepBonusWrapper">
-          <input type="checkbox" id="prepBonusCheck">
+        <!-- Leicht antippbare Free Practice Box -->
+        <div class="checkbox-group" id="prepBonusWrapper" onclick="togglePrepBonus()">
+          <div class="custom-checkbox" id="prepCheckboxVisual">✔</div>
+          <input type="checkbox" id="prepBonusCheck" style="display: none;">
           <span>🟢 Free Practice (+1,00 € Fleißbonus für rechtzeitiges Lernen)</span>
-        </label>
+        </div>
 
         <div class="form-group">
           <label for="customBonusInput">Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. bei sehr schwerer Arbeit)</span></label>
@@ -742,7 +769,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.2-F1</span>
+      <span class="version-tag app-ver-label">v1.4.3-F1</span>
     </footer>
   </div>
 
@@ -760,7 +787,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.2-F1</span>
+      <span class="version-tag app-ver-label">v1.4.3-F1</span>
     </footer>
   </div>
 
@@ -804,7 +831,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.2-F1</span>
+      <span class="version-tag app-ver-label">v1.4.3-F1</span>
     </footer>
   </div>
 
@@ -818,7 +845,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.2-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.3-F1</div>
         </div>
       </div>
 
@@ -860,7 +887,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.2-F1</span>
+      <span class="version-tag app-ver-label">v1.4.3-F1</span>
     </footer>
   </div>
 
@@ -942,7 +969,7 @@
 
     <!-- Fächerverwaltung -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">5. Season Calendar (Schulfächer & Events)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">5. Season Calendar (Schulfächer & Events verwalten)</h2>
       <form id="addSubjectForm" style="display: flex; gap: 8px;">
         <input type="text" id="newSubjectInput" placeholder="Neues Fach/Wettbewerb..." required disabled>
         <button type="submit" class="btn-race" id="addSubjectBtn" style="width: auto; margin-top: 0; padding: 0 16px;" disabled>+</button>
@@ -963,7 +990,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.2-F1</span>
+      <span class="version-tag app-ver-label">v1.4.3-F1</span>
     </footer>
   </div>
 
@@ -994,7 +1021,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.2-F1';
+  const APP_VERSION = 'v1.4.3-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
@@ -1080,6 +1107,18 @@
     document.querySelectorAll('.app-ver-label').forEach(el => el.textContent = APP_VERSION);
     const slipVer = document.getElementById('slipVersionTag');
     if (slipVer) slipVer.textContent = APP_VERSION;
+  }
+
+  /* Free Practice Checkbox Handler */
+  function togglePrepBonus() {
+    const check = document.getElementById('prepBonusCheck');
+    const wrapper = document.getElementById('prepBonusWrapper');
+    check.checked = !check.checked;
+    if (check.checked) {
+      wrapper.classList.add('checked');
+    } else {
+      wrapper.classList.remove('checked');
+    }
   }
 
   /* Paddock Security / Lock Management */
@@ -1557,7 +1596,11 @@
     document.getElementById('typeSelect').value = 'vocab';
     handleTypeChange();
     document.getElementById('customBonusInput').value = '';
+    
+    // Reset Checkbox
     document.getElementById('prepBonusCheck').checked = false;
+    document.getElementById('prepBonusWrapper').classList.remove('checked');
+
     updateTrackerUI();
   });
 
