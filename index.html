@@ -266,6 +266,7 @@
       gap: 10px;
     }
 
+    /* Interaktive F1 Practice Checkbox */
     .checkbox-group {
       display: flex;
       align-items: center;
@@ -732,21 +733,21 @@
       </div>
     </section>
 
-    <!-- Entry Form Noten -->
+    <!-- Entry Form Noten / Wettbewerbe -->
     <section class="card">
       <h2 style="font-family: 'Orbitron', sans-serif; font-size: 13px; text-transform: uppercase; margin-bottom: 10px;">
-        🏁 Log Telemetry (Note / Event eintragen)
+        🏁 Log Telemetry (Note / Wettbewerb eintragen)
       </h2>
       <form id="gradeForm">
         <div class="form-group">
           <label for="subjectSelect">Track / Schulfach / Wettbewerb</label>
-          <select id="subjectSelect" required>
+          <select id="subjectSelect" onchange="handleSubjectChange()" required>
             <option value="" disabled selected>Fach oder Wettbewerb wählen...</option>
           </select>
         </div>
 
         <div class="row">
-          <div class="form-group">
+          <div class="form-group" id="typeGroup">
             <label for="typeSelect">Art der Arbeit (Session Type)</label>
             <select id="typeSelect" onchange="handleTypeChange()" required>
               <option value="vocab">Vokabeltest Englisch (Wöchentlich)</option>
@@ -778,7 +779,7 @@
         </div>
 
         <div class="form-group">
-          <label for="customBonusInput">Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. bei sehr schwerer Arbeit)</span></label>
+          <label for="customBonusInput" id="customBonusLabel">Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. bei sehr schwerer Arbeit)</span></label>
           <input type="number" id="customBonusInput" step="0.25" min="0" placeholder="Automatisch nach Standard-Tabelle">
         </div>
 
@@ -798,11 +799,11 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.4-F1</span>
+      <span class="version-tag app-ver-label">v1.4.5-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 2: OVERALL STANDINGS (MIT VOLLER DATUMSTRANSPARENZ) -->
+  <!-- TAB 2: OVERALL STANDINGS (SCHULE VOR HAUSHALT) -->
   <div id="tab-analytics" class="tab-content">
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 6px;">
@@ -816,7 +817,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.4-F1</span>
+      <span class="version-tag app-ver-label">v1.4.5-F1</span>
     </footer>
   </div>
 
@@ -860,7 +861,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.4-F1</span>
+      <span class="version-tag app-ver-label">v1.4.5-F1</span>
     </footer>
   </div>
 
@@ -874,7 +875,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.4-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.5-F1</div>
         </div>
       </div>
 
@@ -916,7 +917,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.4-F1</span>
+      <span class="version-tag app-ver-label">v1.4.5-F1</span>
     </footer>
   </div>
 
@@ -961,7 +962,7 @@
           <input type="number" id="baseSalaryInput" step="0.50" min="0" value="20.00" disabled>
         </div>
         <div class="form-group" style="margin-bottom: 0;">
-          <label for="bonusCompInput">Wettbewerb (€ Extra)</label>
+          <label for="bonusCompInput">Wettbewerb (€ Teilnahme)</label>
           <input type="number" id="bonusCompInput" step="1.00" min="0" value="20.00" disabled>
         </div>
       </div>
@@ -1019,7 +1020,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.4-F1</span>
+      <span class="version-tag app-ver-label">v1.4.5-F1</span>
     </footer>
   </div>
 
@@ -1050,7 +1051,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.4-F1';
+  const APP_VERSION = 'v1.4.5-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
@@ -1093,7 +1094,7 @@
       "Pole and Victory! Take a bow, sensational effort!"
     ],
     competition: [
-      "🏆 EXTRAORDINARY PERFORMANCE! Championship Trophy unlocked! Outstanding ambition!",
+      "🏆 EXTRAORDINARY AMBITION! Championship Competition complete! 20 € bonus secured!",
       "🏆 GRAND SLAM! What an incredible challenge you conquered today!"
     ],
     chore: [
@@ -1243,22 +1244,39 @@
     });
   }
 
+  /* Wenn Fach ein Wettbewerb ist -> Automatisch umschalten */
+  function handleSubjectChange() {
+    const subject = document.getElementById('subjectSelect').value;
+    const typeSelect = document.getElementById('typeSelect');
+
+    if (subject.includes('Känguru') || subject.includes('Challenge')) {
+      typeSelect.value = 'competition';
+    } else if (subject === 'Englisch' && typeSelect.value === 'competition') {
+      typeSelect.value = 'vocab';
+    }
+    handleTypeChange();
+  }
+
   function handleTypeChange() {
     const type = document.getElementById('typeSelect').value;
     const gradeGroup = document.getElementById('gradeGroup');
     const gradeSelect = document.getElementById('gradeSelect');
     const prepWrapper = document.getElementById('prepBonusWrapper');
+    const customLabel = document.getElementById('customBonusLabel');
     const customInput = document.getElementById('customBonusInput');
 
     if (type === 'competition') {
+      // Keine Note bei Wettbewerben
       gradeGroup.style.display = 'none';
       gradeSelect.required = false;
       prepWrapper.style.display = 'none';
-      customInput.placeholder = `Standard: ${formatCurrency(competitionBonus)}`;
+      customLabel.innerHTML = `🌟 Extra-Erfolgsbonus (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. für Top-Platzierung, wird zu den ${formatCurrency(competitionBonus)} addiert)</span>`;
+      customInput.placeholder = 'Optionaler Extra-Betrag';
     } else {
       gradeGroup.style.display = 'block';
       gradeSelect.required = true;
       prepWrapper.style.display = 'flex';
+      customLabel.innerHTML = `Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. bei sehr schwerer Arbeit)</span>`;
       customInput.placeholder = 'Automatisch nach Standard-Tabelle';
     }
   }
@@ -1404,7 +1422,7 @@
         typeLabel = '🧹 Pit Crew Job';
       } else if (item.type === 'competition') {
         badgeHtml = '<div class="pos-badge pos-trophy">🏆</div>';
-        typeLabel = '🏆 Championship Competition';
+        typeLabel = '🏆 Wettbewerb (Teilnahme & Erfolg)';
       } else {
         const cls = item.grade === 1 ? 'pos-1' : item.grade === 2 ? 'pos-2' : item.grade === 3 ? 'pos-3' : 'pos-other';
         badgeHtml = `<div class="pos-badge ${cls}">P${item.grade}</div>`;
@@ -1419,6 +1437,7 @@
               <h4>${item.subject}</h4>
               <p>
                 ${typeLabel} ${item.grade ? `• Note ${item.grade}` : ''}
+                ${item.extraBonus ? `• 🌟 +${formatCurrency(item.extraBonus)} Extra` : ''}
                 ${item.prepBonus ? '• 🟢 Practice' : ''} 
                 ${item.improved ? '• 🚀 Comeback' : ''} 
                 • ${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
@@ -1477,12 +1496,13 @@
       const historyHtml = s.history.map(h => {
         const dStr = new Date(h.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
         const typeStr = h.type === 'chore' ? '🧹 Haushalt' : h.type === 'competition' ? '🏆 Pokal' : h.type === 'vocab' ? 'Vokabeln' : h.type === 'exam' ? 'Arbeit (100%)' : 'Test (50%)';
-        const gradeStr = h.grade ? `Note ${h.grade}` : 'Erledigt';
+        const gradeStr = h.type === 'competition' ? 'Teilnahme' : h.grade ? `Note ${h.grade}` : 'Erledigt';
 
         return `
           <div class="history-item-row">
             <div>
               <span class="history-date">${dStr}</span> • <span>${typeStr}</span>
+              ${h.extraBonus ? `<span style="color:var(--trophy-gold);"> (🌟 +${formatCurrency(h.extraBonus)} Extra)</span>` : ''}
               ${h.prepBonus ? '<span style="color:var(--p1);"> (🟢 Practice)</span>' : ''}
               ${h.improved ? '<span style="color:var(--p2);"> (🚀 Comeback)</span>' : ''}
             </div>
@@ -1506,7 +1526,6 @@
             </div>
           </div>
 
-          <!-- Vollständiger Datumskalender pro Fach -->
           <div class="stat-history-list">
             <div style="font-size: 10px; color: var(--text-sub); text-transform: uppercase; font-family: 'Orbitron'; margin-bottom: 2px;">Historie & Belege:</div>
             ${historyHtml}
@@ -1539,7 +1558,7 @@
           gradeText = 'Erledigt';
         } else if (item.type === 'competition') {
           typeShort = '🏆 COMP';
-          gradeText = '🏆';
+          gradeText = 'Teilnahme';
         } else {
           typeShort = item.type === 'vocab' ? 'Vokabeln' : item.type === 'exam' ? 'Arbeit (100%)' : 'Test (50%)';
           gradeText = `Note ${item.grade}`;
@@ -1548,7 +1567,7 @@
         return `
           <tr>
             <td><strong>${item.subject}</strong><br><span style="font-size:9px; color:var(--text-sub);">${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</span></td>
-            <td style="font-size:9px; text-transform:uppercase;">${typeShort}${item.prepBonus ? ' 🟢' : ''}${item.improved ? ' 🚀' : ''}</td>
+            <td style="font-size:9px; text-transform:uppercase;">${typeShort}${item.extraBonus ? ' 🌟' : ''}${item.prepBonus ? ' 🟢' : ''}${item.improved ? ' 🚀' : ''}</td>
             <td><strong style="color:${item.type === 'competition' ? 'var(--trophy-gold)' : item.grade === 1 ? 'var(--p1)' : item.grade === 2 ? 'var(--p2)' : '#fff'}">${gradeText}</strong></td>
             <td style="text-align: right; color: var(--p1); font-weight:700; font-family: Orbitron, sans-serif;">+ ${formatCurrency(item.bonus)}</td>
           </tr>
@@ -1593,7 +1612,7 @@
     if (tabId === 'chores') renderChoresUI();
   }
 
-  // Noten-Formular Submit mit Dublettenprüfung
+  // Noten- & Wettbewerbs-Formular Submit mit Dublettenprüfung
   document.getElementById('gradeForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const subject = document.getElementById('subjectSelect').value;
@@ -1611,11 +1630,15 @@
 
     let grade = null;
     let baseBonus = 0;
+    let extraBonus = 0;
     let improved = false;
     let improvementBonus = 0;
 
     if (type === 'competition') {
-      baseBonus = customBonusVal !== '' ? (parseFloat(customBonusVal) || 0) : competitionBonus;
+      baseBonus = competitionBonus;
+      if (customBonusVal !== '') {
+        extraBonus = parseFloat(customBonusVal) || 0;
+      }
     } else {
       grade = parseInt(document.getElementById('gradeSelect').value, 10);
       const prevSubjectEntries = entries.filter(item => item.subject === subject && item.grade !== null);
@@ -1634,12 +1657,13 @@
     }
 
     const prepVal = (prepBonus && type !== 'competition') ? 1.00 : 0;
-    const totalBonus = baseBonus + prepVal + improvementBonus;
+    const totalBonus = baseBonus + extraBonus + prepVal + improvementBonus;
 
     entries.unshift({
       id: Date.now().toString(),
       subject, grade, type,
       bonus: totalBonus,
+      extraBonus: extraBonus > 0 ? extraBonus : null,
       prepBonus: type === 'competition' ? false : prepBonus,
       improved,
       date: new Date().toISOString()
