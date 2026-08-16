@@ -266,7 +266,6 @@
       gap: 10px;
     }
 
-    /* Interaktive F1 Practice Checkbox */
     .checkbox-group {
       display: flex;
       align-items: center;
@@ -537,16 +536,46 @@
       border-bottom: 1px solid #1a1e26;
     }
 
+    /* Standings Accordion / Detail Cards */
     .subject-stat-card {
       background: #090a0d;
       border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 8px 10px;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .stat-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
-      font-size: 12px;
+    }
+
+    .stat-history-list {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--card-border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .history-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #c9d1d9;
+      background: rgba(255,255,255,0.02);
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+
+    .history-date {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      color: var(--text-sub);
     }
 
     /* Footer Branding */
@@ -769,25 +798,25 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.3-F1</span>
+      <span class="version-tag app-ver-label">v1.4.4-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 2: OVERALL STANDINGS (SCHULE VOR HAUSHALT) -->
+  <!-- TAB 2: OVERALL STANDINGS (MIT VOLLER DATUMSTRANSPARENZ) -->
   <div id="tab-analytics" class="tab-content">
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 10px;">
-        📊 Driver Standings (Fächer & Notenstände)
+      <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 6px;">
+        📊 Driver Standings (Historie & Notenstände)
       </h2>
-      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
-        Notenschnitt, Sessions und verdiente Gesamt-Prämien im laufenden Schuljahr.
+      <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 12px;">
+        Vollständige Dokumentation aller Noten und Jobs mit Datum zur Vermeidung von Doppeleinträgen.
       </p>
       <div id="subjectAnalyticsList"></div>
     </section>
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.3-F1</span>
+      <span class="version-tag app-ver-label">v1.4.4-F1</span>
     </footer>
   </div>
 
@@ -831,7 +860,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.3-F1</span>
+      <span class="version-tag app-ver-label">v1.4.4-F1</span>
     </footer>
   </div>
 
@@ -845,7 +874,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.3-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.4-F1</div>
         </div>
       </div>
 
@@ -887,11 +916,11 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.3-F1</span>
+      <span class="version-tag app-ver-label">v1.4.4-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 5: PADDOCK SETTINGS (SCHULE ZUERST, HAUSHALT DARUNTER) -->
+  <!-- TAB 5: PADDOCK SETTINGS -->
   <div id="tab-settings" class="tab-content">
     
     <!-- FIA Security Lock Banner -->
@@ -990,7 +1019,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.3-F1</span>
+      <span class="version-tag app-ver-label">v1.4.4-F1</span>
     </footer>
   </div>
 
@@ -1021,7 +1050,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.3-F1';
+  const APP_VERSION = 'v1.4.4-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
@@ -1392,7 +1421,7 @@
                 ${typeLabel} ${item.grade ? `• Note ${item.grade}` : ''}
                 ${item.prepBonus ? '• 🟢 Practice' : ''} 
                 ${item.improved ? '• 🚀 Comeback' : ''} 
-                • ${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}
+                • ${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
               </p>
             </div>
           </div>
@@ -1405,32 +1434,37 @@
     }).join('');
   }
 
+  /* STANDINGS MIT VOLLER DATUMS-TRANSPARENZ */
   function renderAnalytics() {
     const listEl = document.getElementById('subjectAnalyticsList');
     
     if (entries.length === 0) {
-      listEl.innerHTML = '<div style="color:var(--text-sub); text-align:center; padding:12px;">Keine Sessions aufgezeichnet.</div>';
+      listEl.innerHTML = '<div style="color:var(--text-sub); text-align:center; padding:12px;">Keine Sessions oder Jobs aufgezeichnet.</div>';
       return;
     }
 
     const stats = {};
-    subjects.forEach(sub => { stats[sub] = { count: 0, sumGrade: 0, gradeCount: 0, totalBonus: 0 }; });
 
     entries.forEach(e => {
-      if (!stats[e.subject]) stats[e.subject] = { count: 0, sumGrade: 0, gradeCount: 0, totalBonus: 0 };
+      if (!stats[e.subject]) {
+        stats[e.subject] = {
+          count: 0,
+          sumGrade: 0,
+          gradeCount: 0,
+          totalBonus: 0,
+          history: []
+        };
+      }
       stats[e.subject].count += 1;
-      if (e.grade) {
+      if (e.grade !== null && e.grade !== undefined) {
         stats[e.subject].sumGrade += e.grade;
         stats[e.subject].gradeCount += 1;
       }
       stats[e.subject].totalBonus += e.bonus;
+      stats[e.subject].history.push(e);
     });
 
-    const activeSubjects = Object.keys(stats).filter(s => stats[s].count > 0);
-    if(activeSubjects.length === 0) {
-      listEl.innerHTML = '<div style="color:var(--text-sub); text-align:center; padding:12px;">Noch keine Einträge vorhanden.</div>';
-      return;
-    }
+    const activeSubjects = Object.keys(stats);
 
     listEl.innerHTML = activeSubjects.map(sub => {
       const s = stats[sub];
@@ -1439,15 +1473,43 @@
         ? `<div style="font-family: Orbitron, sans-serif; font-size:12px; color:${avg <= 2.0 ? 'var(--p1)' : '#fff'};">Ø Note ${avg}</div>` 
         : `<div style="font-family: Orbitron, sans-serif; font-size:11px; color:var(--trophy-gold);">🏆 Trophy / Job</div>`;
 
+      // Sortierte Historie mit Datum
+      const historyHtml = s.history.map(h => {
+        const dStr = new Date(h.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        const typeStr = h.type === 'chore' ? '🧹 Haushalt' : h.type === 'competition' ? '🏆 Pokal' : h.type === 'vocab' ? 'Vokabeln' : h.type === 'exam' ? 'Arbeit (100%)' : 'Test (50%)';
+        const gradeStr = h.grade ? `Note ${h.grade}` : 'Erledigt';
+
+        return `
+          <div class="history-item-row">
+            <div>
+              <span class="history-date">${dStr}</span> • <span>${typeStr}</span>
+              ${h.prepBonus ? '<span style="color:var(--p1);"> (🟢 Practice)</span>' : ''}
+              ${h.improved ? '<span style="color:var(--p2);"> (🚀 Comeback)</span>' : ''}
+            </div>
+            <div>
+              <strong>${gradeStr}</strong> ➔ <span style="color:var(--p1); font-weight:bold;">+${formatCurrency(h.bonus)}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
       return `
         <div class="subject-stat-card">
-          <div>
-            <strong style="color:#fff; font-size:13px;">${sub}</strong>
-            <div style="color:var(--text-sub); font-size:11px;">${s.count} Event(s) absolviert</div>
+          <div class="stat-header-row">
+            <div>
+              <strong style="color:#fff; font-size:13px;">${sub}</strong>
+              <div style="color:var(--text-sub); font-size:11px;">${s.count} Eintrag/Einträge</div>
+            </div>
+            <div style="text-align:right;">
+              ${gradeHtml}
+              <div style="font-family: Orbitron, sans-serif; font-size:11px; color:var(--accent);">+ ${formatCurrency(s.totalBonus)} Gesamt</div>
+            </div>
           </div>
-          <div style="text-align:right;">
-            ${gradeHtml}
-            <div style="font-family: Orbitron, sans-serif; font-size:11px; color:var(--accent);">+ ${formatCurrency(s.totalBonus)} Provision</div>
+
+          <!-- Vollständiger Datumskalender pro Fach -->
+          <div class="stat-history-list">
+            <div style="font-size: 10px; color: var(--text-sub); text-transform: uppercase; font-family: 'Orbitron'; margin-bottom: 2px;">Historie & Belege:</div>
+            ${historyHtml}
           </div>
         </div>
       `;
@@ -1485,7 +1547,7 @@
 
         return `
           <tr>
-            <td><strong>${item.subject}</strong><br><span style="font-size:9px; color:var(--text-sub);">${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' })}</span></td>
+            <td><strong>${item.subject}</strong><br><span style="font-size:9px; color:var(--text-sub);">${new Date(item.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</span></td>
             <td style="font-size:9px; text-transform:uppercase;">${typeShort}${item.prepBonus ? ' 🟢' : ''}${item.improved ? ' 🚀' : ''}</td>
             <td><strong style="color:${item.type === 'competition' ? 'var(--trophy-gold)' : item.grade === 1 ? 'var(--p1)' : item.grade === 2 ? 'var(--p2)' : '#fff'}">${gradeText}</strong></td>
             <td style="text-align: right; color: var(--p1); font-weight:700; font-family: Orbitron, sans-serif;">+ ${formatCurrency(item.bonus)}</td>
@@ -1531,13 +1593,21 @@
     if (tabId === 'chores') renderChoresUI();
   }
 
-  // Noten-Formular Submit
+  // Noten-Formular Submit mit Dublettenprüfung
   document.getElementById('gradeForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const subject = document.getElementById('subjectSelect').value;
     const type = document.getElementById('typeSelect').value;
     const customBonusVal = document.getElementById('customBonusInput').value;
     const prepBonus = document.getElementById('prepBonusCheck').checked;
+
+    // Anti-Doppeleintrag Check für denselben Tag & Typ
+    const todayStr = new Date().toISOString().split('T')[0];
+    const duplicate = entries.find(item => item.subject === subject && item.type === type && item.date.startsWith(todayStr));
+    if (duplicate) {
+      const proceed = confirm(`⚠️ Hinweis: Für "${subject}" (${type}) wurde heute (${new Date().toLocaleDateString('de-DE')}) bereits ein Eintrag gebucht. Möchtest du ihn trotzdem noch einmal hinzufügen?`);
+      if (!proceed) return;
+    }
 
     let grade = null;
     let baseBonus = 0;
@@ -1597,19 +1667,25 @@
     handleTypeChange();
     document.getElementById('customBonusInput').value = '';
     
-    // Reset Checkbox
     document.getElementById('prepBonusCheck').checked = false;
     document.getElementById('prepBonusWrapper').classList.remove('checked');
 
     updateTrackerUI();
   });
 
-  // Haushaltsaufgaben-Formular Submit
+  // Haushaltsaufgaben-Formular Submit mit Dublettenprüfung
   document.getElementById('choreForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const choreKey = document.getElementById('choreSelect').value;
     const choreName = CHORE_NAMES[choreKey];
     const choreBonus = chorePrices[choreKey] || 0;
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    const duplicate = entries.find(item => item.subject === choreName && item.type === 'chore' && item.date.startsWith(todayStr));
+    if (duplicate) {
+      const proceed = confirm(`⚠️ Hinweis: "${choreName}" wurde heute bereits einmal verbucht. Möchtest du diese Aufgabe heute wirklich noch einmal buchen?`);
+      if (!proceed) return;
+    }
 
     entries.unshift({
       id: Date.now().toString(),
