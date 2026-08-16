@@ -358,7 +358,6 @@
       border: 1px solid var(--p1);
     }
 
-    /* Policy / Chores Info Box */
     .policy-box {
       background: rgba(0,0,0,0.35);
       border: 1px dashed var(--card-border);
@@ -743,7 +742,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.0-F1</span>
+      <span class="version-tag app-ver-label">v1.4.1-F1</span>
     </footer>
   </div>
 
@@ -770,9 +769,7 @@
       <form id="choreForm">
         <div class="form-group">
           <label for="choreSelect">Haushaltsaufgabe auswählen</label>
-          <select id="choreSelect" required>
-            <!-- Dynamisch aus CHORE_LIST -->
-          </select>
+          <select id="choreSelect" required></select>
         </div>
 
         <button type="submit" class="btn-race">⚡ Pit Crew Job verbuchen</button>
@@ -789,7 +786,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.0-F1</span>
+      <span class="version-tag app-ver-label">v1.4.1-F1</span>
     </footer>
   </div>
 
@@ -807,7 +804,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.0-F1</span>
+      <span class="version-tag app-ver-label">v1.4.1-F1</span>
     </footer>
   </div>
 
@@ -821,7 +818,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.0-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.1-F1</div>
         </div>
       </div>
 
@@ -863,7 +860,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.0-F1</span>
+      <span class="version-tag app-ver-label">v1.4.1-F1</span>
     </footer>
   </div>
 
@@ -881,7 +878,7 @@
       </div>
 
       <div id="unlockFormRow" style="display: flex; gap: 8px; margin-top: 4px;">
-        <input type="password" id="paddockPasswordInput" placeholder="Passwort (Memphis)..." style="font-size: 13px; padding: 8px 12px;">
+        <input type="password" id="paddockPasswordInput" placeholder="Passwort eingeben..." style="font-size: 13px; padding: 8px 12px;">
         <button type="button" class="btn-race" onclick="unlockPaddock()" style="width: auto; margin-top: 0; padding: 0 14px; font-size: 11px;">🔓 Unlock</button>
       </div>
 
@@ -961,7 +958,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.0-F1</span>
+      <span class="version-tag app-ver-label">v1.4.1-F1</span>
     </footer>
   </div>
 
@@ -992,23 +989,22 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.0-F1';
+  const APP_VERSION = 'v1.4.1-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
   const DEFAULT_SUBJECTS = ['Englisch', 'Mathematik', 'Deutsch', 'Geschichte', 'Biologie', 'Physik', 'Geografie', 'Sport', 'Musik', 'Kunst', 'Känguru-Wettbewerb (Mathe)', 'The Big Challenge (Englisch)'];
   
-  // Standard-Preise für die Haushaltsaufgaben
   const DEFAULT_CHORE_PRICES = {
-    clean_living: 3.50,   // Saugen & Wischen (Küche, Wohnzimmer, Flur & Gäste-WC)
-    clean_stairs: 2.50,   // Saugen & Wischen (Treppenstufen & Geländer)
-    clean_rooms: 3.50,    // Saugen & Wischen (beide Kinder-, Eltern- & Badezimmer)
-    cook_meal: 3.00,      // Alleine Kochen
-    table_service: 1.00,  // Tischdecken & Tischabräumen
-    dishes_service: 1.00, // Abwasch & Geschirrspüler ausräumen
-    laundry: 2.00,        // Wäsche aufhängen, abnehmen & zusammenlegen
-    lawn_mow: 4.00,       // Rasen mähen
-    garden_weeds: 3.00    // Unkraut jäten / Laub harken
+    clean_living: 3.50,
+    clean_stairs: 2.50,
+    clean_rooms: 3.50,
+    cook_meal: 3.00,
+    table_service: 1.00,
+    dishes_service: 1.00,
+    laundry: 2.00,
+    lawn_mow: 4.00,
+    garden_weeds: 3.00
   };
 
   const CHORE_NAMES = {
@@ -1195,13 +1191,11 @@
   }
 
   function renderChoresUI() {
-    // Dropdown in Pit Crew Tab
     const select = document.getElementById('choreSelect');
     select.innerHTML = Object.keys(CHORE_NAMES).map(k => `
       <option value="${k}">${CHORE_NAMES[k]} (+${formatCurrency(chorePrices[k] || 0)})</option>
     `).join('');
 
-    // Preistabelle in Pit Crew Tab
     const pricingList = document.getElementById('choresPricingList');
     pricingList.innerHTML = Object.keys(CHORE_NAMES).map(k => `
       <div style="display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px solid #1a1e26;">
@@ -1209,8 +1203,9 @@
         <strong style="color: var(--p1); font-family: 'Orbitron';">+ ${formatCurrency(chorePrices[k] || 0)}</strong>
       </div>
     `).join('');
+  }
 
-    // Paddock Settings für Chores
+  function initPaddockChoresInputs() {
     const padSettings = document.getElementById('paddockChoresSettings');
     padSettings.innerHTML = Object.keys(CHORE_NAMES).map(k => `
       <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
@@ -1219,7 +1214,6 @@
       </div>
     `).join('');
 
-    // Change Handler im Paddock
     Object.keys(CHORE_NAMES).forEach(k => {
       const el = document.getElementById(`chore_input_${k}`);
       if (el) {
@@ -1290,6 +1284,13 @@
       goalName = e.target.value.trim() || 'F1 Fan Cap';
       localStorage.setItem('f1_goal_name', goalName);
       document.getElementById('potGoalLabel').textContent = `${goalName} (30%)`;
+    });
+
+    document.getElementById('baseSalaryInput').addEventListener('change', (e) => {
+      if (!isPaddockUnlocked) return;
+      baseSalary = parseFloat(e.target.value) || 20.00;
+      localStorage.setItem('f1_base_salary', baseSalary.toString());
+      updateTrackerUI();
     });
   }
 
@@ -1610,19 +1611,13 @@
     renderSubjects();
   };
 
-  document.getElementById('baseSalaryInput').addEventListener('change', (e) => {
-    if (!isPaddockUnlocked) return;
-    baseSalary = parseFloat(e.target.value) || 20.00;
-    localStorage.setItem('f1_base_salary', baseSalary.toString());
-    updateTrackerUI();
-  });
-
   // Init
   const initialBtn = document.querySelector(`.driver-btn.${currentDriver}`);
   if (initialBtn) setDriver(currentDriver, initialBtn);
   applyVersionTags();
   renderSubjects();
   renderChoresUI();
+  initPaddockChoresInputs();
   initSettingsInputs();
   updatePaddockLockState();
   updateTrackerUI();
