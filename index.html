@@ -742,11 +742,29 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.1-F1</span>
+      <span class="version-tag app-ver-label">v1.4.2-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 2: HAUSHALTSAUFGABEN (PIT CREW JOBS) -->
+  <!-- TAB 2: OVERALL STANDINGS (SCHULE VOR HAUSHALT) -->
+  <div id="tab-analytics" class="tab-content">
+    <section class="card">
+      <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 10px;">
+        📊 Driver Standings (Fächer & Notenstände)
+      </h2>
+      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
+        Notenschnitt, Sessions und verdiente Gesamt-Prämien im laufenden Schuljahr.
+      </p>
+      <div id="subjectAnalyticsList"></div>
+    </section>
+
+    <footer class="app-footer">
+      <span class="creator">Made by CreatingReorganized</span>
+      <span class="version-tag app-ver-label">v1.4.2-F1</span>
+    </footer>
+  </div>
+
+  <!-- TAB 3: HAUSHALTSAUFGABEN (PIT CREW JOBS) -->
   <div id="tab-chores" class="tab-content">
     
     <div class="policy-box">
@@ -786,25 +804,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.1-F1</span>
-    </footer>
-  </div>
-
-  <!-- TAB 3: OVERALL STANDINGS -->
-  <div id="tab-analytics" class="tab-content">
-    <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 10px;">
-        📊 Driver Standings (Fächer & Notenstände)
-      </h2>
-      <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">
-        Notenschnitt, Sessions und verdiente Gesamt-Prämien im laufenden Schuljahr.
-      </p>
-      <div id="subjectAnalyticsList"></div>
-    </section>
-
-    <footer class="app-footer">
-      <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.1-F1</span>
+      <span class="version-tag app-ver-label">v1.4.2-F1</span>
     </footer>
   </div>
 
@@ -818,7 +818,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.1-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.2-F1</div>
         </div>
       </div>
 
@@ -860,11 +860,11 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.1-F1</span>
+      <span class="version-tag app-ver-label">v1.4.2-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 5: PADDOCK SETTINGS -->
+  <!-- TAB 5: PADDOCK SETTINGS (SCHULE ZUERST, HAUSHALT DARUNTER) -->
   <div id="tab-settings" class="tab-content">
     
     <!-- FIA Security Lock Banner -->
@@ -896,9 +896,9 @@
       </div>
     </section>
 
-    <!-- Grundgehalt & Wettbewerb -->
+    <!-- 1. SCHULLEISTUNGEN & BASISVERTRAG -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Fixgehalt & Wettbewerbsprämie</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">1. Fixgehalt & Wettbewerbsprämie</h2>
       <div class="row">
         <div class="form-group" style="margin-bottom: 0;">
           <label for="baseSalaryInput">Grundgehalt (€ / Monat)</label>
@@ -911,15 +911,9 @@
       </div>
     </section>
 
-    <!-- Haushaltsaufgaben Vergütung -->
-    <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Pit Crew Jobs Vergütung (€)</h2>
-      <div id="paddockChoresSettings" style="display: flex; flex-direction: column; gap: 8px;"></div>
-    </section>
-
     <!-- Vokabeltests -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Vokabeltest Englisch (Wöchentlich)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">2. Vokabeltest Englisch (Wöchentlich)</h2>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
         <div><label>P1 (Note 1 - Sehr gut)</label><input type="number" step="0.25" id="bonus_vocab_1" disabled></div>
         <div><label>P2 (Note 2 - Gut)</label><input type="number" step="0.25" id="bonus_vocab_2" disabled></div>
@@ -928,7 +922,7 @@
 
     <!-- Klassenarbeiten -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Main GP (Große Klassenarbeiten / Schulaufgaben)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">3. Main GP (Große Klassenarbeiten / Schulaufgaben)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
         <div><label>P1 (Note 1)</label><input type="number" step="0.25" id="bonus_exam_1" disabled></div>
         <div><label>P2 (Note 2)</label><input type="number" step="0.25" id="bonus_exam_2" disabled></div>
@@ -938,7 +932,7 @@
 
     <!-- Kleine Tests -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Sprint (Kleine Tests / Kurztests)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">4. Sprint (Kleine Tests / Kurztests)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
         <div><label>P1 (Note 1)</label><input type="number" step="0.25" id="bonus_test_1" disabled></div>
         <div><label>P2 (Note 2)</label><input type="number" step="0.25" id="bonus_test_2" disabled></div>
@@ -948,7 +942,7 @@
 
     <!-- Fächerverwaltung -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">Season Calendar (Fächer & Events verwalten)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">5. Season Calendar (Schulfächer & Events)</h2>
       <form id="addSubjectForm" style="display: flex; gap: 8px;">
         <input type="text" id="newSubjectInput" placeholder="Neues Fach/Wettbewerb..." required disabled>
         <button type="submit" class="btn-race" id="addSubjectBtn" style="width: auto; margin-top: 0; padding: 0 16px;" disabled>+</button>
@@ -956,9 +950,20 @@
       <div class="chip-container" id="subjectsContainer"></div>
     </section>
 
+    <!-- 2. HAUSHALTSAUFGABEN (UNTER DEN SCHULLEISTUNGEN) -->
+    <section class="card" style="border-top: 2px solid var(--accent); margin-top: 10px;">
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 4px; color: var(--accent);">
+        🧹 Pit Crew Jobs Vergütung (Zusatzverdienst Haushalt)
+      </h2>
+      <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 10px;">
+        Nachrangiger Zusatzverdienst. Schule und Freizeit haben immer Vorrang.
+      </p>
+      <div id="paddockChoresSettings" style="display: flex; flex-direction: column; gap: 8px;"></div>
+    </section>
+
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.1-F1</span>
+      <span class="version-tag app-ver-label">v1.4.2-F1</span>
     </footer>
   </div>
 
@@ -970,13 +975,13 @@
     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5v-9l6 4.5-6 4.5z"/></svg>
     Cockpit
   </button>
-  <button class="tab-btn" onclick="switchTab('chores', this)">
-    <svg viewBox="0 0 24 24"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
-    Pit Crew
-  </button>
   <button class="tab-btn" onclick="switchTab('analytics', this)">
     <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
     Standings
+  </button>
+  <button class="tab-btn" onclick="switchTab('chores', this)">
+    <svg viewBox="0 0 24 24"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+    Pit Crew
   </button>
   <button class="tab-btn" onclick="switchTab('report', this)">
     <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
@@ -989,7 +994,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.1-F1';
+  const APP_VERSION = 'v1.4.2-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
