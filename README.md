@@ -1,2 +1,111 @@
-# MoneyTracker
-Tracks pocket money and bonuses for scholastic achievements
+# 🏎️ MoneyTracker – F1 Telemetry & Allowance Tracker
+
+A web-based, mobile-friendly Formel-1 themed allowance and chore tracking Progressive Web App (PWA). Built to gamify school performance, personal projects (podcast reviews), and household participation with transparency, automated budgeting, and incentive alignment.
+
+Made with ⚡ by **CreatingReorganized**  
+Current Version: **`v1.4.7-F1`**
+
+---
+
+## 🏁 Key Features
+
+* **🏎️ Cockpit (Overview & Telemetry Entry):**
+  * **Dynamic Purse Calculation:** Tracks base retainer and performance bonuses in real time.
+  * **Interactive RPM Tachometer:** Lights up dynamically as earnings approach the monthly performance cap.
+  * **Interactive Free Practice Bonus:** One-tap toggle for timely exam prep (+1.00 €).
+  * **Driver Skin Toggle:** Switch seamlessly between Kimi Antonelli (#12) and Oliver Bearman (#87).
+  * **Team Radio:** Dynamic pit wall praise and confetti effects for P1 results, competitions, and completed missions.
+
+* **💰 3-Pot Automatic Budget Split:**
+  * **60% Freies Taschengeld:** Immediate pocket money for flexible spending.
+  * **30% F1 Sparziel:** Automated accumulation for a designated goal (e.g., F1 Merch, Team Cap, Video Games).
+  * **10% Depot / Zukunft:** Long-term savings pot.
+
+* **📊 Standings (Academic & Task Audit Trail):**
+  * Tracks grade averages and accumulated earnings across school subjects.
+  * Full chronological history (`DD.MM.YYYY`) for every exam, test, and chore to prevent duplicates and ensure transparency.
+  * Intelligent duplicate entry warnings when logging identical items on the same day.
+
+* **🧹 Pit Crew & Podcast Missions:**
+  * Educational policy enforcement: Routine base duties (own room, own trash, school bag) remain uncompensated.
+  * **Podcast Collaboration:** Dedicated 5.00 € bonus for reading scripts, giving feedback, or listening to podcast episodes.
+  * **Household Chores:** Itemized rates for dishwashing, laundry sorting, stair dusting, living room care, and garden maintenance.
+
+* **🧾 FIA Pay Sheet (Monthly Export):**
+  * Official itemized monthly performance statement.
+  * In-browser image generator via `html2canvas` for exporting and sending pay sheets directly via WhatsApp, AirDrop, or download.
+
+* **🔒 Paddock Settings (Steward Security Lock):**
+  * Password-protected with PIN/Password (`Memphis`).
+  * Default **Read-Only** mode prevents accidental or unauthorized rule editing.
+  * Full customizability: Base retainer, exam tiers, test scales, competition awards, and task rates.
+
+---
+
+## 💶 Default Compensation Matrix (`v1.4.7-F1`)
+
+### 1. Base Contract
+* **Base Retainer (Fixgehalt):** `10.00 € / Month`
+
+### 2. Academic Performance (Schule hat Vorrang)
+* **Main GP (Klassenarbeiten – Deutsch / Mathe / Englisch):**
+  * **P1 (Note 1):** `+15.00 €`
+  * **P2 (Note 2):** `+10.00 €`
+  * **P3 (Note 3):** `+5.00 €`
+* **Sprint (Tests & Wöchentliche Vokabeltests):**
+  * **P1 (Note 1):** `+5.00 €`
+  * **P2 (Note 2):** `+3.00 €`
+  * **P3 (Note 3):** `+1.00 €`
+* **Special Competitions (Känguru-Wettbewerb / The Big Challenge):**
+  * **Participation Bonus:** `+20.00 €` (no grade required)
+  * **Extra-Erfolgsbonus:** Optional custom field for exceptional placement or ranking.
+* **Modifiers:**
+  * **Free Practice:** `+1.00 €` (proactive preparation)
+  * **Comeback Drive:** `+1.50 €` (grade improvement over prior session)
+
+### 3. Podcast & Pit Crew Tasks
+* **🎙️ Podcast Mission:** `5.00 €` (Read script + feedback OR listen to episode)
+* **Wäsche falten & wegbringen:** `2.00 €`
+* **Wohnzimmer staubsaugen / putzen:** `2.00 €` each
+* **Gemeinsame Mülleimer leeren:** `1.00 €`
+* **3 Treppen mit Staubtuch putzen:** `1.00 €`
+* **Spülmaschine / Tischdecken:** `0.50 €` each
+* **Blumen gießen / Nasse Wäsche aufhängen:** `0.50 €` each
+* **Garten (Unkraut / Laub):** `2.00 €` / `5.00 €`
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+* **Frontend:** Vanilla HTML5, CSS3, JavaScript (ES6+).
+* **Storage:** Client-side `localStorage` for offline persistence (no external database required).
+* **External Libraries:**
+  * [Canvas Confetti](https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js) for milestone celebrations.
+  * [html2canvas](https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js) for FIA pay sheet rendering and export.
+* **Typography:** Google Fonts (`Titillium Web` & `Orbitron`).
+
+---
+
+## 🚀 Setup & Deployment
+
+### Run on GitHub Pages
+1. Push `index.html` to the `main` branch of your repository.
+2. Go to **Settings** > **Pages** in your GitHub repository.
+3. Under **Build and deployment**, set **Source** to `Deploy from a branch` and select branch `main` / `root`.
+4. Click **Save**. The app will be available at `https://<username>.github.io/<repository-name>/`.
+
+### Install as PWA on iPhone (iOS Safari)
+1. Open the deployed GitHub Pages URL in **Safari**.
+2. Tap the **Share** button (box with upward arrow).
+3. Select **Add to Home Screen** (Zum Home-Bildschirm).
+4. Tap **Add** in the top right corner.
+
+---
+
+## 🔐 Paddock Admin Access
+To edit base compensation, tasks, or subjects:
+1. Navigate to the **Paddock** tab.
+2. Enter the steward password (`Memphis`) in the unlock input.
+3. Click **Unlock**.
+4. Adjust values as needed. All changes persist automatically to `localStorage`.
+5. Click **Paddock wieder sperren** when finished.
