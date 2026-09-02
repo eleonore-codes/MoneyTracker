@@ -761,6 +761,10 @@
       </h2>
       <form id="gradeForm">
         <div class="form-group">
+          <label for="gradeDateInput">Datum</label>
+          <input type="date" id="gradeDateInput" required>
+        </div>
+        <div class="form-group">
           <label for="subjectSelect">Track / Schulfach / Wettbewerb</label>
           <select id="subjectSelect" onchange="handleSubjectChange()" required>
             <option value="" disabled selected>Fach oder Wettbewerb wählen...</option>
@@ -819,7 +823,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.2-F1</span>
+      <span class="version-tag app-ver-label">v1.5.3-F1</span>
     </footer>
   </div>
 
@@ -832,12 +836,13 @@
       <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 12px;">
         Vollständige Dokumentation aller Noten, Aufgaben und Podcasts mit Datum zur Vermeidung von Doppeleinträgen.
       </p>
+      <div class="subject-stat-card" id="semesterSummary"></div>
       <div id="subjectAnalyticsList"></div>
     </section>
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.2-F1</span>
+      <span class="version-tag app-ver-label">v1.5.3-F1</span>
     </footer>
   </div>
 
@@ -863,6 +868,10 @@
       </h2>
       <form id="choreForm">
         <div class="form-group">
+          <label for="choreDateInput">Datum</label>
+          <input type="date" id="choreDateInput" required>
+        </div>
+        <div class="form-group">
           <label for="choreSelect">Aufgabe auswählen</label>
           <select id="choreSelect" required></select>
         </div>
@@ -881,7 +890,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.2-F1</span>
+      <span class="version-tag app-ver-label">v1.5.3-F1</span>
     </footer>
   </div>
 
@@ -895,7 +904,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">SEP 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.5.2-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.5.3-F1</div>
         </div>
       </div>
 
@@ -937,7 +946,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.2-F1</span>
+      <span class="version-tag app-ver-label">v1.5.3-F1</span>
     </footer>
   </div>
 
@@ -961,6 +970,9 @@
 
       <button type="button" id="relockBtn" class="btn-race ollie-mode" onclick="lockPaddock()" style="display: none; margin-top: 4px; padding: 8px; font-size: 11px;">
         🔒 Paddock wieder sperren
+      </button>
+      <button type="button" id="clearTestDataBtn" class="btn-race ollie-mode" onclick="clearTestData()" style="display:none; margin-top:8px; padding:8px; font-size:11px;">
+        🧪 Testdaten löschen (zweimal klicken)
       </button>
     </div>
 
@@ -1031,7 +1043,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.2-F1</span>
+      <span class="version-tag app-ver-label">v1.5.3-F1</span>
     </footer>
   </div>
 
@@ -1062,7 +1074,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.5.2-F1';
+  const APP_VERSION = 'v1.5.3-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
   let lastConfettiTime = 0;
@@ -1213,6 +1225,9 @@
   let bonusRules = JSON.parse(localStorage.getItem('f1_bonus_rules')) || DEFAULT_BONUS_RULES;
   let currentDriver = localStorage.getItem('f1_driver') || 'kimi';
   let toastTimer = null;
+  let pendingDeleteId = null;
+  let pendingDeleteTimer = null;
+  let clearDataArmed = false;
 
   function createEntryId() {
     return (window.crypto && typeof window.crypto.randomUUID === 'function')
@@ -1228,6 +1243,12 @@
     toast.classList.toggle('warning', kind === 'warning');
     toast.classList.add('visible');
     toastTimer = window.setTimeout(() => toast.classList.remove('visible'), 2600);
+  }
+
+  function initializeDateInputs() {
+    const today = getLocalDateString();
+    document.getElementById('gradeDateInput').value = today;
+    document.getElementById('choreDateInput').value = today;
   }
 
   function getCurrentMonthKey() {
@@ -1278,9 +1299,9 @@
       isPaddockUnlocked = true;
       input.value = '';
       updatePaddockLockState();
-      alert('Paddock erfolgreich freigeschaltet!');
+      showToast('Paddock erfolgreich freigeschaltet!');
     } else {
-      alert('Falsches Passwort! Zugriff verweigert.');
+      showToast('Falsches Passwort! Zugriff verweigert.', 'warning');
     }
   }
 
@@ -1293,6 +1314,7 @@
     const badge = document.getElementById('paddockLockBadge');
     const unlockRow = document.getElementById('unlockFormRow');
     const relockBtn = document.getElementById('relockBtn');
+    const clearTestDataBtn = document.getElementById('clearTestDataBtn');
 
     const inputsToToggle = [
       'goalNameInput', 'baseSalaryInput', 'bonusCompInput',
@@ -1310,6 +1332,7 @@
       badge.className = 'lock-badge unlocked';
       unlockRow.style.display = 'none';
       relockBtn.style.display = 'block';
+      clearTestDataBtn.style.display = 'block';
 
       inputsToToggle.forEach(id => {
         const el = document.getElementById(id);
@@ -1320,6 +1343,7 @@
       badge.className = 'lock-badge locked';
       unlockRow.style.display = 'flex';
       relockBtn.style.display = 'none';
+      clearTestDataBtn.style.display = 'none';
 
       inputsToToggle.forEach(id => {
         const el = document.getElementById(id);
@@ -1575,12 +1599,29 @@
 
   function renderAnalytics() {
     const listEl = document.getElementById('subjectAnalyticsList');
+    const summaryEl = document.getElementById('semesterSummary');
     const driverEntries = entries.filter(e => e.driver === currentDriver);
     
     if (driverEntries.length === 0) {
+      summaryEl.innerHTML = '<strong>🏁 Halbjahreswertung</strong><div style="color:var(--text-sub);margin-top:4px;">Noch keine Daten für eine Fünf-Monats-Wertung.</div>';
       listEl.innerHTML = '<div style="color:var(--text-sub); text-align:center; padding:12px;">Keine Sessions oder Aufgaben aufgezeichnet.</div>';
       return;
     }
+
+    const datedEntries = driverEntries.filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.localDate || ''));
+    const latestDate = datedEntries.reduce((max, e) => e.localDate > max ? e.localDate : max, getLocalDateString());
+    const end = new Date(`${latestDate.slice(0, 7)}-01T12:00:00`);
+    const start = new Date(end);
+    start.setMonth(start.getMonth() - 4);
+    const startKey = `${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, '0')}`;
+    const endKey = latestDate.slice(0, 7);
+    const semesterEntries = datedEntries.filter(e => e.localDate.slice(0, 7) >= startKey && e.localDate.slice(0, 7) <= endKey);
+    const semesterGrades = semesterEntries.filter(e => Number.isFinite(e.grade));
+    const semesterGpa = semesterGrades.length ? semesterGrades.reduce((sum, e) => sum + e.grade, 0) / semesterGrades.length : null;
+    const semesterBonuses = semesterEntries.reduce((sum, e) => sum + e.bonus, 0);
+    summaryEl.innerHTML = `
+      <div class="stat-header-row"><strong>🏁 Halbjahreswertung (5 Monate)</strong><strong style="color:var(--accent);">${semesterGpa === null ? '–' : `Ø ${semesterGpa.toFixed(2)}`}</strong></div>
+      <div style="color:var(--text-sub);font-size:11px;margin-top:5px;">${startKey} bis ${endKey} • ${semesterGrades.length} Noten • ${formatCurrency(semesterBonuses)} Boni</div>`;
 
     const stats = {};
 
@@ -1746,7 +1787,7 @@
       const type = document.getElementById('typeSelect').value;
       const customBonusVal = document.getElementById('customBonusInput').value;
       const prepBonus = document.getElementById('prepBonusCheck').checked;
-      const localDate = getLocalDateString();
+      const localDate = document.getElementById('gradeDateInput').value || getLocalDateString();
       const stableKey = SUBJECT_KEY_MAP[subject] || subject.toLowerCase().replace(/[^a-z0-9]/g, '_');
 
       const duplicate = entries.find(item => 
@@ -1802,7 +1843,7 @@
         prepBonus: type === 'competition' ? false : prepBonus,
         improved,
         localDate,
-        date: new Date().toISOString()
+        date: `${localDate}T12:00:00`
       });
       localStorage.setItem('f1_entries', JSON.stringify(entries));
 
@@ -1849,7 +1890,7 @@
       const choreBonus = chorePrices[choreKey] || 0;
       const isPodcast = choreKey === 'podcast_task';
       const taskType = isPodcast ? 'podcast' : 'chore';
-      const localDate = getLocalDateString();
+      const localDate = document.getElementById('choreDateInput').value || getLocalDateString();
 
       const existingSameDay = entries.filter(item => 
         item.driver === currentDriver && 
@@ -1863,11 +1904,6 @@
         return;
       }
 
-      if (isPodcast && existingSameDay.length > 0) {
-        const confirmSecond = confirm(`Hinweis: Eine Podcast-Mission wurde heute bereits verbucht. Möchtest du eine weitere Mission hinzufügen?`);
-        if (!confirmSecond) return;
-      }
-
       entries.unshift({
         id: createEntryId(),
         driver: currentDriver,
@@ -1879,7 +1915,7 @@
         prepBonus: false,
         improved: false,
         localDate,
-        date: new Date().toISOString()
+        date: `${localDate}T12:00:00`
       });
       localStorage.setItem('f1_entries', JSON.stringify(entries));
 
@@ -1901,12 +1937,35 @@
   });
 
   window.deleteEntry = function(id) {
-    if(confirm('Eintrag aus Wertung streichen?')) {
-      entries = entries.filter(e => e.id !== String(id));
-      localStorage.setItem('f1_entries', JSON.stringify(entries));
-      updateTrackerUI();
-      showToast('Eintrag gelöscht.');
+    if (pendingDeleteId !== String(id)) {
+      pendingDeleteId = String(id);
+      window.clearTimeout(pendingDeleteTimer);
+      pendingDeleteTimer = window.setTimeout(() => { pendingDeleteId = null; }, 4000);
+      showToast('Zum Löschen denselben ×-Knopf erneut drücken.', 'warning');
+      return;
     }
+    entries = entries.filter(e => e.id !== String(id));
+    localStorage.setItem('f1_entries', JSON.stringify(entries));
+    pendingDeleteId = null;
+    window.clearTimeout(pendingDeleteTimer);
+    updateTrackerUI();
+    showToast('Eintrag gelöscht.');
+  };
+
+  window.clearTestData = function() {
+    if (!isPaddockUnlocked) return;
+    if (!clearDataArmed) {
+      clearDataArmed = true;
+      showToast('Testdaten löschen: Knopf innerhalb von 5 Sekunden erneut drücken.', 'warning');
+      window.setTimeout(() => { clearDataArmed = false; }, 5000);
+      return;
+    }
+    entries = [];
+    localStorage.setItem('f1_entries', '[]');
+    clearDataArmed = false;
+    updateTrackerUI();
+    renderAnalytics();
+    showToast('Alle Testeinträge wurden gelöscht.');
   };
 
   document.getElementById('addSubjectForm').addEventListener('submit', (e) => {
@@ -1938,6 +1997,7 @@
   initPaddockChoresInputs();
   initSettingsInputs();
   updatePaddockLockState();
+  initializeDateInputs();
   updateTrackerUI();
 </script>
 </body>
