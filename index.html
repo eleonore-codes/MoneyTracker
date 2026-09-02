@@ -1,129 +1,3 @@
-All references to children's names have been completely removed from both the documentation and the application source code. The wording now strictly uses neutral Formula 1 terms ("Driver", "Cockpit", "Team Radio").
-
----
-
-### 1. Updated `README.md`
-
-```markdown
-# 🏎️ F1 Telemetry & Allowance Tracker: Money Tracker
-
-A web-based, mobile-friendly Formula 1 themed allowance and chore tracking Progressive Web App (PWA). Built to gamify school performance, personal projects (podcast reviews), and household participation with transparency, automated budgeting, and incentive alignment.
-
-Made with ⚡ by **CreatingReorganized**  
-Current Version: **`v1.4.9-F1`**
-
----
-
-## 🏁 Key Features
-
-* **🏎️ Cockpit (Overview & Telemetry Entry):**
-  * **Dynamic Purse Calculation:** Tracks base retainer and performance bonuses in real time.
-  * **Interactive RPM Tachometer:** Lights up dynamically as earnings approach the monthly performance cap.
-  * **Interactive Free Practice Bonus:** One-tap toggle for timely exam prep (+1.00 €).
-  * **Driver Skin Toggle:** Switch seamlessly between Kimi Antonelli (#12) and Oliver Bearman (#87).
-  * **Team Radio:** Dynamic pit wall praise and confetti effects for P1 results, competitions, and completed missions.
-
-* **💰 3-Pot Automatic Budget Split:**
-  * **60% Freies Taschengeld:** Immediate pocket money for flexible spending.
-  * **30% F1 Sparziel:** Automated accumulation for a designated goal (e.g., F1 Merch, Team Cap, Video Games).
-  * **10% Depot / Zukunft:** Long-term savings pot.
-
-* **📊 Standings (Academic & Task Audit Trail):**
-  * Tracks grade averages and accumulated earnings across school subjects.
-  * Full chronological history (`DD.MM.YYYY`) for every exam, test, and chore to prevent duplicates and ensure transparency.
-  * Intelligent duplicate entry warnings when logging identical items on the same day.
-
-* **🧹 Pit Crew & Podcast Missions:**
-  * Educational policy enforcement: Routine base duties (own room, own trash, school bag) remain uncompensated.
-  * **Podcast Collaboration:** Dedicated 5.00 € bonus for reading scripts, giving feedback, or listening to podcast episodes.
-  * **Household Chores:** Itemized rates for dishwashing, laundry sorting, stair dusting, living room care, and garden maintenance.
-
-* **🧾 FIA Pay Sheet (Monthly Export):**
-  * Official itemized monthly performance statement.
-  * In-browser image generator via `html2canvas` for exporting and sending pay sheets directly via WhatsApp, AirDrop, or download.
-
-* **🔒 Paddock Settings (Steward Security Lock):**
-  * Password-protected with PIN/Password (`Memphis`).
-  * Default **Read-Only** mode prevents accidental or unauthorized rule editing.
-  * Full customizability: Base retainer, exam tiers, test scales, competition awards, and task rates.
-
----
-
-## 💶 Default Compensation Matrix (`v1.4.9-F1`)
-
-### 1. Base Contract
-* **Base Retainer (Fixgehalt):** `10.00 € / Month`
-
-### 2. Academic Performance (Schule hat Vorrang)
-* **Main GP (Klassenarbeiten – Deutsch / Mathe / Englisch / Latein):**
-  * **P1 (Note 1):** `+15.00 €`
-  * **P2 (Note 2):** `+10.00 €`
-  * **P3 (Note 3):** `+5.00 €`
-* **Sprint (Tests & Vokabeltests):**
-  * **P1 (Note 1):** `+5.00 €`
-  * **P2 (Note 2):** `+3.00 €`
-  * **P3 (Note 3):** `+1.00 €`
-* **Special Competitions (Känguru-Wettbewerb / The Big Challenge):**
-  * **Participation Bonus:** `+20.00 €` (no grade required)
-  * **Extra-Erfolgsbonus:** Optional custom field for exceptional placement or ranking.
-* **Modifiers:**
-  * **Free Practice:** `+1.00 €` (proactive preparation)
-  * **Comeback Drive:** `+1.50 €` (grade improvement over prior session)
-
-### 3. Podcast & Pit Crew Tasks
-* **🎙️ Podcast Mission:** `5.00 €` (Read script + feedback OR listen to episode)
-* **Wäsche falten & wegbringen:** `2.00 €`
-* **Wohnzimmer staubsaugen / putzen:** `2.00 €` each
-* **Gemeinsame Mülleimer leeren:** `1.00 €`
-* **3 Treppen mit Staubtuch putzen:** `1.00 €`
-* **Spülmaschine / Tischdecken:** `0.50 €` each
-* **Blumen gießen / Nasse Wäsche aufhängen:** `0.50 €` each
-* **Garten (Unkraut / Laub):** `2.00 €` / `5.00 €`
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-* **Frontend:** Vanilla HTML5, CSS3, JavaScript (ES6+).
-* **Storage:** Client-side `localStorage` for offline persistence.
-* **External Libraries:**
-  * [Canvas Confetti](https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js)
-  * [html2canvas](https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js)
-* **Typography:** Google Fonts (`Titillium Web` & `Orbitron`).
-
----
-
-## 🚀 Setup & Deployment
-
-### Run on GitHub Pages
-1. Push `index.html` to the `main` branch of your repository.
-2. Go to **Settings** > **Pages** in your GitHub repository.
-3. Under **Build and deployment**, set **Source** to `Deploy from a branch` and select branch `main` / `root`.
-4. Click **Save**. The app will be available at `https://eleonore-codes.github.io/MoneyTracker/`.
-
-### Install as PWA on iPhone (iOS Safari)
-1. Open the deployed GitHub Pages URL in **Safari**.
-2. Tap the **Share** button (square with arrow up).
-3. Select **Add to Home Screen** (Zum Home-Bildschirm).
-4. Tap **Add** in the top right corner.
-
----
-
-## 🔐 Paddock Admin Access
-To edit base compensation, tasks, or subjects:
-1. Navigate to the **Paddock** tab.
-2. Enter the steward password (`Memphis`) in the unlock input.
-3. Click **Unlock**.
-4. Adjust values as needed. All changes persist automatically to `localStorage`.
-5. Click **🔒 Paddock wieder sperren** when finished.
-
-```
-
----
-
-### 2. Updated `index.html` (`v1.4.9-F1`)
-
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -392,6 +266,7 @@ To edit base compensation, tasks, or subjects:
       gap: 10px;
     }
 
+    /* Interactive Checkbox */
     .checkbox-group {
       display: flex;
       align-items: center;
@@ -893,7 +768,7 @@ To edit base compensation, tasks, or subjects:
           </div>
         </div>
 
-        <!-- Leicht antippbare Free Practice Box -->
+        <!-- Free Practice Checkbox -->
         <div class="checkbox-group" id="prepBonusWrapper" onclick="togglePrepBonus()">
           <div class="custom-checkbox" id="prepCheckboxVisual">✔</div>
           <input type="checkbox" id="prepBonusCheck" style="display: none;">
@@ -921,11 +796,11 @@ To edit base compensation, tasks, or subjects:
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.9-F1</span>
+      <span class="version-tag app-ver-label">v1.5.0-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 2: OVERALL STANDINGS (SCHULE VOR HAUSHALT) -->
+  <!-- TAB 2: OVERALL STANDINGS -->
   <div id="tab-analytics" class="tab-content">
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 6px;">
@@ -939,11 +814,11 @@ To edit base compensation, tasks, or subjects:
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.9-F1</span>
+      <span class="version-tag app-ver-label">v1.5.0-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 3: HAUSHALTSAUFGABEN & PODCAST (PIT CREW JOBS) -->
+  <!-- TAB 3: PIT CREW JOBS -->
   <div id="tab-chores" class="tab-content">
     
     <div class="policy-box">
@@ -969,7 +844,7 @@ To edit base compensation, tasks, or subjects:
           <select id="choreSelect" required></select>
         </div>
 
-        <button type="submit" class="btn-race">⚡ Aufgabe / Job verbuchen</button>
+        <button type="submit" class="btn-race" id="choreSubmitBtn">⚡ Aufgabe / Job verbuchen</button>
       </form>
     </section>
 
@@ -983,7 +858,7 @@ To edit base compensation, tasks, or subjects:
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.9-F1</span>
+      <span class="version-tag app-ver-label">v1.5.0-F1</span>
     </footer>
   </div>
 
@@ -997,7 +872,7 @@ To edit base compensation, tasks, or subjects:
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">SEP 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.9-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.5.0-F1</div>
         </div>
       </div>
 
@@ -1039,7 +914,7 @@ To edit base compensation, tasks, or subjects:
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.9-F1</span>
+      <span class="version-tag app-ver-label">v1.5.0-F1</span>
     </footer>
   </div>
 
@@ -1133,7 +1008,7 @@ To edit base compensation, tasks, or subjects:
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.9-F1</span>
+      <span class="version-tag app-ver-label">v1.5.0-F1</span>
     </footer>
   </div>
 
@@ -1164,9 +1039,28 @@ To edit base compensation, tasks, or subjects:
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.9-F1';
+  const APP_VERSION = 'v1.5.0-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
+  let lastConfettiTime = 0;
+
+  // Service Worker Registration with Auto-Cleanup
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').then(reg => {
+        reg.addEventListener('updatefound', () => {
+          const installingWorker = reg.installing;
+          if (installingWorker) {
+            installingWorker.onstatechange = () => {
+              if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                console.log('New content available; auto-refreshing...');
+              }
+            };
+          }
+        });
+      }).catch(err => console.log('SW registration error:', err));
+    });
+  }
 
   const DEFAULT_SUBJECTS = [
     '(D) Deutsch*',
@@ -1183,6 +1077,22 @@ To edit base compensation, tasks, or subjects:
     'Känguru-Wettbewerb (Mathe)',
     'The Big Challenge (Englisch)'
   ];
+
+  const SUBJECT_KEY_MAP = {
+    '(D) Deutsch*': 'deutsch',
+    '(M) Mathematics*': 'math',
+    '(E) English*': 'english',
+    '(L) Latin*': 'latin',
+    '(KR) Religion': 'religion',
+    '(CH) Chemistry': 'chemistry',
+    '(SP) Sports': 'sports',
+    'WKbi': 'wkbi',
+    '(BI) Biologie': 'biology',
+    'EKbi': 'ekbi',
+    'Profil': 'profil',
+    'Känguru-Wettbewerb (Mathe)': 'kaenguru',
+    'The Big Challenge (Englisch)': 'big_challenge'
+  };
   
   const DEFAULT_CHORE_PRICES = {
     dishwasher: 0.50,
@@ -1226,7 +1136,7 @@ To edit base compensation, tasks, or subjects:
       "Pole and Victory! Take a bow, sensational effort!"
     ],
     competition: [
-      "🏆 EXTRAORDINARY AMBITION! Championship Competition complete! 20 € bonus secured!",
+      "🏆 EXTRAORDINARY AMBITION! Championship Competition complete! Bonus secured!",
       "🏆 GRAND SLAM! What an incredible challenge you conquered today!"
     ],
     chore: [
@@ -1253,12 +1163,28 @@ To edit base compensation, tasks, or subjects:
 
   let entries = JSON.parse(localStorage.getItem('f1_entries')) || [];
   
+  // Storage Migration & Legacy Compatibility
+  entries = entries.map(e => ({
+    id: e.id || String(Date.now()),
+    driver: e.driver || 'kimi',
+    subject: e.subject || 'Unbekannt',
+    key: e.key || e.subjectKey || (SUBJECT_KEY_MAP[e.subject] || 'custom'),
+    grade: e.grade !== undefined ? e.grade : null,
+    type: e.type || 'test',
+    bonus: Number(e.bonus) || 0,
+    extraBonus: e.extraBonus ? Number(e.extraBonus) : null,
+    prepBonus: Boolean(e.prepBonus),
+    improved: Boolean(e.improved),
+    localDate: e.localDate || (e.date ? e.date.split('T')[0] : new Date().toLocaleDateString('en-CA')),
+    date: e.date || new Date().toISOString()
+  }));
+
   const storedVersion = localStorage.getItem('f1_timetable_version');
   let subjects;
-  if (storedVersion !== 'timetable_2026_v1') {
+  if (storedVersion !== 'timetable_2026_v2') {
     subjects = DEFAULT_SUBJECTS;
     localStorage.setItem('f1_subjects', JSON.stringify(subjects));
-    localStorage.setItem('f1_timetable_version', 'timetable_2026_v1');
+    localStorage.setItem('f1_timetable_version', 'timetable_2026_v2');
   } else {
     subjects = JSON.parse(localStorage.getItem('f1_subjects')) || DEFAULT_SUBJECTS;
   }
@@ -1275,6 +1201,10 @@ To edit base compensation, tasks, or subjects:
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
   }
 
+  function getLocalDateString() {
+    return new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD in local time
+  }
+
   function formatCurrency(val) {
     return val.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
   }
@@ -1283,6 +1213,18 @@ To edit base compensation, tasks, or subjects:
     document.querySelectorAll('.app-ver-label').forEach(el => el.textContent = APP_VERSION);
     const slipVer = document.getElementById('slipVersionTag');
     if (slipVer) slipVer.textContent = APP_VERSION;
+  }
+
+  function fireConfettiThrottled(config) {
+    const now = Date.now();
+    if (now - lastConfettiTime > 800) {
+      lastConfettiTime = now;
+      try {
+        confetti(config);
+      } catch (err) {
+        console.warn('Confetti error:', err);
+      }
+    }
   }
 
   function togglePrepBonus() {
@@ -1360,19 +1302,18 @@ To edit base compensation, tasks, or subjects:
     if (btn) btn.classList.add('active');
 
     const root = document.documentElement;
-    const submitBtn = document.getElementById('submitBtn');
     
     if (driver === 'kimi') {
       root.style.setProperty('--accent', '#00d2be');
-      if (submitBtn) submitBtn.classList.remove('ollie-mode');
-      const slipName = document.getElementById('slipDriverName');
-      if (slipName) slipName.textContent = 'DRIVER #12';
+      document.getElementById('submitBtn').classList.remove('ollie-mode');
+      document.getElementById('slipDriverName').textContent = 'DRIVER #12 (KIMI)';
     } else {
       root.style.setProperty('--accent', '#e10600');
-      if (submitBtn) submitBtn.classList.add('ollie-mode');
-      const slipName = document.getElementById('slipDriverName');
-      if (slipName) slipName.textContent = 'DRIVER #87';
+      document.getElementById('submitBtn').classList.add('ollie-mode');
+      document.getElementById('slipDriverName').textContent = 'DRIVER #87 (OLLIE)';
     }
+
+    updateTrackerUI();
   }
 
   function updateRpmLights(totalSalary) {
@@ -1528,7 +1469,8 @@ To edit base compensation, tasks, or subjects:
 
   function updateTrackerUI() {
     const currentMonthKey = getCurrentMonthKey();
-    const currentMonthEntries = entries.filter(e => e.date.startsWith(currentMonthKey));
+    const currentDriverEntries = entries.filter(e => e.driver === currentDriver);
+    const currentMonthEntries = currentDriverEntries.filter(e => e.date.startsWith(currentMonthKey));
 
     const dateObj = new Date();
     document.getElementById('currentMonthText').textContent = dateObj.toLocaleDateString('de-DE', { month: 'short', year: 'numeric' }).toUpperCase();
@@ -1599,15 +1541,16 @@ To edit base compensation, tasks, or subjects:
 
   function renderAnalytics() {
     const listEl = document.getElementById('subjectAnalyticsList');
+    const driverEntries = entries.filter(e => e.driver === currentDriver);
     
-    if (entries.length === 0) {
+    if (driverEntries.length === 0) {
       listEl.innerHTML = '<div style="color:var(--text-sub); text-align:center; padding:12px;">Keine Sessions oder Aufgaben aufgezeichnet.</div>';
       return;
     }
 
     const stats = {};
 
-    entries.forEach(e => {
+    driverEntries.forEach(e => {
       if (!stats[e.subject]) {
         stats[e.subject] = {
           count: 0,
@@ -1679,7 +1622,8 @@ To edit base compensation, tasks, or subjects:
 
   function renderReport() {
     const currentMonthKey = getCurrentMonthKey();
-    const currentMonthEntries = entries.filter(e => e.date.startsWith(currentMonthKey));
+    const driverEntries = entries.filter(e => e.driver === currentDriver);
+    const currentMonthEntries = driverEntries.filter(e => e.date.startsWith(currentMonthKey));
     const dateObj = new Date();
     
     document.getElementById('slipMonth').textContent = dateObj.toLocaleDateString('de-DE', { month: 'short', year: 'numeric' }).toUpperCase();
@@ -1757,132 +1701,180 @@ To edit base compensation, tasks, or subjects:
     if (tabId === 'chores') renderChoresUI();
   }
 
-  document.getElementById('gradeForm').addEventListener('submit', (e) => {
+  // Idempotency-Guarded Grade Submit Handler
+  document.getElementById('gradeForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const subject = document.getElementById('subjectSelect').value;
-    const type = document.getElementById('typeSelect').value;
-    const customBonusVal = document.getElementById('customBonusInput').value;
-    const prepBonus = document.getElementById('prepBonusCheck').checked;
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
 
-    const todayStr = new Date().toISOString().split('T')[0];
-    const duplicate = entries.find(item => item.subject === subject && item.type === type && item.date.startsWith(todayStr));
-    if (duplicate) {
-      const proceed = confirm(`⚠️ Hinweis: Für "${subject}" (${type}) wurde heute bereits ein Eintrag gebucht. Möchtest du ihn trotzdem noch einmal buchen?`);
-      if (!proceed) return;
-    }
+    try {
+      const subject = document.getElementById('subjectSelect').value;
+      const type = document.getElementById('typeSelect').value;
+      const customBonusVal = document.getElementById('customBonusInput').value;
+      const prepBonus = document.getElementById('prepBonusCheck').checked;
+      const localDate = getLocalDateString();
+      const stableKey = SUBJECT_KEY_MAP[subject] || subject.toLowerCase().replace(/[^a-z0-9]/g, '_');
 
-    let grade = null;
-    let baseBonus = 0;
-    let extraBonus = 0;
-    let improved = false;
-    let improvementBonus = 0;
+      // Deterministic Duplicate Detection (accounts for driver, type, key, and local calendar date)
+      const duplicate = entries.find(item => 
+        item.driver === currentDriver && 
+        item.type === type && 
+        item.key === stableKey && 
+        item.localDate === localDate
+      );
 
-    if (type === 'competition') {
-      baseBonus = competitionBonus;
-      if (customBonusVal !== '') {
-        extraBonus = parseFloat(customBonusVal) || 0;
-      }
-    } else {
-      grade = parseInt(document.getElementById('gradeSelect').value, 10);
-      const prevSubjectEntries = entries.filter(item => item.subject === subject && item.grade !== null);
-      if (prevSubjectEntries.length > 0) {
-        const lastGrade = prevSubjectEntries[0].grade;
-        if (grade < lastGrade) {
-          improved = true;
-          improvementBonus = 1.50;
+      if (duplicate) {
+        const proceed = confirm(`⚠️ Duplicate Warning: An entry for "${subject}" (${type}) was already logged today for this driver. Do you deliberately want to confirm and add another entry?`);
+        if (!proceed) {
+          submitBtn.disabled = false;
+          return;
         }
       }
-      if (customBonusVal !== '') {
-        baseBonus = parseFloat(customBonusVal) || 0;
+
+      let grade = null;
+      let baseBonus = 0;
+      let extraBonus = 0;
+      let improved = false;
+      let improvementBonus = 0;
+
+      if (type === 'competition') {
+        baseBonus = competitionBonus;
+        if (customBonusVal !== '') {
+          extraBonus = parseFloat(customBonusVal) || 0;
+        }
       } else {
-        baseBonus = (bonusRules[type] && bonusRules[type][grade]) ? bonusRules[type][grade] : 0;
+        grade = parseInt(document.getElementById('gradeSelect').value, 10);
+        const prevSubjectEntries = entries.filter(item => item.driver === currentDriver && item.subject === subject && item.grade !== null);
+        if (prevSubjectEntries.length > 0) {
+          const lastGrade = prevSubjectEntries[0].grade;
+          if (grade < lastGrade) {
+            improved = true;
+            improvementBonus = 1.50;
+          }
+        }
+        if (customBonusVal !== '') {
+          baseBonus = parseFloat(customBonusVal) || 0;
+        } else {
+          baseBonus = (bonusRules[type] && bonusRules[type][grade]) ? bonusRules[type][grade] : 0;
+        }
       }
+
+      const prepVal = (prepBonus && type !== 'competition') ? 1.00 : 0;
+      const totalBonus = baseBonus + extraBonus + prepVal + improvementBonus;
+
+      entries.unshift({
+        id: String(Date.now()),
+        driver: currentDriver,
+        key: stableKey,
+        subject, grade, type,
+        bonus: totalBonus,
+        extraBonus: extraBonus > 0 ? extraBonus : null,
+        prepBonus: type === 'competition' ? false : prepBonus,
+        improved,
+        localDate,
+        date: new Date().toISOString()
+      });
+      localStorage.setItem('f1_entries', JSON.stringify(entries));
+
+      const radioEl = document.getElementById('teamRadioText');
+      if (type === 'competition') {
+        radioEl.textContent = `"${RADIO_MESSAGES.competition[Math.floor(Math.random() * RADIO_MESSAGES.competition.length)]}"`;
+        fireConfettiThrottled({ particleCount: 150, spread: 90, origin: { y: 0.5 }, colors: ['#ffd700', '#ffffff', '#00d2be', '#e10600'] });
+      } else if (grade === 1) {
+        radioEl.textContent = `"${RADIO_MESSAGES.p1[Math.floor(Math.random() * RADIO_MESSAGES.p1.length)]}"`;
+        fireConfettiThrottled({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#00d2be', '#ffffff', '#e10600'] });
+      } else if (improved) {
+        radioEl.textContent = `"${RADIO_MESSAGES.improved[Math.floor(Math.random() * RADIO_MESSAGES.improved.length)]}"`;
+        fireConfettiThrottled({ particleCount: 50, spread: 50, origin: { y: 0.6 } });
+      } else if (prepBonus) {
+        radioEl.textContent = `"${RADIO_MESSAGES.practice[Math.floor(Math.random() * RADIO_MESSAGES.practice.length)]}"`;
+      } else {
+        radioEl.textContent = `"${RADIO_MESSAGES.default[Math.floor(Math.random() * RADIO_MESSAGES.default.length)]}"`;
+      }
+
+      document.getElementById('subjectSelect').selectedIndex = 0;
+      document.getElementById('typeSelect').value = 'exam';
+      handleTypeChange();
+      document.getElementById('customBonusInput').value = '';
+      
+      document.getElementById('prepBonusCheck').checked = false;
+      document.getElementById('prepBonusWrapper').classList.remove('checked');
+
+      updateTrackerUI();
+    } finally {
+      submitBtn.disabled = false;
     }
-
-    const prepVal = (prepBonus && type !== 'competition') ? 1.00 : 0;
-    const totalBonus = baseBonus + extraBonus + prepVal + improvementBonus;
-
-    entries.unshift({
-      id: Date.now().toString(),
-      subject, grade, type,
-      bonus: totalBonus,
-      extraBonus: extraBonus > 0 ? extraBonus : null,
-      prepBonus: type === 'competition' ? false : prepBonus,
-      improved,
-      date: new Date().toISOString()
-    });
-    localStorage.setItem('f1_entries', JSON.stringify(entries));
-
-    const radioEl = document.getElementById('teamRadioText');
-    if (type === 'competition') {
-      radioEl.textContent = `"${RADIO_MESSAGES.competition[Math.floor(Math.random() * RADIO_MESSAGES.competition.length)]}"`;
-      confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 }, colors: ['#ffd700', '#ffffff', '#00d2be', '#e10600'] });
-    } else if (grade === 1) {
-      radioEl.textContent = `"${RADIO_MESSAGES.p1[Math.floor(Math.random() * RADIO_MESSAGES.p1.length)]}"`;
-      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#00d2be', '#ffffff', '#e10600'] });
-    } else if (improved) {
-      radioEl.textContent = `"${RADIO_MESSAGES.improved[Math.floor(Math.random() * RADIO_MESSAGES.improved.length)]}"`;
-      confetti({ particleCount: 60, spread: 60, origin: { y: 0.6 } });
-    } else if (prepBonus) {
-      radioEl.textContent = `"${RADIO_MESSAGES.practice[Math.floor(Math.random() * RADIO_MESSAGES.practice.length)]}"`;
-    } else {
-      radioEl.textContent = `"${RADIO_MESSAGES.default[Math.floor(Math.random() * RADIO_MESSAGES.default.length)]}"`;
-    }
-
-    document.getElementById('subjectSelect').selectedIndex = 0;
-    document.getElementById('typeSelect').value = 'exam';
-    handleTypeChange();
-    document.getElementById('customBonusInput').value = '';
-    
-    document.getElementById('prepBonusCheck').checked = false;
-    document.getElementById('prepBonusWrapper').classList.remove('checked');
-
-    updateTrackerUI();
   });
 
-  document.getElementById('choreForm').addEventListener('submit', (e) => {
+  // Idempotency-Guarded Chore / Task Submit Handler
+  document.getElementById('choreForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const choreKey = document.getElementById('choreSelect').value;
-    const choreName = CHORE_NAMES[choreKey];
-    const choreBonus = chorePrices[choreKey] || 0;
-    const isPodcast = choreKey === 'podcast_task';
+    const submitBtn = document.getElementById('choreSubmitBtn');
+    submitBtn.disabled = true;
 
-    const todayStr = new Date().toISOString().split('T')[0];
-    const duplicate = entries.find(item => item.subject === choreName && item.date.startsWith(todayStr));
-    if (duplicate) {
-      const proceed = confirm(`⚠️ Hinweis: "${choreName}" wurde heute bereits einmal verbucht. Trotzdem buchen?`);
-      if (!proceed) return;
+    try {
+      const choreKey = document.getElementById('choreSelect').value;
+      const choreName = CHORE_NAMES[choreKey];
+      const choreBonus = chorePrices[choreKey] || 0;
+      const isPodcast = choreKey === 'podcast_task';
+      const taskType = isPodcast ? 'podcast' : 'chore';
+      const localDate = getLocalDateString();
+
+      // Deterministic Duplicate Detection
+      const duplicate = entries.find(item => 
+        item.driver === currentDriver && 
+        item.type === taskType && 
+        item.key === choreKey && 
+        item.localDate === localDate
+      );
+
+      if (duplicate) {
+        const msg = isPodcast 
+          ? `⚠️ Podcast Warning: A podcast mission was already logged today for this driver. Confirm to log a second mission?`
+          : `⚠️ Duplicate Warning: "${choreName}" was already logged today for this driver. Do you deliberately want to confirm and add another entry?`;
+        
+        const proceed = confirm(msg);
+        if (!proceed) {
+          submitBtn.disabled = false;
+          return;
+        }
+      }
+
+      entries.unshift({
+        id: String(Date.now()),
+        driver: currentDriver,
+        key: choreKey,
+        subject: choreName,
+        grade: null,
+        type: taskType,
+        bonus: choreBonus,
+        prepBonus: false,
+        improved: false,
+        localDate,
+        date: new Date().toISOString()
+      });
+      localStorage.setItem('f1_entries', JSON.stringify(entries));
+
+      const radioEl = document.getElementById('teamRadioText');
+      if (isPodcast) {
+        radioEl.textContent = `"${RADIO_MESSAGES.podcast[Math.floor(Math.random() * RADIO_MESSAGES.podcast.length)]}"`;
+        fireConfettiThrottled({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#ba68c8', '#ffffff', '#00d2be'] });
+      } else {
+        radioEl.textContent = `"${RADIO_MESSAGES.chore[Math.floor(Math.random() * RADIO_MESSAGES.chore.length)]}"`;
+        fireConfettiThrottled({ particleCount: 60, spread: 50, origin: { y: 0.6 }, colors: ['#00d2be', '#ffd700', '#ffffff'] });
+      }
+
+      updateTrackerUI();
+      alert(`Verbucht: + ${formatCurrency(choreBonus)}!`);
+      switchTab('tracker', document.querySelectorAll('.tab-btn')[0]);
+    } finally {
+      submitBtn.disabled = false;
     }
-
-    entries.unshift({
-      id: Date.now().toString(),
-      subject: choreName,
-      grade: null,
-      type: isPodcast ? 'podcast' : 'chore',
-      bonus: choreBonus,
-      prepBonus: false,
-      improved: false,
-      date: new Date().toISOString()
-    });
-    localStorage.setItem('f1_entries', JSON.stringify(entries));
-
-    const radioEl = document.getElementById('teamRadioText');
-    if (isPodcast) {
-      radioEl.textContent = `"${RADIO_MESSAGES.podcast[Math.floor(Math.random() * RADIO_MESSAGES.podcast.length)]}"`;
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ba68c8', '#ffffff', '#00d2be'] });
-    } else {
-      radioEl.textContent = `"${RADIO_MESSAGES.chore[Math.floor(Math.random() * RADIO_MESSAGES.chore.length)]}"`;
-      confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#00d2be', '#ffd700', '#ffffff'] });
-    }
-
-    updateTrackerUI();
-    alert(`Verbucht: + ${formatCurrency(choreBonus)}!`);
-    switchTab('tracker', document.querySelectorAll('.tab-btn')[0]);
   });
 
   window.deleteEntry = function(id) {
     if(confirm('Eintrag aus Wertung streichen?')) {
-      entries = entries.filter(e => e.id !== id);
+      entries = entries.filter(e => e.id !== String(id));
       localStorage.setItem('f1_entries', JSON.stringify(entries));
       updateTrackerUI();
     }
@@ -1919,5 +1911,3 @@ To edit base compensation, tasks, or subjects:
 </script>
 </body>
 </html>
-
-```
