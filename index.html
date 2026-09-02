@@ -448,6 +448,7 @@
 
     .pos-trophy { border-color: var(--trophy-gold); color: var(--trophy-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); font-size: 16px; }
     .pos-chore { border-color: var(--driver-kimi); color: var(--driver-kimi); font-size: 16px; }
+    .pos-podcast { border-color: #ba68c8; color: #ba68c8; font-size: 16px; }
     .pos-1 { border-color: var(--p1); color: var(--p1); }
     .pos-2 { border-color: var(--p2); color: var(--p2); }
     .pos-3 { border-color: var(--p3); color: var(--p3); }
@@ -537,7 +538,7 @@
       border-bottom: 1px solid #1a1e26;
     }
 
-    /* Standings Accordion / Detail Cards */
+    /* Standings Detail Cards */
     .subject-stat-card {
       background: #090a0d;
       border: 1px solid var(--card-border);
@@ -689,7 +690,7 @@
       <span class="radio-icon">📻</span>
       <div>
         <strong style="color: var(--accent); font-family: 'Orbitron'; font-size: 11px;">PIT WALL RADIO:</strong>
-        <p id="teamRadioText">"Radio check. Ready for the race weekend! Keep pushing."</p>
+        <p id="teamRadioText">"Radio check Leonhard. Ready for the race weekend! Keep pushing."</p>
       </div>
     </div>
 
@@ -702,13 +703,13 @@
 
       <div class="telemetry-main-val">
         <div style="font-size: 10px; color: var(--text-sub); text-transform: uppercase; font-family: 'Orbitron';">Total Purse (Gesamtauszahlung)</div>
-        <div class="amount" id="totalAmount">20,00 €</div>
+        <div class="amount" id="totalAmount">10,00 €</div>
       </div>
 
       <div class="telemetry-grid">
         <div class="telemetry-box">
           <span>Base Retainer (Fixgehalt)</span>
-          <strong id="dashBaseSalary">20,00 €</strong>
+          <strong id="dashBaseSalary">10,00 €</strong>
         </div>
         <div class="telemetry-box">
           <span>Bonus & Jobs (Zusatz)</span>
@@ -720,15 +721,15 @@
       <div class="pots-grid">
         <div class="pot-card">
           <span>Freies Taschengeld (60%)</span>
-          <strong id="potFree">12,00 €</strong>
+          <strong id="potFree">6,00 €</strong>
         </div>
         <div class="pot-card">
           <span id="potGoalLabel">F1 Sparziel (30%)</span>
-          <strong id="potGoal">6,00 €</strong>
+          <strong id="potGoal">3,00 €</strong>
         </div>
         <div class="pot-card">
           <span>Depot (10%)</span>
-          <strong id="potFuture">2,00 €</strong>
+          <strong id="potFuture">1,00 €</strong>
         </div>
       </div>
     </section>
@@ -750,9 +751,8 @@
           <div class="form-group" id="typeGroup">
             <label for="typeSelect">Art der Arbeit (Session Type)</label>
             <select id="typeSelect" onchange="handleTypeChange()" required>
-              <option value="vocab">Vokabeltest Englisch (Wöchentlich)</option>
-              <option value="exam">Main GP (Klassenarbeit / Schulaufgabe - 100%)</option>
-              <option value="test">Sprint (Kleiner Test / Kurztest - 50%)</option>
+              <option value="exam">Main GP (Klassenarbeit D / M / E)</option>
+              <option value="test">Sprint (Tests & Vokabeltests)</option>
               <option value="competition">🏆 Special Competition (+20 € Känguru / Big Challenge)</option>
             </select>
           </div>
@@ -779,8 +779,8 @@
         </div>
 
         <div class="form-group">
-          <label for="customBonusInput" id="customBonusLabel">Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. bei sehr schwerer Arbeit)</span></label>
-          <input type="number" id="customBonusInput" step="0.25" min="0" placeholder="Automatisch nach Standard-Tabelle">
+          <label for="customBonusInput" id="customBonusLabel">Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional)</span></label>
+          <input type="number" id="customBonusInput" step="0.25" min="0" placeholder="Automatisch nach Staffelung">
         </div>
 
         <button type="submit" class="btn-race" id="submitBtn">⚡ Log Sector & Bonus (Verbuchen)</button>
@@ -799,7 +799,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.5-F1</span>
+      <span class="version-tag app-ver-label">v1.4.7-F1</span>
     </footer>
   </div>
 
@@ -810,25 +810,25 @@
         📊 Driver Standings (Historie & Notenstände)
       </h2>
       <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 12px;">
-        Vollständige Dokumentation aller Noten und Jobs mit Datum zur Vermeidung von Doppeleinträgen.
+        Vollständige Dokumentation aller Noten, Aufgaben und Podcasts mit Datum zur Vermeidung von Doppeleinträgen.
       </p>
       <div id="subjectAnalyticsList"></div>
     </section>
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.5-F1</span>
+      <span class="version-tag app-ver-label">v1.4.7-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 3: HAUSHALTSAUFGABEN (PIT CREW JOBS) -->
+  <!-- TAB 3: HAUSHALTSAUFGABEN & PODCAST (PIT CREW JOBS) -->
   <div id="tab-chores" class="tab-content">
     
     <div class="policy-box">
       <strong>⚠️ PÄDAGOGISCHE GRUNDREGEL</strong>
-      Alltägliche Grundpflichten (das eigene Zimmer aufräumen, den eigenen Teller abräumen, die Schultasche packen) gehören zum normalen Zusammenleben in der Familie und werden nicht bezahlt.
+      Alltägliche Grundpflichten (eigenes Zimmer aufräumen, eigener Mülleimer Mittwochs, Schultasche, Teller abräumen) gehören zum normalen Zusammenleben in der Familie und werden nicht bezahlt.
       <br><br>
-      <strong>Bezahlt werden freiwillige Zusatzaufgaben</strong>, die über das normale Maß hinausgehen, der ganzen Familie nützen oder den Eltern echte Arbeit abnehmen.
+      <strong>Bezahlt werden freiwillige Zusatzaufgaben</strong>, die über das normale Maß hinausgehen, der Familie nützen oder den Eltern echte Arbeit abnehmen.
       <ul class="rules-list">
         <li><strong>1. Freiwilligkeit:</strong> Du entscheidest selbst, ob du dir etwas dazuverdienen möchtest.</li>
         <li><strong>2. Qualitäts-Check:</strong> Vor der Auszahlung erfolgt eine kurze Abnahme durch die Eltern.</li>
@@ -839,29 +839,29 @@
     <!-- Job Log Form -->
     <section class="card">
       <h2 style="font-family: 'Orbitron', sans-serif; font-size: 13px; text-transform: uppercase; margin-bottom: 10px;">
-        🧹 Pit Crew Job erfassen & abrechnen
+        🧹 Pit Crew Job oder Podcast erfassen
       </h2>
       <form id="choreForm">
         <div class="form-group">
-          <label for="choreSelect">Haushaltsaufgabe auswählen</label>
+          <label for="choreSelect">Aufgabe auswählen</label>
           <select id="choreSelect" required></select>
         </div>
 
-        <button type="submit" class="btn-race">⚡ Pit Crew Job verbuchen</button>
+        <button type="submit" class="btn-race">⚡ Aufgabe / Job verbuchen</button>
       </form>
     </section>
 
     <!-- Aktive Vergütungs-Übersicht -->
     <section class="card">
       <h2 style="font-family: 'Orbitron', sans-serif; font-size: 13px; text-transform: uppercase; margin-bottom: 10px;">
-        📋 Aktuelle Job-Tarife (Zusatzverdienst)
+        📋 Aktuelle Aufgaben-Tarife (Zusatzverdienst)
       </h2>
       <div id="choresPricingList"></div>
     </section>
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.5-F1</span>
+      <span class="version-tag app-ver-label">v1.4.7-F1</span>
     </footer>
   </div>
 
@@ -870,19 +870,19 @@
     <div id="payslipCard">
       <div class="slip-top">
         <div>
-          <div style="font-family: 'Orbitron'; font-size: 15px; font-weight: 900;" id="slipDriverName">KIMI ANTONELLI #12</div>
+          <div style="font-family: 'Orbitron'; font-size: 15px; font-weight: 900;" id="slipDriverName">LEONHARD (KIMI #12)</div>
           <div style="font-size: 10px; color: var(--text-sub); font-family: 'Orbitron';">FIA PERFORMANCE & BONUS SHEET</div>
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.5-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.7-F1</div>
         </div>
       </div>
 
       <table class="slip-table">
         <thead>
           <tr>
-            <th>LEISTUNG / JOB</th>
+            <th>LEISTUNG / AUFGABE</th>
             <th>ART</th>
             <th>NOTE / STATUS</th>
             <th style="text-align: right;">BONUS</th>
@@ -894,7 +894,7 @@
       <div style="background: #090a0d; border: 1px solid var(--card-border); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 4px;">
         <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub);">
           <span>Grund-Taschengeld (Fixgehalt):</span>
-          <span id="slipBase">20,00 €</span>
+          <span id="slipBase">10,00 €</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-sub);">
           <span>Leistungs-, Jobs- & Pokal-Bonus:</span>
@@ -902,7 +902,7 @@
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 900; color: var(--accent); margin-top: 4px; padding-top: 4px; border-top: 1px dashed #333; font-family: 'Orbitron';">
           <span>GESAMTAUSZAHLUNG:</span>
-          <span id="slipTotal">20,00 €</span>
+          <span id="slipTotal">10,00 €</span>
         </div>
       </div>
       
@@ -917,7 +917,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.5-F1</span>
+      <span class="version-tag app-ver-label">v1.4.7-F1</span>
     </footer>
   </div>
 
@@ -959,7 +959,7 @@
       <div class="row">
         <div class="form-group" style="margin-bottom: 0;">
           <label for="baseSalaryInput">Grundgehalt (€ / Monat)</label>
-          <input type="number" id="baseSalaryInput" step="0.50" min="0" value="20.00" disabled>
+          <input type="number" id="baseSalaryInput" step="0.50" min="0" value="10.00" disabled>
         </div>
         <div class="form-group" style="margin-bottom: 0;">
           <label for="bonusCompInput">Wettbewerb (€ Teilnahme)</label>
@@ -968,38 +968,29 @@
       </div>
     </section>
 
-    <!-- Vokabeltests -->
-    <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">2. Vokabeltest Englisch (Wöchentlich)</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div><label>P1 (Note 1 - Sehr gut)</label><input type="number" step="0.25" id="bonus_vocab_1" disabled></div>
-        <div><label>P2 (Note 2 - Gut)</label><input type="number" step="0.25" id="bonus_vocab_2" disabled></div>
-      </div>
-    </section>
-
     <!-- Klassenarbeiten -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">3. Main GP (Große Klassenarbeiten / Schulaufgaben)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">2. Main GP (Klassenarbeiten Deutsch / Mathe / Englisch)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-        <div><label>P1 (Note 1)</label><input type="number" step="0.25" id="bonus_exam_1" disabled></div>
-        <div><label>P2 (Note 2)</label><input type="number" step="0.25" id="bonus_exam_2" disabled></div>
-        <div><label>P3 (Note 3)</label><input type="number" step="0.25" id="bonus_exam_3" disabled></div>
+        <div><label>P1 (Note 1 - 15 €)</label><input type="number" step="0.50" id="bonus_exam_1" disabled></div>
+        <div><label>P2 (Note 2 - 10 €)</label><input type="number" step="0.50" id="bonus_exam_2" disabled></div>
+        <div><label>P3 (Note 3 - 5 €)</label><input type="number" step="0.50" id="bonus_exam_3" disabled></div>
       </div>
     </section>
 
-    <!-- Kleine Tests -->
+    <!-- Tests & Vokabeltests -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">4. Sprint (Kleine Tests / Kurztests)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">3. Sprint (Tests & Vokabeltests)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
-        <div><label>P1 (Note 1)</label><input type="number" step="0.25" id="bonus_test_1" disabled></div>
-        <div><label>P2 (Note 2)</label><input type="number" step="0.25" id="bonus_test_2" disabled></div>
-        <div><label>P3 (Note 3)</label><input type="number" step="0.25" id="bonus_test_3" disabled></div>
+        <div><label>P1 (Note 1 - 5 €)</label><input type="number" step="0.50" id="bonus_test_1" disabled></div>
+        <div><label>P2 (Note 2 - 3 €)</label><input type="number" step="0.50" id="bonus_test_2" disabled></div>
+        <div><label>P3 (Note 3 - 1 €)</label><input type="number" step="0.50" id="bonus_test_3" disabled></div>
       </div>
     </section>
 
     <!-- Fächerverwaltung -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">5. Season Calendar (Schulfächer & Events verwalten)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">4. Season Calendar (Schulfächer & Events verwalten)</h2>
       <form id="addSubjectForm" style="display: flex; gap: 8px;">
         <input type="text" id="newSubjectInput" placeholder="Neues Fach/Wettbewerb..." required disabled>
         <button type="submit" class="btn-race" id="addSubjectBtn" style="width: auto; margin-top: 0; padding: 0 16px;" disabled>+</button>
@@ -1007,20 +998,20 @@
       <div class="chip-container" id="subjectsContainer"></div>
     </section>
 
-    <!-- 2. HAUSHALTSAUFGABEN (UNTER DEN SCHULLEISTUNGEN) -->
+    <!-- 2. HAUSHALT & PODCAST AUFGABEN -->
     <section class="card" style="border-top: 2px solid var(--accent); margin-top: 10px;">
       <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 4px; color: var(--accent);">
-        🧹 Pit Crew Jobs Vergütung (Zusatzverdienst Haushalt)
+        🧹 Pit Crew Jobs & Podcast-Aufgaben (€)
       </h2>
       <p style="font-size: 11px; color: var(--text-sub); margin-bottom: 10px;">
-        Nachrangiger Zusatzverdienst. Schule und Freizeit haben immer Vorrang.
+        Freiwilliger Zusatzverdienst. Schule und Freizeit haben immer Vorrang.
       </p>
       <div id="paddockChoresSettings" style="display: flex; flex-direction: column; gap: 8px;"></div>
     </section>
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.5-F1</span>
+      <span class="version-tag app-ver-label">v1.4.7-F1</span>
     </footer>
   </div>
 
@@ -1051,45 +1042,50 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.5-F1';
+  const APP_VERSION = 'v1.4.7-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
-  const DEFAULT_SUBJECTS = ['Englisch', 'Mathematik', 'Deutsch', 'Geschichte', 'Biologie', 'Physik', 'Geografie', 'Sport', 'Musik', 'Kunst', 'Känguru-Wettbewerb (Mathe)', 'The Big Challenge (Englisch)'];
+  const DEFAULT_SUBJECTS = ['Deutsch', 'Mathematik', 'Englisch', 'Geschichte', 'Biologie', 'Physik', 'Geografie', 'Sport', 'Musik', 'Kunst', 'Känguru-Wettbewerb (Mathe)', 'The Big Challenge (Englisch)'];
   
   const DEFAULT_CHORE_PRICES = {
-    clean_living: 3.50,
-    clean_stairs: 2.50,
-    clean_rooms: 3.50,
-    cook_meal: 3.00,
-    table_service: 1.00,
-    dishes_service: 1.00,
-    laundry: 2.00,
-    lawn_mow: 4.00,
-    garden_weeds: 3.00
+    dishwasher: 0.50,
+    table_deck: 0.50,
+    laundry_hang: 0.50,
+    laundry_fold: 2.00,
+    trash_bins: 1.00,
+    stairs_dust: 1.00,
+    living_vacuum: 2.00,
+    living_clean: 2.00,
+    flowers_water: 0.50,
+    weeds_pull: 2.00,
+    leaves_sweep: 5.00,
+    podcast_task: 5.00
   };
 
   const CHORE_NAMES = {
-    clean_living: 'Saugen & Wischen (Küche, Wohnzimmer, Flur & Gäste-WC)',
-    clean_stairs: 'Saugen & Wischen (Treppenstufen & -Geländer)',
-    clean_rooms: 'Saugen & Wischen (Kinder-, Eltern- & Badezimmer)',
-    cook_meal: 'Alleine Kochen (für die Familie)',
-    table_service: 'Tischdecken & Tischabräumen',
-    dishes_service: 'Abwasch & Geschirrspüler ausräumen',
-    laundry: 'Wäsche aufhängen, abnehmen & zusammenlegen',
-    lawn_mow: 'Rasen mähen (Garten)',
-    garden_weeds: 'Unkraut jäten / Laub harken'
+    dishwasher: 'Küche: Spülmaschine ausräumen',
+    table_deck: 'Küche: Tisch decken oder abräumen (Spülmaschine)',
+    laundry_hang: 'Wäsche: Nasse Wäsche aufhängen',
+    laundry_fold: 'Wäsche: Saubere Wäsche falten, sortieren & wegbringen',
+    trash_bins: 'Reinigung: Gemeinsame Mülleimer leeren & zur Tonne bringen',
+    stairs_dust: 'Reinigung: 3 Treppen mit Staubtuch putzen',
+    living_vacuum: 'Reinigung: Wohnzimmer staubsaugen',
+    living_clean: 'Reinigung: Wohnzimmer putzen',
+    flowers_water: 'Außen: Blumen gießen',
+    weeds_pull: 'Außen: Unkraut zupfen',
+    leaves_sweep: 'Außen: Blätter fegen und wegbringen',
+    podcast_task: '🎙️ Podcast: Skript lesen + Feedback geben ODER Folge hören'
   };
 
   const DEFAULT_BONUS_RULES = {
-    vocab: { 1: 1.00, 2: 0.50, 3: 0.00, 4: 0.00, 5: 0.00, 6: 0.00 },
-    exam: { 1: 4.00, 2: 2.00, 3: 0.50, 4: 0.00, 5: 0.00, 6: 0.00 },
-    test: { 1: 2.00, 2: 1.00, 3: 0.25, 4: 0.00, 5: 0.00, 6: 0.00 }
+    exam: { 1: 15.00, 2: 10.00, 3: 5.00, 4: 0.00, 5: 0.00, 6: 0.00 },
+    test: { 1: 5.00, 2: 3.00, 3: 1.00, 4: 0.00, 5: 0.00, 6: 0.00 }
   };
 
   const RADIO_MESSAGES = {
     p1: [
-      "P1!! Mega drive! That was world-class pace!",
+      "P1!! Mega drive Leonhard! That was world-class pace!",
       "YES! Simply lovely. What a phenomenal result!",
       "Pole and Victory! Take a bow, sensational effort!"
     ],
@@ -1100,6 +1096,10 @@
     chore: [
       "🧹 BOX CONFIRMED! Pit Crew Job complete. Outstanding teamwork!",
       "🔧 Perfect execution by the Pit Crew! Team bonus credited!"
+    ],
+    podcast: [
+      "🎙️ RADIO INTERVIEW COMPLETE! Great input and focus on the podcast!",
+      "📻 Clear communication from the cockpit! Podcast review credited!"
     ],
     improved: [
       "Mega comeback drive into the points! That's real racecraft!",
@@ -1118,7 +1118,7 @@
   let entries = JSON.parse(localStorage.getItem('f1_entries')) || [];
   let subjects = JSON.parse(localStorage.getItem('f1_subjects')) || DEFAULT_SUBJECTS;
   let chorePrices = JSON.parse(localStorage.getItem('f1_chore_prices')) || DEFAULT_CHORE_PRICES;
-  let baseSalary = parseFloat(localStorage.getItem('f1_base_salary')) || 20.00;
+  let baseSalary = parseFloat(localStorage.getItem('f1_base_salary')) || 10.00;
   let competitionBonus = parseFloat(localStorage.getItem('f1_comp_bonus')) || 20.00;
   let goalName = localStorage.getItem('f1_goal_name') || 'F1 Fan Cap';
   let bonusRules = JSON.parse(localStorage.getItem('f1_bonus_rules')) || DEFAULT_BONUS_RULES;
@@ -1139,7 +1139,6 @@
     if (slipVer) slipVer.textContent = APP_VERSION;
   }
 
-  /* Free Practice Checkbox Handler */
   function togglePrepBonus() {
     const check = document.getElementById('prepBonusCheck');
     const wrapper = document.getElementById('prepBonusWrapper');
@@ -1151,7 +1150,6 @@
     }
   }
 
-  /* Paddock Security / Lock Management */
   function unlockPaddock() {
     const input = document.getElementById('paddockPasswordInput');
     if (input.value.trim().toLowerCase() === PADDOCK_PASSWORD.toLowerCase()) {
@@ -1176,7 +1174,6 @@
 
     const inputsToToggle = [
       'goalNameInput', 'baseSalaryInput', 'bonusCompInput',
-      'bonus_vocab_1', 'bonus_vocab_2',
       'bonus_exam_1', 'bonus_exam_2', 'bonus_exam_3',
       'bonus_test_1', 'bonus_test_2', 'bonus_test_3',
       'newSubjectInput', 'addSubjectBtn'
@@ -1223,18 +1220,18 @@
       root.style.setProperty('--accent', '#00d2be');
       if (submitBtn) submitBtn.classList.remove('ollie-mode');
       const slipName = document.getElementById('slipDriverName');
-      if (slipName) slipName.textContent = 'KIMI ANTONELLI #12';
+      if (slipName) slipName.textContent = 'LEONHARD (KIMI #12)';
     } else {
       root.style.setProperty('--accent', '#e10600');
       if (submitBtn) submitBtn.classList.add('ollie-mode');
       const slipName = document.getElementById('slipDriverName');
-      if (slipName) slipName.textContent = 'OLLIE BEARMAN #87';
+      if (slipName) slipName.textContent = 'LEONHARD (OLLIE #87)';
     }
   }
 
   function updateRpmLights(totalSalary) {
-    const maxBonusTarget = 40.0;
-    const ratio = Math.min(Math.max((totalSalary - 20) / (maxBonusTarget - 20), 0), 1);
+    const maxBonusTarget = 50.0;
+    const ratio = Math.min(Math.max((totalSalary - 10) / (maxBonusTarget - 10), 0), 1);
     const lights = document.querySelectorAll('.rpm-light');
     const activeCount = Math.round(ratio * lights.length);
 
@@ -1244,15 +1241,12 @@
     });
   }
 
-  /* Wenn Fach ein Wettbewerb ist -> Automatisch umschalten */
   function handleSubjectChange() {
     const subject = document.getElementById('subjectSelect').value;
     const typeSelect = document.getElementById('typeSelect');
 
     if (subject.includes('Känguru') || subject.includes('Challenge')) {
       typeSelect.value = 'competition';
-    } else if (subject === 'Englisch' && typeSelect.value === 'competition') {
-      typeSelect.value = 'vocab';
     }
     handleTypeChange();
   }
@@ -1266,18 +1260,17 @@
     const customInput = document.getElementById('customBonusInput');
 
     if (type === 'competition') {
-      // Keine Note bei Wettbewerben
       gradeGroup.style.display = 'none';
       gradeSelect.required = false;
       prepWrapper.style.display = 'none';
-      customLabel.innerHTML = `🌟 Extra-Erfolgsbonus (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. für Top-Platzierung, wird zu den ${formatCurrency(competitionBonus)} addiert)</span>`;
+      customLabel.innerHTML = `🌟 Extra-Erfolgsbonus (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(wird zu den ${formatCurrency(competitionBonus)} addiert)</span>`;
       customInput.placeholder = 'Optionaler Extra-Betrag';
     } else {
       gradeGroup.style.display = 'block';
       gradeSelect.required = true;
       prepWrapper.style.display = 'flex';
-      customLabel.innerHTML = `Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional z. B. bei sehr schwerer Arbeit)</span>`;
-      customInput.placeholder = 'Automatisch nach Standard-Tabelle';
+      customLabel.innerHTML = `Sonderprämie (€) <span style="font-size: 9px; color: var(--text-sub); text-transform:none;">(optional)</span>`;
+      customInput.placeholder = 'Automatisch nach Staffelung';
     }
   }
 
@@ -1341,8 +1334,6 @@
     document.getElementById('baseSalaryInput').value = baseSalary;
     document.getElementById('bonusCompInput').value = competitionBonus;
     document.getElementById('goalNameInput').value = goalName;
-    document.getElementById('bonus_vocab_1').value = bonusRules.vocab[1];
-    document.getElementById('bonus_vocab_2').value = bonusRules.vocab[2];
     document.getElementById('bonus_exam_1').value = bonusRules.exam[1];
     document.getElementById('bonus_exam_2').value = bonusRules.exam[2];
     document.getElementById('bonus_exam_3').value = bonusRules.exam[3];
@@ -1350,7 +1341,7 @@
     document.getElementById('bonus_test_2').value = bonusRules.test[2];
     document.getElementById('bonus_test_3').value = bonusRules.test[3];
 
-    ['vocab', 'exam', 'test'].forEach(type => {
+    ['exam', 'test'].forEach(type => {
       [1, 2, 3].forEach(grade => {
         const el = document.getElementById(`bonus_${type}_${grade}`);
         if(el) {
@@ -1379,7 +1370,7 @@
 
     document.getElementById('baseSalaryInput').addEventListener('change', (e) => {
       if (!isPaddockUnlocked) return;
-      baseSalary = parseFloat(e.target.value) || 20.00;
+      baseSalary = parseFloat(e.target.value) || 10.00;
       localStorage.setItem('f1_base_salary', baseSalary.toString());
       updateTrackerUI();
     });
@@ -1420,13 +1411,16 @@
       if (item.type === 'chore') {
         badgeHtml = '<div class="pos-badge pos-chore">🧹</div>';
         typeLabel = '🧹 Pit Crew Job';
+      } else if (item.type === 'podcast') {
+        badgeHtml = '<div class="pos-badge pos-podcast">🎙️</div>';
+        typeLabel = '🎙️ Podcast Mission';
       } else if (item.type === 'competition') {
         badgeHtml = '<div class="pos-badge pos-trophy">🏆</div>';
-        typeLabel = '🏆 Wettbewerb (Teilnahme & Erfolg)';
+        typeLabel = '🏆 Wettbewerb';
       } else {
         const cls = item.grade === 1 ? 'pos-1' : item.grade === 2 ? 'pos-2' : item.grade === 3 ? 'pos-3' : 'pos-other';
         badgeHtml = `<div class="pos-badge ${cls}">P${item.grade}</div>`;
-        typeLabel = item.type === 'vocab' ? '🔤 Vokabeltest' : item.type === 'exam' ? '🏁 Klassenarbeit (100%)' : '⚡ Kurztest (50%)';
+        typeLabel = item.type === 'exam' ? '🏁 Klassenarbeit (15/10/5 €)' : '⚡ Test (5/3/1 €)';
       }
 
       return `
@@ -1453,12 +1447,11 @@
     }).join('');
   }
 
-  /* STANDINGS MIT VOLLER DATUMS-TRANSPARENZ */
   function renderAnalytics() {
     const listEl = document.getElementById('subjectAnalyticsList');
     
     if (entries.length === 0) {
-      listEl.innerHTML = '<div style="color:var(--text-sub); text-align:center; padding:12px;">Keine Sessions oder Jobs aufgezeichnet.</div>';
+      listEl.innerHTML = '<div style="color:var(--text-sub); text-align:center; padding:12px;">Keine Sessions oder Aufgaben aufgezeichnet.</div>';
       return;
     }
 
@@ -1492,17 +1485,16 @@
         ? `<div style="font-family: Orbitron, sans-serif; font-size:12px; color:${avg <= 2.0 ? 'var(--p1)' : '#fff'};">Ø Note ${avg}</div>` 
         : `<div style="font-family: Orbitron, sans-serif; font-size:11px; color:var(--trophy-gold);">🏆 Trophy / Job</div>`;
 
-      // Sortierte Historie mit Datum
       const historyHtml = s.history.map(h => {
         const dStr = new Date(h.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        const typeStr = h.type === 'chore' ? '🧹 Haushalt' : h.type === 'competition' ? '🏆 Pokal' : h.type === 'vocab' ? 'Vokabeln' : h.type === 'exam' ? 'Arbeit (100%)' : 'Test (50%)';
+        const typeStr = h.type === 'chore' ? '🧹 Haushalt' : h.type === 'podcast' ? '🎙️ Podcast' : h.type === 'competition' ? '🏆 Pokal' : h.type === 'exam' ? 'Arbeit' : 'Test';
         const gradeStr = h.type === 'competition' ? 'Teilnahme' : h.grade ? `Note ${h.grade}` : 'Erledigt';
 
         return `
           <div class="history-item-row">
             <div>
               <span class="history-date">${dStr}</span> • <span>${typeStr}</span>
-              ${h.extraBonus ? `<span style="color:var(--trophy-gold);"> (🌟 +${formatCurrency(h.extraBonus)} Extra)</span>` : ''}
+              ${h.extraBonus ? `<span style="color:var(--trophy-gold);"> (🌟 +${formatCurrency(h.extraBonus)})</span>` : ''}
               ${h.prepBonus ? '<span style="color:var(--p1);"> (🟢 Practice)</span>' : ''}
               ${h.improved ? '<span style="color:var(--p2);"> (🚀 Comeback)</span>' : ''}
             </div>
@@ -1556,11 +1548,14 @@
         if (item.type === 'chore') {
           typeShort = '🧹 CREW';
           gradeText = 'Erledigt';
+        } else if (item.type === 'podcast') {
+          typeShort = '🎙️ PODCAST';
+          gradeText = 'Erledigt';
         } else if (item.type === 'competition') {
           typeShort = '🏆 COMP';
           gradeText = 'Teilnahme';
         } else {
-          typeShort = item.type === 'vocab' ? 'Vokabeln' : item.type === 'exam' ? 'Arbeit (100%)' : 'Test (50%)';
+          typeShort = item.type === 'exam' ? 'Arbeit' : 'Test';
           gradeText = `Note ${item.grade}`;
         }
 
@@ -1612,7 +1607,7 @@
     if (tabId === 'chores') renderChoresUI();
   }
 
-  // Noten- & Wettbewerbs-Formular Submit mit Dublettenprüfung
+  // Noten- & Wettbewerbs-Formular Submit
   document.getElementById('gradeForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const subject = document.getElementById('subjectSelect').value;
@@ -1620,11 +1615,10 @@
     const customBonusVal = document.getElementById('customBonusInput').value;
     const prepBonus = document.getElementById('prepBonusCheck').checked;
 
-    // Anti-Doppeleintrag Check für denselben Tag & Typ
     const todayStr = new Date().toISOString().split('T')[0];
     const duplicate = entries.find(item => item.subject === subject && item.type === type && item.date.startsWith(todayStr));
     if (duplicate) {
-      const proceed = confirm(`⚠️ Hinweis: Für "${subject}" (${type}) wurde heute (${new Date().toLocaleDateString('de-DE')}) bereits ein Eintrag gebucht. Möchtest du ihn trotzdem noch einmal hinzufügen?`);
+      const proceed = confirm(`⚠️ Hinweis: Für "${subject}" (${type}) wurde heute bereits ein Eintrag gebucht. Möchtest du ihn trotzdem noch einmal buchen?`);
       if (!proceed) return;
     }
 
@@ -1687,7 +1681,7 @@
     }
 
     document.getElementById('subjectSelect').selectedIndex = 0;
-    document.getElementById('typeSelect').value = 'vocab';
+    document.getElementById('typeSelect').value = 'exam';
     handleTypeChange();
     document.getElementById('customBonusInput').value = '';
     
@@ -1697,17 +1691,18 @@
     updateTrackerUI();
   });
 
-  // Haushaltsaufgaben-Formular Submit mit Dublettenprüfung
+  // Haushalts- & Podcast-Formular Submit
   document.getElementById('choreForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const choreKey = document.getElementById('choreSelect').value;
     const choreName = CHORE_NAMES[choreKey];
     const choreBonus = chorePrices[choreKey] || 0;
+    const isPodcast = choreKey === 'podcast_task';
 
     const todayStr = new Date().toISOString().split('T')[0];
-    const duplicate = entries.find(item => item.subject === choreName && item.type === 'chore' && item.date.startsWith(todayStr));
+    const duplicate = entries.find(item => item.subject === choreName && item.date.startsWith(todayStr));
     if (duplicate) {
-      const proceed = confirm(`⚠️ Hinweis: "${choreName}" wurde heute bereits einmal verbucht. Möchtest du diese Aufgabe heute wirklich noch einmal buchen?`);
+      const proceed = confirm(`⚠️ Hinweis: "${choreName}" wurde heute bereits einmal verbucht. Trotzdem buchen?`);
       if (!proceed) return;
     }
 
@@ -1715,7 +1710,7 @@
       id: Date.now().toString(),
       subject: choreName,
       grade: null,
-      type: 'chore',
+      type: isPodcast ? 'podcast' : 'chore',
       bonus: choreBonus,
       prepBonus: false,
       improved: false,
@@ -1724,11 +1719,16 @@
     localStorage.setItem('f1_entries', JSON.stringify(entries));
 
     const radioEl = document.getElementById('teamRadioText');
-    radioEl.textContent = `"${RADIO_MESSAGES.chore[Math.floor(Math.random() * RADIO_MESSAGES.chore.length)]}"`;
-    confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#00d2be', '#ffd700', '#ffffff'] });
+    if (isPodcast) {
+      radioEl.textContent = `"${RADIO_MESSAGES.podcast[Math.floor(Math.random() * RADIO_MESSAGES.podcast.length)]}"`;
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ba68c8', '#ffffff', '#00d2be'] });
+    } else {
+      radioEl.textContent = `"${RADIO_MESSAGES.chore[Math.floor(Math.random() * RADIO_MESSAGES.chore.length)]}"`;
+      confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#00d2be', '#ffd700', '#ffffff'] });
+    }
 
     updateTrackerUI();
-    alert(`Pit Crew Job verbucht: + ${formatCurrency(choreBonus)}!`);
+    alert(`Verbucht: + ${formatCurrency(choreBonus)}!`);
     switchTab('tracker', document.querySelectorAll('.tab-btn')[0]);
   });
 
