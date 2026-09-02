@@ -751,7 +751,7 @@
           <div class="form-group" id="typeGroup">
             <label for="typeSelect">Art der Arbeit (Session Type)</label>
             <select id="typeSelect" onchange="handleTypeChange()" required>
-              <option value="exam">Main GP (Klassenarbeit D / M / E)</option>
+              <option value="exam">Main GP (Klassenarbeit D / M / E / L)</option>
               <option value="test">Sprint (Tests & Vokabeltests)</option>
               <option value="competition">🏆 Special Competition (+20 € Känguru / Big Challenge)</option>
             </select>
@@ -799,7 +799,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.7-F1</span>
+      <span class="version-tag app-ver-label">v1.4.9-F1</span>
     </footer>
   </div>
 
@@ -817,7 +817,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.7-F1</span>
+      <span class="version-tag app-ver-label">v1.4.9-F1</span>
     </footer>
   </div>
 
@@ -861,7 +861,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.7-F1</span>
+      <span class="version-tag app-ver-label">v1.4.9-F1</span>
     </footer>
   </div>
 
@@ -875,7 +875,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">AUG 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.7-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.4.9-F1</div>
         </div>
       </div>
 
@@ -917,7 +917,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.7-F1</span>
+      <span class="version-tag app-ver-label">v1.4.9-F1</span>
     </footer>
   </div>
 
@@ -970,7 +970,7 @@
 
     <!-- Klassenarbeiten -->
     <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">2. Main GP (Klassenarbeiten Deutsch / Mathe / Englisch)</h2>
+      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">2. Main GP (Klassenarbeiten Deutsch / Mathe / Englisch / Latein)</h2>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
         <div><label>P1 (Note 1 - 15 €)</label><input type="number" step="0.50" id="bonus_exam_1" disabled></div>
         <div><label>P2 (Note 2 - 10 €)</label><input type="number" step="0.50" id="bonus_exam_2" disabled></div>
@@ -1011,7 +1011,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.4.7-F1</span>
+      <span class="version-tag app-ver-label">v1.4.9-F1</span>
     </footer>
   </div>
 
@@ -1042,11 +1042,26 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.4.7-F1';
+  const APP_VERSION = 'v1.4.9-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
 
-  const DEFAULT_SUBJECTS = ['Deutsch', 'Mathematik', 'Englisch', 'Geschichte', 'Biologie', 'Physik', 'Geografie', 'Sport', 'Musik', 'Kunst', 'Känguru-Wettbewerb (Mathe)', 'The Big Challenge (Englisch)'];
+  // Neuer Stundenplan: Hauptfächer mit *, Nebenfächer, Wettbewerbe
+  const DEFAULT_SUBJECTS = [
+    '(D) Deutsch*',
+    '(M) Mathematics*',
+    '(E) English*',
+    '(L) Latin*',
+    '(KR) Religion',
+    '(CH) Chemistry',
+    '(SP) Sports',
+    'WKbi',
+    '(BI) Biologie',
+    'EKbi',
+    'Profil',
+    'Känguru-Wettbewerb (Mathe)',
+    'The Big Challenge (Englisch)'
+  ];
   
   const DEFAULT_CHORE_PRICES = {
     dishwasher: 0.50,
@@ -1116,7 +1131,18 @@
   };
 
   let entries = JSON.parse(localStorage.getItem('f1_entries')) || [];
-  let subjects = JSON.parse(localStorage.getItem('f1_subjects')) || DEFAULT_SUBJECTS;
+  
+  // Versionsprüfung zur automatischen Fächer-Aktualisierung
+  const storedVersion = localStorage.getItem('f1_timetable_version');
+  let subjects;
+  if (storedVersion !== 'timetable_2026_v1') {
+    subjects = DEFAULT_SUBJECTS;
+    localStorage.setItem('f1_subjects', JSON.stringify(subjects));
+    localStorage.setItem('f1_timetable_version', 'timetable_2026_v1');
+  } else {
+    subjects = JSON.parse(localStorage.getItem('f1_subjects')) || DEFAULT_SUBJECTS;
+  }
+
   let chorePrices = JSON.parse(localStorage.getItem('f1_chore_prices')) || DEFAULT_CHORE_PRICES;
   let baseSalary = parseFloat(localStorage.getItem('f1_base_salary')) || 10.00;
   let competitionBonus = parseFloat(localStorage.getItem('f1_comp_bonus')) || 20.00;
@@ -1241,12 +1267,17 @@
     });
   }
 
+  // Auto-Detect: Hauptfächer (*) -> Main GP; Wettbewerbe -> Competition; Rest -> Test
   function handleSubjectChange() {
     const subject = document.getElementById('subjectSelect').value;
     const typeSelect = document.getElementById('typeSelect');
 
     if (subject.includes('Känguru') || subject.includes('Challenge')) {
       typeSelect.value = 'competition';
+    } else if (subject.includes('*')) {
+      typeSelect.value = 'exam';
+    } else {
+      typeSelect.value = 'test';
     }
     handleTypeChange();
   }
@@ -1420,7 +1451,7 @@
       } else {
         const cls = item.grade === 1 ? 'pos-1' : item.grade === 2 ? 'pos-2' : item.grade === 3 ? 'pos-3' : 'pos-other';
         badgeHtml = `<div class="pos-badge ${cls}">P${item.grade}</div>`;
-        typeLabel = item.type === 'exam' ? '🏁 Klassenarbeit (15/10/5 €)' : '⚡ Test (5/3/1 €)';
+        typeLabel = item.type === 'exam' ? '🏁 Main GP (15/10/5 €)' : '⚡ Sprint (5/3/1 €)';
       }
 
       return `
@@ -1487,7 +1518,7 @@
 
       const historyHtml = s.history.map(h => {
         const dStr = new Date(h.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-        const typeStr = h.type === 'chore' ? '🧹 Haushalt' : h.type === 'podcast' ? '🎙️ Podcast' : h.type === 'competition' ? '🏆 Pokal' : h.type === 'exam' ? 'Arbeit' : 'Test';
+        const typeStr = h.type === 'chore' ? '🧹 Haushalt' : h.type === 'podcast' ? '🎙️ Podcast' : h.type === 'competition' ? '🏆 Pokal' : h.type === 'exam' ? 'Main GP' : 'Sprint';
         const gradeStr = h.type === 'competition' ? 'Teilnahme' : h.grade ? `Note ${h.grade}` : 'Erledigt';
 
         return `
@@ -1555,7 +1586,7 @@
           typeShort = '🏆 COMP';
           gradeText = 'Teilnahme';
         } else {
-          typeShort = item.type === 'exam' ? 'Arbeit' : 'Test';
+          typeShort = item.type === 'exam' ? 'Main GP' : 'Sprint';
           gradeText = `Note ${item.grade}`;
         }
 
