@@ -823,7 +823,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.3-F1</span>
+      <span class="version-tag app-ver-label">v1.5.4-F1</span>
     </footer>
   </div>
 
@@ -842,7 +842,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.3-F1</span>
+      <span class="version-tag app-ver-label">v1.5.4-F1</span>
     </footer>
   </div>
 
@@ -890,7 +890,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.3-F1</span>
+      <span class="version-tag app-ver-label">v1.5.4-F1</span>
     </footer>
   </div>
 
@@ -904,7 +904,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">SEP 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.5.3-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.5.4-F1</div>
         </div>
       </div>
 
@@ -946,7 +946,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.3-F1</span>
+      <span class="version-tag app-ver-label">v1.5.4-F1</span>
     </footer>
   </div>
 
@@ -1043,7 +1043,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.3-F1</span>
+      <span class="version-tag app-ver-label">v1.5.4-F1</span>
     </footer>
   </div>
 
@@ -1074,7 +1074,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.5.3-F1';
+  const APP_VERSION = 'v1.5.4-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
   let lastConfettiTime = 0;
@@ -1136,7 +1136,8 @@
     flowers_water: 0.50,
     weeds_pull: 2.00,
     leaves_sweep: 5.00,
-    podcast_task: 5.00
+    podcast_task: 5.00,
+    learning_app_95: 5.00
   };
 
   const CHORE_NAMES = {
@@ -1151,7 +1152,8 @@
     flowers_water: 'Außen: Blumen gießen',
     weeds_pull: 'Außen: Unkraut zupfen',
     leaves_sweep: 'Außen: Blätter fegen und wegbringen',
-    podcast_task: '🎙️ Podcast: Skript lesen + Feedback geben ODER Folge hören'
+    podcast_task: '🎙️ Podcast: Skript lesen + Feedback geben ODER Folge hören',
+    learning_app_95: '📚 Lern-App bis zur Erfolgskarte mit mehr als 95 % als Test- oder Klassenarbeitsvorbereitung nutzen'
   };
 
   const DEFAULT_BONUS_RULES = {
@@ -1218,7 +1220,9 @@
     subjects = JSON.parse(localStorage.getItem('f1_subjects')) || DEFAULT_SUBJECTS;
   }
 
-  let chorePrices = JSON.parse(localStorage.getItem('f1_chore_prices')) || DEFAULT_CHORE_PRICES;
+  const storedChorePrices = JSON.parse(localStorage.getItem('f1_chore_prices')) || {};
+  let chorePrices = { ...DEFAULT_CHORE_PRICES, ...storedChorePrices };
+  localStorage.setItem('f1_chore_prices', JSON.stringify(chorePrices));
   let baseSalary = parseFloat(localStorage.getItem('f1_base_salary')) || 10.00;
   let competitionBonus = parseFloat(localStorage.getItem('f1_comp_bonus')) || 20.00;
   let goalName = localStorage.getItem('f1_goal_name') || 'F1 Fan Cap';
