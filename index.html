@@ -722,7 +722,7 @@
       </div>
 
       <div class="telemetry-main-val">
-        <div style="font-size: 10px; color: var(--text-sub); text-transform: uppercase; font-family: 'Orbitron';">Total Purse (Gesamtauszahlung)</div>
+        <div style="font-size: 10px; color: var(--text-sub); text-transform: uppercase; font-family: 'Orbitron';">Total Purse (Gesamt verdient)</div>
         <div class="amount" id="totalAmount">10,00 €</div>
       </div>
 
@@ -824,12 +824,12 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.7.0-F1</span>
+      <span class="version-tag app-ver-label">v1.8.0-F1</span>
     </footer>
   </div>
 
   <!-- TAB 2: OVERALL STANDINGS -->
-  <div id="tab-analytics" class="tab-content">
+  <div id="tab-analytics" class="tab-content"><section class="card"><h2>🏁 Monatsvergleich</h2><div id="monthComparison"></div></section>
     <section class="card">
       <h2 style="font-family: 'Orbitron'; font-size: 14px; text-transform: uppercase; margin-bottom: 6px;">
         📊 Driver Standings (Historie & Notenstände)
@@ -843,12 +843,32 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.7.0-F1</span>
+      <span class="version-tag app-ver-label">v1.8.0-F1</span>
     </footer>
   </div>
 
   <!-- TAB 3: PIT CREW JOBS -->
   <div id="tab-chores" class="tab-content">
+    <section class="card">
+      <h2>🏁 Monatsabrechnung</h2>
+      <p>Vormonat prüfen, Auszahlung erfassen und für dieses Kind festschreiben.</p>
+      <div id="settlementStatus"></div>
+      <button type="button" class="btn-race" onclick="openSettlement()">Vormonat abrechnen / prüfen</button>
+    </section>
+    <dialog id="settlementDialog" style="background:#111419;color:#fff;border:1px solid #555;border-radius:12px;max-width:480px;width:90%;max-height:85vh;overflow:auto;">
+      <form id="settlementForm">
+        <h2>Abrechnung prüfen</h2><div id="settlementReview"></div>
+        <label for="settlementBase">Grund-Taschengeld dieses Monats (€)</label>
+        <input id="settlementBase" type="number" min="0" step="0.01" required oninput="updateSettlementReview()">
+        <label for="settlementPaid">Tatsächlich ans Kind ausgezahlt (€)</label>
+        <input id="settlementPaid" type="number" min="0" step="0.01" required>
+        <label for="settlementDate">Auszahlungsdatum</label>
+        <input id="settlementDate" type="date" required>
+        <p>Vorschlag: 60 % auszahlen, 30 % Wunschgeld und 10 % Depot zurücklegen. Betrag bei Bedarf anpassen.</p>
+        <button type="submit" class="btn-race">Abschluss & Auszahlung bestätigen</button>
+        <button type="button" class="btn-race" onclick="document.getElementById('settlementDialog').close()">Abbrechen</button>
+      </form>
+    </dialog>
     
     <div class="policy-box">
       <strong>⚠️ PÄDAGOGISCHE GRUNDREGEL</strong>
@@ -891,7 +911,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.7.0-F1</span>
+      <span class="version-tag app-ver-label">v1.8.0-F1</span>
     </footer>
   </div>
 
@@ -907,11 +927,12 @@
     </section>
     <section class="card"><h2 style="font-family:'Orbitron';font-size:13px;margin-bottom:8px;">Aktive Wünsche</h2><div id="activeWishes"></div></section>
     <section class="card"><h2 style="font-family:'Orbitron';font-size:13px;margin-bottom:8px;">Bereits gekauft & Retrospektive</h2><div id="boughtWishes"></div></section>
-    <footer class="app-footer"><span class="creator">Made by CreatingReorganized</span><span class="version-tag app-ver-label">v1.7.0-F1</span></footer>
+    <footer class="app-footer"><span class="creator">Made by CreatingReorganized</span><span class="version-tag app-ver-label">v1.8.0-F1</span></footer>
   </div>
 
   <!-- TAB 5: FIA PAY SHEET -->
   <div id="tab-report" class="tab-content">
+    <label for="reportPeriod">Abrechnung</label><select id="reportPeriod" onchange="renderReport()"><option value="current">Laufender Monat</option><option value="previous">Vormonat</option></select>
     <div id="payslipCard">
       <div class="slip-top">
         <div>
@@ -920,7 +941,7 @@
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">SEP 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.7.0-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.8.0-F1</div>
         </div>
       </div>
 
@@ -946,11 +967,12 @@
           <span id="slipBonus" style="color: var(--p1);">+ 0,00 €</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 900; color: var(--accent); margin-top: 4px; padding-top: 4px; border-top: 1px dashed #333; font-family: 'Orbitron';">
-          <span>GESAMTAUSZAHLUNG:</span>
+          <span>GESAMT VERDIENT:</span>
           <span id="slipTotal">10,00 €</span>
         </div>
       </div>
       
+      <div id="slipSettlement" style="font-size:12px;margin-top:12px;"></div>
       <div style="text-align: right; font-size: 8px; color: #444c56; margin-top: 8px; font-family: 'Orbitron';">
         MADE BY CREATINGREORGANIZED
       </div>
@@ -962,7 +984,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.7.0-F1</span>
+      <span class="version-tag app-ver-label">v1.8.0-F1</span>
     </footer>
   </div>
 
@@ -1051,7 +1073,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.7.0-F1</span>
+      <span class="version-tag app-ver-label">v1.8.0-F1</span>
     </footer>
   </div>
 
@@ -1086,7 +1108,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.7.0-F1';
+  const APP_VERSION = 'v1.8.0-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
   let lastConfettiTime = 0;
@@ -1148,9 +1170,8 @@
     flowers_water: 0.50,
     weeds_pull: 2.00,
     leaves_sweep: 5.00,
-    podcast_task: 5.00,
-    learning_app_95: 5.00,
-    app_test_task: 5.00
+    podcast_30: 5.00,
+    learning_app_30: 5.00
   };
 
   const CHORE_NAMES = {
@@ -1165,9 +1186,8 @@
     flowers_water: 'Außen: Blumen gießen',
     weeds_pull: 'Außen: Unkraut zupfen',
     leaves_sweep: 'Außen: Blätter fegen und wegbringen',
-    podcast_task: '🎙️ Podcast: Skript lesen + Feedback geben ODER Folge hören',
-    learning_app_95: '📚 Lern-App bis zur Erfolgskarte mit mehr als 95 % als Test- oder Klassenarbeitsvorbereitung nutzen',
-    app_test_task: '📱 App-Testing: 30 Min. Lern-App testen & Feedback geben'
+    podcast_30: '🎙️ 30 min Podcast: Skript(e) lesen oder Folge(n) hören & Feedback geben',
+    learning_app_30: '📱 30 min Lern-App als Test- oder Klassenarbeitsvorbereitung nutzen & Feedback geben'
   };
 
   const DEFAULT_BONUS_RULES = {
@@ -1248,6 +1268,8 @@
   const storedDriver = localStorage.getItem('f1_driver');
   let currentDriver = storedDriver === legacy12 ? 'driver12' : storedDriver === legacy87 ? 'driver87' : (storedDriver || 'driver12');
   localStorage.setItem('f1_driver', currentDriver);
+  let settlements = JSON.parse(localStorage.getItem('f1_settlements')) || {};
+  let settlementDraft = null;
   let toastTimer = null;
   let pendingDeleteId = null;
   let pendingDeleteTimer = null;
@@ -1546,9 +1568,10 @@
   }
 
   function updateTrackerUI() {
+    renderSettlementStatus();
     const currentMonthKey = getCurrentMonthKey();
     const currentDriverEntries = entries.filter(e => e.driver === currentDriver);
-    const currentMonthEntries = currentDriverEntries.filter(e => e.date.startsWith(currentMonthKey));
+    const currentMonthEntries = currentDriverEntries.filter(e => (e.localDate || e.date).startsWith(currentMonthKey));
 
     const dateObj = new Date();
     document.getElementById('currentMonthText').textContent = dateObj.toLocaleDateString('de-DE', { month: 'short', year: 'numeric' }).toUpperCase();
@@ -1623,6 +1646,7 @@
   }
 
   function renderAnalytics() {
+    renderMonthComparison();
     const listEl = document.getElementById('subjectAnalyticsList');
     const summaryEl = document.getElementById('semesterSummary');
     const driverEntries = entries.filter(e => e.driver === currentDriver);
@@ -1721,11 +1745,11 @@
   }
 
   function renderReport() {
-    const currentMonthKey = getCurrentMonthKey();
-    const driverEntries = entries.filter(e => e.driver === currentDriver);
-    const currentMonthEntries = driverEntries.filter(e => e.date.startsWith(currentMonthKey));
-    const dateObj = new Date();
-    
+    const month = reportMonth();
+    const data = monthData(month);
+    const currentMonthEntries = data.entries;
+    const dateObj = new Date(`${month}-01T12:00:00`);
+    document.getElementById('slipSettlement').innerHTML = moneySummary(data);
     document.getElementById('slipMonth').textContent = dateObj.toLocaleDateString('de-DE', { month: 'short', year: 'numeric' }).toUpperCase();
 
     let totalBonus = 0;
@@ -1764,9 +1788,9 @@
       }).join('');
     }
 
-    document.getElementById('slipBase').textContent = formatCurrency(baseSalary);
+    document.getElementById('slipBase').textContent = formatCurrency(data.base);
     document.getElementById('slipBonus').textContent = `+ ${formatCurrency(totalBonus)}`;
-    document.getElementById('slipTotal').textContent = formatCurrency(baseSalary + totalBonus);
+    document.getElementById('slipTotal').textContent = formatCurrency(data.total);
   }
 
   async function exportSlipAsImage() {
@@ -1774,7 +1798,7 @@
     try {
       const canvas = await html2canvas(card, { scale: 3, backgroundColor: '#111419' });
       canvas.toBlob(async (blob) => {
-        const file = new File([blob], `F1-Telemetry-${currentDriver.toUpperCase()}-${getCurrentMonthKey()}.png`, { type: 'image/png' });
+        const file = new File([blob], `F1-Telemetry-${currentDriver.toUpperCase()}-${reportMonth()}.png`, { type: 'image/png' });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({ files: [file], title: 'F1 Paddock Telemetry', text: 'Offizielle FIA Gehaltsabrechnung' });
         } else {
@@ -1837,6 +1861,7 @@
       const customBonusVal = document.getElementById('customBonusInput').value;
       const prepBonus = document.getElementById('prepBonusCheck').checked;
       const localDate = document.getElementById('gradeDateInput').value || getLocalDateString();
+      if (isMonthClosed(localDate.slice(0, 7))) { showToast('Monat abgeschlossen. Bitte zuerst in Standings wieder öffnen.', 'warning'); return; }
       const stableKey = SUBJECT_KEY_MAP[subject] || subject.toLowerCase().replace(/[^a-z0-9]/g, '_');
 
       const duplicate = entries.find(item => 
@@ -1937,9 +1962,10 @@
       const choreKey = document.getElementById('choreSelect').value;
       const choreName = CHORE_NAMES[choreKey];
       const choreBonus = chorePrices[choreKey] || 0;
-      const isPodcast = choreKey === 'podcast_task';
+      const isPodcast = choreKey === 'podcast_30';
       const taskType = isPodcast ? 'podcast' : 'chore';
       const localDate = document.getElementById('choreDateInput').value || getLocalDateString();
+      if (isMonthClosed(localDate.slice(0, 7))) { showToast('Monat abgeschlossen. Bitte zuerst in Standings wieder öffnen.', 'warning'); return; }
 
       const existingSameDay = entries.filter(item => 
         item.driver === currentDriver && 
@@ -1983,6 +2009,8 @@
   });
 
   window.deleteEntry = function(id) {
+    const entry = entries.find(e => e.id === String(id));
+    if (entry && isMonthClosed((entry.localDate || entry.date).slice(0, 7), entry.driver)) { showToast('Monat abgeschlossen. Bitte zuerst wieder öffnen.', 'warning'); return; }
     if (pendingDeleteId !== String(id)) {
       pendingDeleteId = String(id);
       window.clearTimeout(pendingDeleteTimer);
@@ -1995,6 +2023,7 @@
     pendingDeleteId = null;
     window.clearTimeout(pendingDeleteTimer);
     updateTrackerUI();
+    renderMonthComparison();
     showToast('Eintrag gelöscht.');
   };
 
@@ -2006,8 +2035,8 @@
       window.setTimeout(() => { clearDataArmed = false; }, 5000);
       return;
     }
-    entries = [];
-    localStorage.setItem('f1_entries', '[]');
+    entries = entries.filter(e => isMonthClosed((e.localDate || e.date).slice(0, 7), e.driver));
+    localStorage.setItem('f1_entries', JSON.stringify(entries));
     clearDataArmed = false;
     updateTrackerUI();
     renderAnalytics();
@@ -2034,6 +2063,90 @@
     renderSubjects();
     showToast('Fach entfernt.');
   };
+
+
+  function previousMonth() {
+    const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 1);
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+  }
+  function settlementKey(month, driver = currentDriver) { return `${driver}:${month}`; }
+  function isMonthClosed(month, driver = currentDriver) { return settlements[settlementKey(month, driver)]?.closed === true; }
+  function roundMoney(n) { return Math.round((n + Number.EPSILON) * 100) / 100; }
+  function escapeText(value) { const el = document.createElement('span'); el.textContent = value; return el.innerHTML; }
+  function monthLabel(month) { return new Date(`${month}-01T12:00:00`).toLocaleDateString('de-DE', {month:'long',year:'numeric'}); }
+  function monthData(month) {
+    const saved = settlements[settlementKey(month)];
+    if (saved?.closed) return saved;
+    const rows = entries.filter(e => e.driver === currentDriver && (e.localDate || e.date).startsWith(month));
+    const base = saved?.base ?? baseSalary;
+    return {month, driver:currentDriver, base, entries:rows, total:roundMoney(base + rows.reduce((sum,e)=>sum+e.bonus,0)), closed:false};
+  }
+  function moneySummary(data) {
+    const free = roundMoney(data.total * .6), goal = roundMoney(data.total * .3);
+    return `<p><strong>${data.closed ? 'Abgeschlossen · Auszahlung bestätigt' : data.month === getCurrentMonthKey() ? 'Laufend · Zwischenstand' : 'Offen · noch nicht abgeschlossen'}</strong></p>
+      <p>Verdient: <strong>${formatCurrency(data.total)}</strong><br>
+      Tatsächlich ausgezahlt: <strong>${data.closed ? formatCurrency(data.paid) : 'Noch nicht bestätigt'}</strong>
+      ${data.closed ? `<br>Auszahlungsdatum: ${escapeText(data.paidDate)}<br>Zurückgelegt / nicht ausgezahlt: ${formatCurrency(roundMoney(data.total-data.paid))}` : ''}</p>
+      <p>Aufteilung: Freies Taschengeld ${formatCurrency(free)} · Wunschgeld ${formatCurrency(goal)} · Depot ${formatCurrency(roundMoney(data.total-free-goal))}</p>`;
+  }
+  function renderSettlementStatus() {
+    const data = monthData(previousMonth());
+    document.getElementById('settlementStatus').textContent = `DRIVER #${currentDriver === 'driver12' ? '12' : '87'} · ${monthLabel(data.month)} · ${data.closed ? 'abgeschlossen' : 'offen'}`;
+  }
+  function renderMonthComparison() {
+    document.getElementById('monthComparison').innerHTML = [previousMonth(), getCurrentMonthKey()].map(month => {
+      const data = monthData(month);
+      return `<div class="subject-stat-card"><h3>${monthLabel(month)}</h3>${moneySummary(data)}
+        <details><summary>Einnahmequellen</summary><p>Grund-Taschengeld: ${formatCurrency(data.base)}</p>
+        ${data.entries.map((e, index) => `<p>${escapeText(e.localDate || e.date.slice(0,10))} · ${escapeText(e.subject)}: ${formatCurrency(e.bonus)} ${!data.closed ? `<button type="button" onclick="deleteMonthEntry('${month}', ${index})">Eintrag löschen</button>` : ''}</p>`).join('') || '<p>Keine zusätzlichen Einnahmen.</p>'}</details>
+        ${data.closed ? `<button class="btn-race" onclick="reopenMonth('${month}')">Abschluss zur Korrektur wieder öffnen</button>` : ''}</div>`;
+    }).join('');
+  }
+  function openSettlement() {
+    const data = monthData(previousMonth());
+    if (data.closed) { showToast('Bereits abgeschlossen. Zum Korrigieren in Standings wieder öffnen.', 'warning'); return; }
+    settlementDraft = JSON.parse(JSON.stringify(data));
+    document.getElementById('settlementBase').value = data.base.toFixed(2);
+    document.getElementById('settlementPaid').value = roundMoney(data.total*.6).toFixed(2);
+    document.getElementById('settlementDate').value = getLocalDateString();
+    updateSettlementReview();
+    document.getElementById('settlementDialog').showModal();
+  }
+  function deleteMonthEntry(month, index) {
+    const entry = monthData(month).entries[index];
+    if (entry && !isMonthClosed(month)) window.deleteEntry(entry.id);
+  }
+  function updateSettlementReview() {
+    if (!settlementDraft) return;
+    settlementDraft.base = Number(document.getElementById('settlementBase').value);
+    settlementDraft.total = roundMoney(settlementDraft.base + settlementDraft.entries.reduce((sum,e)=>sum+e.bonus,0));
+    document.getElementById('settlementPaid').max = settlementDraft.total;
+    document.getElementById('settlementReview').innerHTML = `<p><strong>DRIVER #${settlementDraft.driver === 'driver12' ? '12' : '87'} · ${monthLabel(settlementDraft.month)}</strong></p>
+      ${moneySummary(settlementDraft)}<details><summary>${settlementDraft.entries.length} Buchungen prüfen</summary>${settlementDraft.entries.map(e=>`<p>${escapeText(e.localDate)} · ${escapeText(e.subject)}: ${formatCurrency(e.bonus)}</p>`).join('')}</details>
+      <p>Bitte das damalige Grund-Taschengeld prüfen. Bei bisher nicht abgeschlossenen Monaten wird der aktuell hinterlegte Wert vorgeschlagen.</p>`;
+  }
+  document.getElementById('settlementForm').addEventListener('submit', event => {
+    event.preventDefault();
+    if (!settlementDraft || settlementDraft.driver !== currentDriver || isMonthClosed(settlementDraft.month)) return;
+    const paid = Number(document.getElementById('settlementPaid').value);
+    const paidDate = document.getElementById('settlementDate').value;
+    if (!Number.isFinite(paid) || paid < 0 || paid > settlementDraft.total || !paidDate || paidDate > getLocalDateString()) { showToast('Bitte Betrag und Auszahlungsdatum prüfen.', 'warning'); return; }
+    const record = {...settlementDraft, paid, paidDate, closed:true, closedAt:new Date().toISOString()};
+    const next = {...settlements, [settlementKey(record.month)]:record};
+    try { localStorage.setItem('f1_settlements', JSON.stringify(next)); } catch { showToast('Speichern fehlgeschlagen. Abschluss wurde nicht übernommen.', 'warning'); return; }
+    settlements = next;
+    document.getElementById('settlementDialog').close();
+    renderSettlementStatus(); renderMonthComparison();
+    showToast('Monat abgeschlossen und Auszahlung gespeichert.');
+  });
+  function reopenMonth(month) {
+    if (!isMonthClosed(month) || !confirm(`${monthLabel(month)} für dieses Kind wieder öffnen? Die Auszahlungsbestätigung wird aufgehoben. Nach der Korrektur bitte erneut abschließen.`)) return;
+    const key = settlementKey(month);
+    const next = {...settlements, [key]: {...settlements[key], closed:false}};
+    try { localStorage.setItem('f1_settlements', JSON.stringify(next)); } catch { showToast('Wiederöffnen konnte nicht gespeichert werden.', 'warning'); return; }
+    settlements = next; renderSettlementStatus(); renderMonthComparison();
+  }
+  function reportMonth() { return document.getElementById('reportPeriod').value === 'previous' ? previousMonth() : getCurrentMonthKey(); }
 
   const initialBtn = document.querySelector(`.driver-btn.${currentDriver}`);
   if (initialBtn) setDriver(currentDriver, initialBtn);
