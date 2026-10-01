@@ -13,7 +13,7 @@ Current Version: **`v1.4.7-F1`**
   * **Dynamic Purse Calculation:** Tracks base retainer and performance bonuses in real time.
   * **Interactive RPM Tachometer:** Lights up dynamically as earnings approach the monthly performance cap.
   * **Interactive Free Practice Bonus:** One-tap toggle for timely exam prep (+1.00 €).
-  * **Driver Skin Toggle:** Switch seamlessly between Kimi Antonelli (#12) and Oliver Bearman (#87).
+  * **Driver Skin Toggle:** Switch seamlessly between Driver #12 and Driver #87.
   * **Team Radio:** Dynamic pit wall praise and confetti effects for P1 results, competitions, and completed missions.
 
 * **💰 3-Pot Automatic Budget Split:**

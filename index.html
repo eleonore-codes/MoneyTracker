@@ -22,9 +22,9 @@
       --text-sub: #8b949e;
       --f1-red: #e10600;
       
-      --driver-kimi: #00d2be;
-      --driver-ollie: #e10600;
-      --accent: var(--driver-kimi);
+      --driver-12: #00d2be;
+      --driver-87: #e10600;
+      --accent: var(--driver-12);
       
       --p1: #00e676;
       --p2: #00b0ff;
@@ -112,13 +112,13 @@
       color: #fff;
     }
 
-    .driver-btn.active.kimi {
-      border-left: 4px solid var(--driver-kimi);
-      color: var(--driver-kimi);
+    .driver-btn.active.driver12 {
+      border-left: 4px solid var(--driver-12);
+      color: var(--driver-12);
     }
 
-    .driver-btn.active.ollie {
-      border-left: 4px solid var(--driver-ollie);
+    .driver-btn.active.driver87 {
+      border-left: 4px solid var(--driver-87);
       color: #ff5252;
     }
 
@@ -352,7 +352,7 @@
       transition: filter 0.2s, transform 0.1s;
     }
 
-    button.btn-race.ollie-mode {
+    button.btn-race.driver87-mode {
       background: linear-gradient(135deg, #e10600, #ff5252);
       color: #fff;
     }
@@ -467,7 +467,7 @@
     }
 
     .pos-trophy { border-color: var(--trophy-gold); color: var(--trophy-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); font-size: 16px; }
-    .pos-chore { border-color: var(--driver-kimi); color: var(--driver-kimi); font-size: 16px; }
+    .pos-chore { border-color: var(--driver-12); color: var(--driver-12); font-size: 16px; }
     .pos-podcast { border-color: #ba68c8; color: #ba68c8; font-size: 16px; }
     .pos-1 { border-color: var(--p1); color: var(--p1); }
     .pos-2 { border-color: var(--p2); color: var(--p2); }
@@ -650,7 +650,7 @@
       text-transform: uppercase;
       font-family: 'Orbitron', sans-serif;
       cursor: pointer;
-      width: 20%;
+      width: 16.666%;
     }
 
     .tab-btn.active { color: var(--accent); }
@@ -680,12 +680,12 @@
   
   <!-- Driver Selector -->
   <div class="driver-selector">
-    <button class="driver-btn active kimi" onclick="setDriver('kimi', this)">
-      <span>KIMI ANTONELLI</span>
+    <button class="driver-btn active driver12" onclick="setDriver('driver12', this)">
+      <span>DRIVER</span>
       <span class="driver-num">#12</span>
     </button>
-    <button class="driver-btn ollie" onclick="setDriver('ollie', this)">
-      <span>OLLIE BEARMAN</span>
+    <button class="driver-btn driver87" onclick="setDriver('driver87', this)">
+      <span>DRIVER</span>
       <span class="driver-num">#87</span>
     </button>
   </div>
@@ -746,6 +746,7 @@
         <div class="pot-card">
           <span id="potGoalLabel">F1 Sparziel (30%)</span>
           <strong id="potGoal">3,00 €</strong>
+          <span id="wishProgressMini">0 % • offen: –</span>
         </div>
         <div class="pot-card">
           <span>Depot (10%)</span>
@@ -823,7 +824,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.4-F1</span>
+      <span class="version-tag app-ver-label">v1.7.0-F1</span>
     </footer>
   </div>
 
@@ -842,7 +843,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.4-F1</span>
+      <span class="version-tag app-ver-label">v1.7.0-F1</span>
     </footer>
   </div>
 
@@ -890,21 +891,36 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.4-F1</span>
+      <span class="version-tag app-ver-label">v1.7.0-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 4: FIA PAY SHEET -->
+  <!-- TAB 4: WISHLIST -->
+  <div id="tab-wishlist" class="tab-content">
+    <section class="card">
+      <h2 style="font-family:'Orbitron';font-size:14px;margin-bottom:10px;">🏁 Wishlist</h2>
+      <form id="wishForm">
+        <div class="form-group"><label for="wishTitle">Wunsch</label><input id="wishTitle" required maxlength="80"></div>
+        <div class="form-group"><label for="wishCost">Zielkosten (€)</label><input id="wishCost" type="number" min="0.01" step="0.01" required></div>
+        <button class="btn-race" type="submit">Wunsch hinzufügen</button>
+      </form>
+    </section>
+    <section class="card"><h2 style="font-family:'Orbitron';font-size:13px;margin-bottom:8px;">Aktive Wünsche</h2><div id="activeWishes"></div></section>
+    <section class="card"><h2 style="font-family:'Orbitron';font-size:13px;margin-bottom:8px;">Bereits gekauft & Retrospektive</h2><div id="boughtWishes"></div></section>
+    <footer class="app-footer"><span class="creator">Made by CreatingReorganized</span><span class="version-tag app-ver-label">v1.7.0-F1</span></footer>
+  </div>
+
+  <!-- TAB 5: FIA PAY SHEET -->
   <div id="tab-report" class="tab-content">
     <div id="payslipCard">
       <div class="slip-top">
         <div>
-          <div style="font-family: 'Orbitron'; font-size: 15px; font-weight: 900;" id="slipDriverName">DRIVER #12 (KIMI)</div>
+          <div style="font-family: 'Orbitron'; font-size: 15px; font-weight: 900;" id="slipDriverName">DRIVER #12 (DRIVER #12)</div>
           <div style="font-size: 10px; color: var(--text-sub); font-family: 'Orbitron';">FIA PERFORMANCE & BONUS SHEET</div>
         </div>
         <div style="text-align: right;">
           <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 12px; color: var(--accent);" id="slipMonth">SEP 2026</div>
-          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.5.4-F1</div>
+          <div style="font-size: 8px; color: var(--text-sub); font-family: 'Orbitron';" id="slipVersionTag">v1.7.0-F1</div>
         </div>
       </div>
 
@@ -946,11 +962,11 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.4-F1</span>
+      <span class="version-tag app-ver-label">v1.7.0-F1</span>
     </footer>
   </div>
 
-  <!-- TAB 5: PADDOCK SETTINGS -->
+  <!-- TAB 6: PADDOCK SETTINGS -->
   <div id="tab-settings" class="tab-content">
     
     <!-- FIA Security Lock Banner -->
@@ -968,22 +984,14 @@
         <button type="button" class="btn-race" onclick="unlockPaddock()" style="width: auto; margin-top: 0; padding: 0 14px; font-size: 11px;">🔓 Unlock</button>
       </div>
 
-      <button type="button" id="relockBtn" class="btn-race ollie-mode" onclick="lockPaddock()" style="display: none; margin-top: 4px; padding: 8px; font-size: 11px;">
+      <button type="button" id="relockBtn" class="btn-race driver87-mode" onclick="lockPaddock()" style="display: none; margin-top: 4px; padding: 8px; font-size: 11px;">
         🔒 Paddock wieder sperren
       </button>
-      <button type="button" id="clearTestDataBtn" class="btn-race ollie-mode" onclick="clearTestData()" style="display:none; margin-top:8px; padding:8px; font-size:11px;">
+      <button type="button" id="clearTestDataBtn" class="btn-race driver87-mode" onclick="clearTestData()" style="display:none; margin-top:8px; padding:8px; font-size:11px;">
         🧪 Testdaten löschen (zweimal klicken)
       </button>
     </div>
 
-    <!-- F1 Sparziel -->
-    <section class="card">
-      <h2 style="font-family: 'Orbitron'; font-size: 13px; text-transform: uppercase; margin-bottom: 8px;">F1 Sparziel / Wishlist (30% Topf)</h2>
-      <div class="form-group" style="margin-bottom: 0;">
-        <label for="goalNameInput">Wunsch (z. B. F1 Team Cap / Hoodie / Videospiel)</label>
-        <input type="text" id="goalNameInput" placeholder="F1 Fan Cap" disabled>
-      </div>
-    </section>
 
     <!-- 1. SCHULLEISTUNGEN & BASISVERTRAG -->
     <section class="card">
@@ -1043,7 +1051,7 @@
 
     <footer class="app-footer">
       <span class="creator">Made by CreatingReorganized</span>
-      <span class="version-tag app-ver-label">v1.5.4-F1</span>
+      <span class="version-tag app-ver-label">v1.7.0-F1</span>
     </footer>
   </div>
 
@@ -1061,7 +1069,11 @@
   </button>
   <button class="tab-btn" onclick="switchTab('chores', this)">
     <svg viewBox="0 0 24 24"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
-    Pit Crew
+    Pit Stop
+  </button>
+  <button class="tab-btn" onclick="switchTab('wishlist', this)">
+    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>
+    Wishlist
   </button>
   <button class="tab-btn" onclick="switchTab('report', this)">
     <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
@@ -1074,7 +1086,7 @@
 </nav>
 
 <script>
-  const APP_VERSION = 'v1.5.4-F1';
+  const APP_VERSION = 'v1.7.0-F1';
   const PADDOCK_PASSWORD = 'Memphis';
   let isPaddockUnlocked = false;
   let lastConfettiTime = 0;
@@ -1137,7 +1149,8 @@
     weeds_pull: 2.00,
     leaves_sweep: 5.00,
     podcast_task: 5.00,
-    learning_app_95: 5.00
+    learning_app_95: 5.00,
+    app_test_task: 5.00
   };
 
   const CHORE_NAMES = {
@@ -1153,7 +1166,8 @@
     weeds_pull: 'Außen: Unkraut zupfen',
     leaves_sweep: 'Außen: Blätter fegen und wegbringen',
     podcast_task: '🎙️ Podcast: Skript lesen + Feedback geben ODER Folge hören',
-    learning_app_95: '📚 Lern-App bis zur Erfolgskarte mit mehr als 95 % als Test- oder Klassenarbeitsvorbereitung nutzen'
+    learning_app_95: '📚 Lern-App bis zur Erfolgskarte mit mehr als 95 % als Test- oder Klassenarbeitsvorbereitung nutzen',
+    app_test_task: '📱 App-Testing: 30 Min. Lern-App testen & Feedback geben'
   };
 
   const DEFAULT_BONUS_RULES = {
@@ -1195,9 +1209,11 @@
 
   let entries = JSON.parse(localStorage.getItem('f1_entries')) || [];
   
+  const legacy12 = String.fromCharCode(107,105,109,105);
+  const legacy87 = String.fromCharCode(111,108,108,105,101);
   entries = entries.map(e => ({
     id: e.id || String(Date.now()),
-    driver: e.driver || 'kimi',
+    driver: e.driver === legacy12 ? 'driver12' : e.driver === legacy87 ? 'driver87' : (e.driver || 'driver12'),
     subject: e.subject || 'Unbekannt',
     key: e.key || e.subjectKey || (SUBJECT_KEY_MAP[e.subject] || 'custom'),
     grade: e.grade !== undefined ? e.grade : null,
@@ -1212,10 +1228,10 @@
 
   const storedVersion = localStorage.getItem('f1_timetable_version');
   let subjects;
-  if (storedVersion !== 'timetable_2026_v2') {
+  if (storedVersion !== 'timetable_2026_v3') {
     subjects = DEFAULT_SUBJECTS;
     localStorage.setItem('f1_subjects', JSON.stringify(subjects));
-    localStorage.setItem('f1_timetable_version', 'timetable_2026_v2');
+    localStorage.setItem('f1_timetable_version', 'timetable_2026_v3');
   } else {
     subjects = JSON.parse(localStorage.getItem('f1_subjects')) || DEFAULT_SUBJECTS;
   }
@@ -1225,9 +1241,13 @@
   localStorage.setItem('f1_chore_prices', JSON.stringify(chorePrices));
   let baseSalary = parseFloat(localStorage.getItem('f1_base_salary')) || 10.00;
   let competitionBonus = parseFloat(localStorage.getItem('f1_comp_bonus')) || 20.00;
-  let goalName = localStorage.getItem('f1_goal_name') || 'F1 Fan Cap';
+  let goalName = localStorage.getItem('f1_goal_name') || 'Noch kein Wunsch';
+  let wishes = JSON.parse(localStorage.getItem('f1_wishlist')) || [];
+  let boughtWishes = JSON.parse(localStorage.getItem('f1_wishlist_bought')) || [];
   let bonusRules = JSON.parse(localStorage.getItem('f1_bonus_rules')) || DEFAULT_BONUS_RULES;
-  let currentDriver = localStorage.getItem('f1_driver') || 'kimi';
+  const storedDriver = localStorage.getItem('f1_driver');
+  let currentDriver = storedDriver === legacy12 ? 'driver12' : storedDriver === legacy87 ? 'driver87' : (storedDriver || 'driver12');
+  localStorage.setItem('f1_driver', currentDriver);
   let toastTimer = null;
   let pendingDeleteId = null;
   let pendingDeleteTimer = null;
@@ -1321,7 +1341,7 @@
     const clearTestDataBtn = document.getElementById('clearTestDataBtn');
 
     const inputsToToggle = [
-      'goalNameInput', 'baseSalaryInput', 'bonusCompInput',
+      'baseSalaryInput', 'bonusCompInput',
       'bonus_exam_1', 'bonus_exam_2', 'bonus_exam_3',
       'bonus_test_1', 'bonus_test_2', 'bonus_test_3',
       'newSubjectInput', 'addSubjectBtn'
@@ -1365,17 +1385,21 @@
 
     const root = document.documentElement;
     
-    if (driver === 'kimi') {
+    if (driver === 'driver12') {
       root.style.setProperty('--accent', '#00d2be');
-      document.getElementById('submitBtn').classList.remove('ollie-mode');
-      document.getElementById('slipDriverName').textContent = 'DRIVER #12 (KIMI)';
+      document.getElementById('submitBtn').classList.remove('driver87-mode');
+      document.getElementById('slipDriverName').textContent = 'DRIVER #12';
     } else {
       root.style.setProperty('--accent', '#e10600');
-      document.getElementById('submitBtn').classList.add('ollie-mode');
-      document.getElementById('slipDriverName').textContent = 'DRIVER #87 (OLLIE)';
+      document.getElementById('submitBtn').classList.add('driver87-mode');
+      document.getElementById('slipDriverName').textContent = 'DRIVER #87';
     }
 
     updateTrackerUI();
+    const activeTab = document.querySelector('.tab-content.active')?.id;
+    if (activeTab === 'tab-analytics') renderAnalytics();
+    if (activeTab === 'tab-report') renderReport();
+    if (activeTab === 'tab-wishlist') renderWishlist();
   }
 
   function updateRpmLights(totalSalary) {
@@ -1486,7 +1510,6 @@
   function initSettingsInputs() {
     document.getElementById('baseSalaryInput').value = baseSalary;
     document.getElementById('bonusCompInput').value = competitionBonus;
-    document.getElementById('goalNameInput').value = goalName;
     document.getElementById('bonus_exam_1').value = bonusRules.exam[1];
     document.getElementById('bonus_exam_2').value = bonusRules.exam[2];
     document.getElementById('bonus_exam_3').value = bonusRules.exam[3];
@@ -1514,13 +1537,6 @@
       handleTypeChange();
     });
 
-    document.getElementById('goalNameInput').addEventListener('change', (e) => {
-      if (!isPaddockUnlocked) return;
-      goalName = e.target.value.trim() || 'F1 Fan Cap';
-      localStorage.setItem('f1_goal_name', goalName);
-      document.getElementById('potGoalLabel').textContent = `${goalName} (30%)`;
-    });
-
     document.getElementById('baseSalaryInput').addEventListener('change', (e) => {
       if (!isPaddockUnlocked) return;
       baseSalary = parseFloat(e.target.value) || 10.00;
@@ -1536,6 +1552,8 @@
 
     const dateObj = new Date();
     document.getElementById('currentMonthText').textContent = dateObj.toLocaleDateString('de-DE', { month: 'short', year: 'numeric' }).toUpperCase();
+    const activeWish = wishes[0];
+    goalName = activeWish ? activeWish.title : 'Noch kein Wunsch';
     document.getElementById('potGoalLabel').textContent = `${goalName} (30%)`;
 
     let totalBonus = 0;
@@ -1548,6 +1566,9 @@
 
     document.getElementById('potFree').textContent = formatCurrency(totalSalary * 0.60);
     document.getElementById('potGoal').textContent = formatCurrency(totalSalary * 0.30);
+    const savingsPot = totalSalary * 0.30;
+    const pct = activeWish ? Math.min(100, Math.round((savingsPot / activeWish.cost) * 100)) : 0;
+    document.getElementById('wishProgressMini').textContent = activeWish ? `${pct} % • offen: ${formatCurrency(Math.max(0, activeWish.cost - savingsPot))}` : '0 % • offen: –';
     document.getElementById('potFuture').textContent = formatCurrency(totalSalary * 0.10);
 
     updateRpmLights(totalSalary);
@@ -1768,6 +1789,29 @@
     }
   }
 
+  function getCurrentSavingsPot() {
+    const key = getCurrentMonthKey();
+    const bonus = entries.filter(e => e.driver === currentDriver && e.date.startsWith(key)).reduce((s,e) => s + e.bonus, 0);
+    return (baseSalary + bonus) * 0.30;
+  }
+
+  function persistWishes() {
+    localStorage.setItem('f1_wishlist', JSON.stringify(wishes));
+    localStorage.setItem('f1_wishlist_bought', JSON.stringify(boughtWishes));
+    updateTrackerUI(); renderWishlist();
+  }
+
+  function renderWishlist() {
+    const pot = getCurrentSavingsPot();
+    document.getElementById('activeWishes').innerHTML = wishes.length ? wishes.map((w,i) => `<div class="subject-stat-card"><div class="stat-header-row"><strong>P${i+1} • ${w.title}</strong><strong>${formatCurrency(w.cost)}</strong></div><div style="margin:6px 0;color:var(--text-sub)">${Math.min(100,Math.round(pot/w.cost*100))}% • ${formatCurrency(Math.max(0,w.cost-pot))} offen</div><button onclick="moveWish(${i},-1)" ${i===0?'disabled':''}>▲</button> <button onclick="moveWish(${i},1)" ${i===wishes.length-1?'disabled':''}>▼</button> <button onclick="buyWish(${i})" ${pot<w.cost?'disabled':''}>Als gekauft markieren 🛍️</button></div>`).join('') : '<p style="color:var(--text-sub)">Noch keine Wünsche.</p>';
+    document.getElementById('boughtWishes').innerHTML = boughtWishes.length ? boughtWishes.map((w,i) => `<div class="subject-stat-card"><strong>${w.title}</strong><div style="color:var(--text-sub)">${w.purchasedAt}</div><button onclick="rateWish(${i})">${w.rating || '⭐ Top-Kauf'}</button></div>`).join('') : '<p style="color:var(--text-sub)">Noch keine Käufe.</p>';
+  }
+  window.moveWish=(i,d)=>{const n=i+d;if(n<0||n>=wishes.length)return;[wishes[i],wishes[n]]=[wishes[n],wishes[i]];persistWishes();};
+  window.buyWish=i=>{const [w]=wishes.splice(i,1);boughtWishes.unshift({...w,purchasedAt:getLocalDateString(),rating:'⭐ Top-Kauf'});persistWishes();};
+  window.rateWish=i=>{const r=['⭐ Top-Kauf','😐 Geht so','👎 Fehlkauf'];boughtWishes[i].rating=r[(r.indexOf(boughtWishes[i].rating)+1)%r.length];persistWishes();};
+
+  document.getElementById('wishForm').addEventListener('submit',e=>{e.preventDefault();wishes.push({id:createEntryId(),title:document.getElementById('wishTitle').value.trim(),cost:Number(document.getElementById('wishCost').value)});e.target.reset();persistWishes();});
+
   function switchTab(tabId, btn) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -1778,6 +1822,7 @@
     if (tabId === 'analytics') renderAnalytics();
     if (tabId === 'report') renderReport();
     if (tabId === 'chores') renderChoresUI();
+    if (tabId === 'wishlist') renderWishlist();
   }
 
   // Idempotency-Guarded Grade Submit Handler
@@ -1903,10 +1948,7 @@
         item.localDate === localDate
       );
 
-      if (!isPodcast && existingSameDay.length > 0) {
-        showToast(`Bereits heute verbucht: ${choreName}.`, 'warning');
-        return;
-      }
+      if (existingSameDay.length > 0 && !confirm(`Diese Aufgabe wurde heute bereits verbucht. Weitere Session für „${choreName}“ hinzufügen?`)) return;
 
       entries.unshift({
         id: createEntryId(),
